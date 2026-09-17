@@ -63,13 +63,13 @@ export default function ScreenshotCarousel() {
 
   return (
     <div className="relative max-w-6xl mx-auto px-4">
-      {/* Category Pills Header */}
-      <div className="flex items-center justify-center flex-wrap gap-2 mb-10">
+      {/* Category Pills Header with smooth mobile horizontal swipe */}
+      <div className="flex items-center sm:justify-center overflow-x-auto no-scrollbar gap-2 mb-8 sm:mb-10 pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap">
         {SLIDES.map((slide, idx) => (
           <button
             key={idx}
             onClick={() => setCurrent(idx)}
-            className={`px-4 py-2 rounded-full text-xs font-medium transition-all ${
+            className={`px-3.5 sm:px-4 py-2 rounded-full text-xs font-medium transition-all shrink-0 cursor-pointer ${
               current === idx
                 ? 'bg-[#e2682f] text-white shadow-[0_0_20px_rgba(226,104,47,0.4)]'
                 : 'glass-panel text-[#6f6a58] dark:text-[#8a8265] hover:text-[#1b1810] dark:hover:text-[#f5f2e8] hover:border-black/20 dark:hover:border-white/20'

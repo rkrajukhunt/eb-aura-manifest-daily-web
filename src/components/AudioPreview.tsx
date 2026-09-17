@@ -141,8 +141,8 @@ export default function AudioPreview() {
       <div className="absolute top-0 right-0 -mr-24 -mt-24 w-80 h-80 bg-[#e2682f]/10 rounded-full blur-3xl pointer-events-none" />
 
       {/* Header with tags */}
-      <div className="flex flex-wrap items-center justify-between gap-4 mb-6 relative z-10">
-        <div className="flex items-center gap-2.5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-6 relative z-10">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#e2682f]/15 text-[#c9531f] dark:text-[#f2a96f] border border-[#e2682f]/30">
             <Sparkles className="w-3.5 h-3.5 text-[#e2682f]" />
             <span>Interactive Audio Moment</span>
@@ -151,12 +151,12 @@ export default function AudioPreview() {
         </div>
 
         {/* Sample Switcher Tabs */}
-        <div className="flex items-center gap-1.5 bg-black/5 dark:bg-black/40 p-1 rounded-xl border border-black/5 dark:border-white/5">
+        <div className="flex items-center gap-1 sm:gap-1.5 bg-black/5 dark:bg-black/40 p-1 rounded-xl border border-black/5 dark:border-white/5 self-start sm:self-auto">
           {SAMPLES.map((s, idx) => (
             <button
               key={s.id}
               onClick={() => switchSample(idx)}
-              className={`px-3 py-1 text-xs rounded-lg transition-all ${
+              className={`px-2.5 sm:px-3 py-1 text-xs rounded-lg transition-all cursor-pointer ${
                 activeSampleIndex === idx
                   ? 'bg-[#e2682f] text-white font-medium shadow-md'
                   : 'text-[#6f6a58] dark:text-[#8a8265] hover:text-[#1b1810] dark:hover:text-[#f5f2e8]'

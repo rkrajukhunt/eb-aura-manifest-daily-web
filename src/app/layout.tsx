@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans, Cormorant_Garamond } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import StructuredData from '@/components/StructuredData';
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -18,7 +19,10 @@ const cormorantGaramond = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: 'Aura: Manifest Daily — Personalized Audio Moments & Daily Affirmations',
+  title: {
+    default: 'Aura: Manifest Daily — Personalized Audio Moments & Daily Affirmations',
+    template: '%s | Aura: Manifest Daily',
+  },
   description:
     'An AI companion that transforms your dream life into intimate, personalized audio moments and daily affirmations. Designed with warm editorial elegance, living memory intelligence, and zero guilt.',
   keywords: [
@@ -30,11 +34,28 @@ export const metadata: Metadata = {
     'gratitude journal',
     'daily meditation',
     'living memory AI',
+    'morning audio meditation',
   ],
-  authors: [{ name: 'EmperorBrains' }],
+  authors: [{ name: 'EmperorBrains', url: 'https://eb-aura-manifest-daily.onrender.com' }],
   creator: 'EmperorBrains',
   publisher: 'EmperorBrains',
+  applicationName: 'Aura: Manifest Daily',
+  category: 'lifestyle',
   metadataBase: new URL('https://eb-aura-manifest-daily.onrender.com'),
+  alternates: {
+    canonical: 'https://eb-aura-manifest-daily.onrender.com',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   openGraph: {
     title: 'Aura: Manifest Daily — Your Dream Life Spoken Into Reality',
     description:
@@ -46,7 +67,7 @@ export const metadata: Metadata = {
         url: '/assets/banner.png',
         width: 1200,
         height: 630,
-        alt: 'Aura: Manifest Daily Banner',
+        alt: 'Aura: Manifest Daily — Morning Audio Moments & Affirmations',
       },
     ],
     locale: 'en_US',
@@ -82,10 +103,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plusJakartaSans.variable} ${cormorantGaramond.variable} scroll-smooth antialiased dark`}
+      className={`${plusJakartaSans.variable} ${cormorantGaramond.variable} scroll-smooth antialiased dark w-full max-w-full overflow-x-hidden`}
       suppressHydrationWarning
     >
       <head>
+        <StructuredData />
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -103,15 +125,15 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-[#ece9df] text-[#1b1810] dark:bg-[#0b0a08] dark:text-[#f5f2e8] font-sans-ui selection:bg-[#e2682f]/30 selection:text-white relative overflow-x-hidden transition-colors duration-300">
-        {/* Ambient Top Glow */}
-        <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#e2682f]/10 dark:bg-[#e2682f]/10 blur-[130px] rounded-full pointer-events-none -z-10" />
-
-        {/* Ambient Mid Glow */}
-        <div className="fixed top-1/2 left-[-150px] w-[500px] h-[500px] bg-[#8a8265]/10 dark:bg-[#8a8265]/5 blur-[150px] rounded-full pointer-events-none -z-10" />
+      <body className="min-h-screen flex flex-col bg-[#ece9df] text-[#1b1810] dark:bg-[#0b0a08] dark:text-[#f5f2e8] font-sans-ui selection:bg-[#e2682f]/30 selection:text-white relative w-full max-w-full overflow-x-hidden transition-colors duration-300">
+        {/* Ambient Glows strictly clipped within viewport */}
+        <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10" aria-hidden="true">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] max-w-[120vw] h-[350px] bg-[#e2682f]/10 dark:bg-[#e2682f]/10 blur-[130px] rounded-full" />
+          <div className="absolute top-1/2 left-[-150px] w-[500px] max-w-[100vw] h-[500px] bg-[#8a8265]/10 dark:bg-[#8a8265]/5 blur-[150px] rounded-full" />
+        </div>
 
         <Navbar />
-        <div className="flex-1">{children}</div>
+        <div className="flex-1 w-full max-w-full overflow-x-hidden">{children}</div>
         <Footer />
       </body>
     </html>

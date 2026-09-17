@@ -66,20 +66,20 @@ export default function Home() {
           </div>
 
           {/* Trust points */}
-          <div className="pt-8 flex flex-wrap items-center justify-center gap-6 text-xs text-[#6f6a58] dark:text-[#8a8265]">
-            <span className="flex items-center gap-1.5">
-              <ShieldCheck className="w-4 h-4 text-[#e2682f]" />
-              Private & Encrypted
+          <div className="pt-6 sm:pt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs text-[#6f6a58] dark:text-[#8a8265]">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/5 dark:bg-white/5 sm:bg-transparent sm:dark:bg-transparent">
+              <ShieldCheck className="w-4 h-4 text-[#e2682f] shrink-0" />
+              <span>Private & Encrypted</span>
             </span>
-            <span>•</span>
-            <span className="flex items-center gap-1.5">
-              <Sparkles className="w-4 h-4 text-[#e2682f] dark:text-[#f2a96f]" />
-              Zero Toxic Positivity
+            <span className="hidden sm:inline">•</span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/5 dark:bg-white/5 sm:bg-transparent sm:dark:bg-transparent">
+              <Sparkles className="w-4 h-4 text-[#e2682f] dark:text-[#f2a96f] shrink-0" />
+              <span>Zero Toxic Positivity</span>
             </span>
-            <span>•</span>
-            <span className="flex items-center gap-1.5">
-              <Volume2 className="w-4 h-4 text-[#e2682f]" />
-              ElevenLabs AI Voices
+            <span className="hidden sm:inline">•</span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/5 dark:bg-white/5 sm:bg-transparent sm:dark:bg-transparent">
+              <Volume2 className="w-4 h-4 text-[#e2682f] shrink-0" />
+              <span>ElevenLabs AI Voices</span>
             </span>
           </div>
         </div>
@@ -197,17 +197,21 @@ export default function Home() {
       {/* ============================================================ */}
       {/* 5. AURA VS TRADITIONAL MEDITATION APPS                       */}
       {/* ============================================================ */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-        <div className="text-center space-y-4 mb-14">
+      <section className="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+        <div className="text-center space-y-3 sm:space-y-4 mb-10 sm:mb-14">
           <span className="text-xs uppercase tracking-widest text-[#e2682f] font-mono font-semibold">
             Intentional Difference
           </span>
-          <h2 className="font-serif-luxury text-4xl sm:text-5xl font-bold text-[#1b1810] dark:text-[#f5f2e8]">
+          <h2 className="font-serif-luxury text-3xl sm:text-4xl md:text-5xl font-bold text-[#1b1810] dark:text-[#f5f2e8]">
             Why Aura Feels Different
           </h2>
+          <p className="text-xs sm:text-sm text-[#6f6a58] dark:text-[#8a8265] max-w-md mx-auto">
+            Traditional apps play the same generic audio for millions. Aura speaks directly to your journey.
+          </p>
         </div>
 
-        <div className="glass-panel rounded-3xl overflow-hidden border border-black/10 dark:border-white/10">
+        {/* Desktop Table View (Hidden on mobile) */}
+        <div className="hidden sm:block glass-panel rounded-3xl overflow-hidden border border-black/10 dark:border-white/10">
           <div className="grid grid-cols-12 bg-black/5 dark:bg-white/5 p-4 sm:p-6 text-xs uppercase tracking-wider font-semibold text-[#6f6a58] dark:text-[#8a8265] border-b border-black/10 dark:border-white/10">
             <div className="col-span-5 sm:col-span-6">Experience</div>
             <div className="col-span-4 sm:col-span-3 text-center text-[#e2682f]">Aura</div>
@@ -263,6 +267,64 @@ export default function Home() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Mobile Cards View (Visible on small screens) */}
+        <div className="block sm:hidden space-y-3.5">
+          {[
+            {
+              feature: 'Audio Personalization',
+              aura: 'Unique daily AI moment generated for your goals',
+              others: 'Static pre-recorded audio libraries',
+            },
+            {
+              feature: 'Memory & Continuity',
+              aura: 'Living Memory Engine remembers your reflections',
+              others: 'Zero memory — starts over every time',
+            },
+            {
+              feature: 'Habit Loops',
+              aura: 'Gentle soft streaks with zero guilt or shame',
+              others: 'Punishing streak counters that reset to 0',
+            },
+            {
+              feature: 'Voice Quality',
+              aura: 'ElevenLabs hyper-realistic studio voices',
+              others: 'Robotic synthetic speech or monotone audio',
+            },
+          ].map((item, idx) => (
+            <div
+              key={idx}
+              className="glass-panel rounded-2xl p-4 border border-black/10 dark:border-white/10 space-y-3"
+            >
+              <span className="text-xs font-bold uppercase tracking-wider text-[#1b1810] dark:text-[#f5f2e8]">
+                {item.feature}
+              </span>
+
+              {/* Aura advantage */}
+              <div className="p-3 rounded-xl bg-[#e2682f]/10 dark:bg-[#e2682f]/15 border border-[#e2682f]/25 space-y-1">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-[#e2682f] dark:text-[#f2a96f]">
+                    Aura
+                  </span>
+                  <Check className="w-3.5 h-3.5 text-[#e2682f]" />
+                </div>
+                <p className="text-xs font-medium text-[#1b1810] dark:text-[#f5f2e8]">
+                  {item.aura}
+                </p>
+              </div>
+
+              {/* Typical Apps */}
+              <div className="px-3 py-2 rounded-xl bg-black/5 dark:bg-white/5 space-y-0.5">
+                <span className="text-[10px] font-semibold uppercase tracking-widest text-[#8a8265]">
+                  Typical Apps
+                </span>
+                <p className="text-xs text-[#6f6a58] dark:text-[#8a8265]">
+                  {item.others}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
