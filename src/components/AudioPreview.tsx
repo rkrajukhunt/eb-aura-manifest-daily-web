@@ -60,7 +60,6 @@ export default function AudioPreview() {
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
 
-      // Soothing warm harmonic chord (A3 = 220Hz or gentle 432Hz ambient feeling)
       osc.type = 'sine';
       osc.frequency.setValueAtTime(activeSampleIndex === 0 ? 216 : activeSampleIndex === 1 ? 288 : 172, ctx.currentTime);
 
@@ -74,7 +73,7 @@ export default function AudioPreview() {
       oscillatorRef.current = osc;
       gainNodeRef.current = gain;
     } catch {
-      // Graceful ignore if audio context isn't allowed
+      // Graceful ignore
     }
   };
 
@@ -137,22 +136,22 @@ export default function AudioPreview() {
   };
 
   return (
-    <div className="glass-panel-glow rounded-3xl p-6 sm:p-8 md:p-10 border border-[#e2682f]/30 max-w-4xl mx-auto shadow-[0_20px_60px_-15px_rgba(226,104,47,0.15)] relative overflow-hidden">
+    <div className="glass-panel-glow rounded-3xl p-6 sm:p-8 md:p-10 border border-[#e2682f]/30 max-w-4xl mx-auto shadow-[0_20px_60px_-15px_rgba(226,104,47,0.15)] relative overflow-hidden transition-colors duration-300">
       {/* Background ambient glow */}
       <div className="absolute top-0 right-0 -mr-24 -mt-24 w-80 h-80 bg-[#e2682f]/10 rounded-full blur-3xl pointer-events-none" />
 
       {/* Header with tags */}
       <div className="flex flex-wrap items-center justify-between gap-4 mb-6 relative z-10">
         <div className="flex items-center gap-2.5">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#e2682f]/15 text-[#f2a96f] border border-[#e2682f]/30">
-            <Sparkles className="w-3.5 h-3.5" />
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#e2682f]/15 text-[#c9531f] dark:text-[#f2a96f] border border-[#e2682f]/30">
+            <Sparkles className="w-3.5 h-3.5 text-[#e2682f]" />
             <span>Interactive Audio Moment</span>
           </span>
-          <span className="text-xs text-[#8a8265]">AI Voice by ElevenLabs</span>
+          <span className="text-xs text-[#6f6a58] dark:text-[#8a8265]">AI Voice by ElevenLabs</span>
         </div>
 
         {/* Sample Switcher Tabs */}
-        <div className="flex items-center gap-1.5 bg-black/40 p-1 rounded-xl border border-white/5">
+        <div className="flex items-center gap-1.5 bg-black/5 dark:bg-black/40 p-1 rounded-xl border border-black/5 dark:border-white/5">
           {SAMPLES.map((s, idx) => (
             <button
               key={s.id}
@@ -160,7 +159,7 @@ export default function AudioPreview() {
               className={`px-3 py-1 text-xs rounded-lg transition-all ${
                 activeSampleIndex === idx
                   ? 'bg-[#e2682f] text-white font-medium shadow-md'
-                  : 'text-[#8a8265] hover:text-[#f5f2e8]'
+                  : 'text-[#6f6a58] dark:text-[#8a8265] hover:text-[#1b1810] dark:hover:text-[#f5f2e8]'
               }`}
             >
               Track {idx + 1}
@@ -171,21 +170,21 @@ export default function AudioPreview() {
 
       {/* Track Info */}
       <div className="relative z-10 space-y-2 mb-6">
-        <span className="text-xs uppercase tracking-widest text-[#8a8265] font-semibold">
+        <span className="text-xs uppercase tracking-widest text-[#6f6a58] dark:text-[#8a8265] font-semibold">
           {sample.category}
         </span>
-        <h3 className="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#f5f2e8]">
+        <h3 className="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#1b1810] dark:text-[#f5f2e8]">
           {sample.title}
         </h3>
-        <p className="text-xs text-[#dad5be]/80 flex items-center gap-1.5">
+        <p className="text-xs text-[#4a4536] dark:text-[#dad5be]/80 flex items-center gap-1.5">
           <Volume2 className="w-3.5 h-3.5 text-[#e2682f]" />
           <span>Synthesized voice: {sample.voice}</span>
         </p>
       </div>
 
       {/* Quote / Script text display */}
-      <div className="relative z-10 bg-[#0c0b09]/80 border border-white/5 rounded-2xl p-5 sm:p-6 mb-8">
-        <p className="font-serif-luxury italic text-lg sm:text-xl text-[#f5f2e8]/90 leading-relaxed">
+      <div className="relative z-10 bg-[#f5f2e8]/90 dark:bg-[#0c0b09]/80 border border-black/5 dark:border-white/5 rounded-2xl p-5 sm:p-6 mb-8 shadow-sm">
+        <p className="font-serif-luxury italic text-lg sm:text-xl text-[#1b1810] dark:text-[#f5f2e8]/90 leading-relaxed">
           &ldquo;{sample.text}&rdquo;
         </p>
       </div>
@@ -211,16 +210,16 @@ export default function AudioPreview() {
 
         {/* Dynamic Waveform Visualizer */}
         <div className="flex-1 w-full space-y-2.5">
-          <div className="flex items-center justify-between text-xs text-[#8a8265] font-mono">
+          <div className="flex items-center justify-between text-xs text-[#6f6a58] dark:text-[#8a8265] font-mono">
             <span>{formatTime(currentTime)}</span>
-            <span className="text-[#e2682f]">
+            <span className="text-[#e2682f] font-medium">
               {isPlaying ? 'Playing binaural sample...' : 'Tap play to listen'}
             </span>
             <span>{formatTime(sample.duration)}</span>
           </div>
 
           {/* Animated Waveform Bars */}
-          <div className="h-12 flex items-center justify-between gap-1 sm:gap-1.5 px-2 bg-black/40 rounded-xl border border-white/5">
+          <div className="h-12 flex items-center justify-between gap-1 sm:gap-1.5 px-2 bg-black/5 dark:bg-black/40 rounded-xl border border-black/5 dark:border-white/5">
             {Array.from({ length: 32 }).map((_, i) => {
               const active = (currentTime / sample.duration) * 32 >= i;
               const delay = (i % 8) * 0.15;
@@ -238,7 +237,7 @@ export default function AudioPreview() {
                   className={`w-1.5 rounded-full transition-colors duration-200 ${
                     active || isPlaying
                       ? 'bg-gradient-to-t from-[#e2682f] to-[#f2a96f]'
-                      : 'bg-white/10'
+                      : 'bg-black/10 dark:bg-white/10'
                   }`}
                 />
               );
@@ -255,7 +254,7 @@ export default function AudioPreview() {
               setIsPlaying(false);
             }
           }}
-          className="p-3 text-[#8a8265] hover:text-[#f5f2e8] rounded-xl hover:bg-white/5 transition-colors"
+          className="p-3 text-[#6f6a58] dark:text-[#8a8265] hover:text-[#1b1810] dark:hover:text-[#f5f2e8] rounded-xl hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
           title="Reset"
           aria-label="Reset audio track"
         >

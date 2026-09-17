@@ -66,7 +66,10 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#0b0a08',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ece9df' },
+    { media: '(prefers-color-scheme: dark)', color: '#0b0a08' },
+  ],
   width: 'device-width',
   initialScale: 1,
 };
@@ -79,14 +82,33 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plusJakartaSans.variable} ${cormorantGaramond.variable} scroll-smooth antialiased`}
+      className={`${plusJakartaSans.variable} ${cormorantGaramond.variable} scroll-smooth antialiased dark`}
+      suppressHydrationWarning
     >
-      <body className="min-h-screen flex flex-col bg-[#0b0a08] text-[#f5f2e8] font-sans-ui selection:bg-[#e2682f]/30 selection:text-white relative overflow-x-hidden">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                const storedTheme = localStorage.getItem('aura-theme');
+                if (storedTheme === 'light') {
+                  document.documentElement.classList.remove('dark');
+                } else if (storedTheme === 'dark') {
+                  document.documentElement.classList.add('dark');
+                } else {
+                  document.documentElement.classList.add('dark');
+                }
+              } catch (_) {}
+            `,
+          }}
+        />
+      </head>
+      <body className="min-h-screen flex flex-col bg-[#ece9df] text-[#1b1810] dark:bg-[#0b0a08] dark:text-[#f5f2e8] font-sans-ui selection:bg-[#e2682f]/30 selection:text-white relative overflow-x-hidden transition-colors duration-300">
         {/* Ambient Top Glow */}
-        <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#e2682f]/10 blur-[130px] rounded-full pointer-events-none -z-10" />
+        <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#e2682f]/10 dark:bg-[#e2682f]/10 blur-[130px] rounded-full pointer-events-none -z-10" />
 
         {/* Ambient Mid Glow */}
-        <div className="fixed top-1/2 left-[-150px] w-[500px] h-[500px] bg-[#8a8265]/5 blur-[150px] rounded-full pointer-events-none -z-10" />
+        <div className="fixed top-1/2 left-[-150px] w-[500px] h-[500px] bg-[#8a8265]/10 dark:bg-[#8a8265]/5 blur-[150px] rounded-full pointer-events-none -z-10" />
 
         <Navbar />
         <div className="flex-1">{children}</div>

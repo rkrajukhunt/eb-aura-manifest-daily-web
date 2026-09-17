@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X, Sparkles, ArrowRight } from 'lucide-react';
+import ThemeToggle from './ThemeToggle';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -30,15 +31,15 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-[#0b0a08]/95 backdrop-blur-2xl border-b border-[rgba(218,213,190,0.12)] py-3.5 shadow-[0_10px_35px_rgba(0,0,0,0.7)]'
-          : 'bg-[#0b0a08]/70 backdrop-blur-xl border-b border-white/[0.04] py-4'
+          ? 'bg-[#ece9df]/90 dark:bg-[#0b0a08]/95 backdrop-blur-2xl border-b border-[rgba(138,130,101,0.2)] dark:border-[rgba(218,213,190,0.12)] py-3.5 shadow-[0_4px_25px_rgba(27,24,16,0.06)] dark:shadow-[0_10px_35px_rgba(0,0,0,0.7)]'
+          : 'bg-[#ece9df]/60 dark:bg-[#0b0a08]/70 backdrop-blur-xl border-b border-black/[0.04] dark:border-white/[0.04] py-4'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Brand Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-10 h-10 rounded-full overflow-hidden border border-[#e2682f]/30 p-1 group-hover:border-[#e2682f] transition-colors">
+            <div className="relative w-10 h-10 rounded-full overflow-hidden border border-[#e2682f]/30 p-1 group-hover:border-[#e2682f] transition-colors bg-white/20 dark:bg-transparent">
               <Image
                 src="/assets/logo.png"
                 alt="Aura: Manifest Daily Logo"
@@ -48,7 +49,7 @@ export default function Navbar() {
               />
             </div>
             <div className="flex flex-col">
-              <span className="font-serif-luxury text-xl font-bold tracking-wide text-[#f5f2e8] group-hover:text-[#f2a96f] transition-colors">
+              <span className="font-serif-luxury text-xl font-bold tracking-wide text-[#1b1810] dark:text-[#f5f2e8] group-hover:text-[#e2682f] dark:group-hover:text-[#f2a96f] transition-colors">
                 Aura
               </span>
               <span className="text-[10px] tracking-widest uppercase text-[#8a8265] -mt-1 font-medium">
@@ -63,15 +64,16 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-[#dad5be] hover:text-[#f5f2e8] transition-colors duration-200"
+                className="text-sm font-medium text-[#4a4536] dark:text-[#dad5be] hover:text-[#1b1810] dark:hover:text-[#f5f2e8] transition-colors duration-200"
               >
                 {link.name}
               </Link>
             ))}
           </nav>
 
-          {/* Action Button */}
+          {/* Action & Theme Switcher */}
           <div className="hidden md:flex items-center gap-4">
+            <ThemeToggle />
             <Link
               href="/#download"
               className="relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider text-[#1b1810] bg-gradient-to-r from-[#f2a96f] to-[#e2682f] hover:opacity-95 shadow-[0_0_20px_rgba(226,104,47,0.35)] transition-all transform hover:-translate-y-0.5 active:translate-y-0"
@@ -81,11 +83,12 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Mobile Menu Trigger */}
-          <div className="md:hidden flex items-center">
+          {/* Mobile Menu Trigger & Theme Toggle */}
+          <div className="md:hidden flex items-center gap-2">
+            <ThemeToggle />
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-[#dad5be] hover:text-[#f5f2e8] hover:bg-white/5 transition-colors focus:outline-none"
+              className="p-2 rounded-lg text-[#4a4536] dark:text-[#dad5be] hover:text-[#1b1810] dark:hover:text-[#f5f2e8] hover:bg-black/5 dark:hover:bg-white/5 transition-colors focus:outline-none"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -96,14 +99,14 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden glass-panel border-b border-[rgba(218,213,190,0.12)] px-6 py-6 animate-in slide-in-from-top-4 duration-200">
+        <div className="md:hidden glass-panel border-b border-[rgba(138,130,101,0.2)] dark:border-[rgba(218,213,190,0.12)] px-6 py-6 animate-in slide-in-from-top-4 duration-200">
           <nav className="flex flex-col gap-4">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-base font-medium text-[#dad5be] hover:text-[#f5f2e8] py-2 border-b border-white/5"
+                className="text-base font-medium text-[#4a4536] dark:text-[#dad5be] hover:text-[#1b1810] dark:hover:text-[#f5f2e8] py-2 border-b border-black/5 dark:border-white/5"
               >
                 {link.name}
               </Link>

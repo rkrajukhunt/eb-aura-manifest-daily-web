@@ -52,8 +52,8 @@ export default function FaqAccordion() {
             key={idx}
             className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
               isOpen
-                ? 'glass-panel-glow border-[#e2682f]/30'
-                : 'glass-panel border-white/5 hover:border-white/10'
+                ? 'glass-panel-glow border-[#e2682f]/40 dark:border-[#e2682f]/30'
+                : 'glass-panel border-black/10 dark:border-white/5 hover:border-black/20 dark:hover:border-white/10'
             }`}
           >
             <button
@@ -61,7 +61,7 @@ export default function FaqAccordion() {
               className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 focus:outline-none"
               aria-expanded={isOpen}
             >
-              <span className="font-serif-luxury text-lg sm:text-xl font-bold text-[#f5f2e8]">
+              <span className="font-serif-luxury text-lg sm:text-xl font-bold text-[#1b1810] dark:text-[#f5f2e8]">
                 {faq.question}
               </span>
               <ChevronDown
@@ -71,7 +71,7 @@ export default function FaqAccordion() {
               />
             </button>
             {isOpen && (
-              <div className="px-6 pb-6 pt-1 text-sm sm:text-base text-[#dad5be] leading-relaxed border-t border-white/5 animate-in fade-in duration-200">
+              <div className="px-6 pb-6 pt-1 text-sm sm:text-base text-[#4a4536] dark:text-[#dad5be] leading-relaxed border-t border-black/5 dark:border-white/5 animate-in fade-in duration-200">
                 {faq.answer}
               </div>
             )}
