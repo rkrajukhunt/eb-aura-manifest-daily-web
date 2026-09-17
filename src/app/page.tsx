@@ -391,39 +391,42 @@ export default function Home() {
       {/* 8. FINAL DOWNLOAD CTA BANNER                                 */}
       {/* ============================================================ */}
       <section id="download" className="py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-        <div className="relative rounded-[40px] p-8 sm:p-14 md:p-16 overflow-hidden glass-panel-glow border-2 border-[#e2682f]/40 text-center space-y-8 shadow-[0_20px_80px_rgba(226,104,47,0.2)]">
-          {/* Internal Glow */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#e2682f]/15 to-transparent pointer-events-none" />
+        <div className="relative rounded-[40px] p-8 sm:p-14 md:p-16 overflow-hidden glass-panel-glow border-2 border-[#e2682f]/40 text-center shadow-[0_20px_80px_rgba(226,104,47,0.2)]">
+          {/* Internal Glow Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#e2682f]/10 via-[#e2682f]/5 to-[#e2682f]/15 pointer-events-none" />
 
-          <div className="max-w-2xl mx-auto space-y-4 relative z-10">
-            <h2 className="font-serif-luxury text-4xl sm:text-5xl md:text-6xl font-bold text-[#f5f2e8] leading-tight">
-              Begin your morning with clarity tomorrow.
-            </h2>
-            <p className="text-base sm:text-lg text-[#dad5be]">
-              Download Aura on iOS. Set your intentions, rest with peaceful gratitude, and let your future self speak to you.
-            </p>
-          </div>
+          {/* Inner Content with vertical spacing */}
+          <div className="relative z-10 space-y-8">
+            <div className="max-w-2xl mx-auto space-y-4">
+              <h2 className="font-serif-luxury text-4xl sm:text-5xl md:text-6xl font-bold text-[#f5f2e8] leading-tight">
+                Begin your morning with clarity tomorrow.
+              </h2>
+              <p className="text-base sm:text-lg text-[#dad5be]">
+                Download Aura on iOS. Set your intentions, rest with peaceful gratitude, and let your future self speak to you.
+              </p>
+            </div>
 
-          <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
-              href="https://apps.apple.com/app/id6795523727"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-full text-sm font-semibold uppercase tracking-wider text-[#1b1810] bg-gradient-to-r from-[#f2a96f] to-[#e2682f] hover:opacity-95 shadow-xl transition-transform hover:scale-105"
-            >
-              <Smartphone className="w-5 h-5" />
-              <span>Get Aura for iOS</span>
-            </a>
-            <Link
-              href="/support"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-semibold uppercase tracking-wider text-[#dad5be] glass-panel hover:text-white"
-            >
-              <span>Need Help? Contact Support</span>
-            </Link>
-          </div>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a
+                href="https://apps.apple.com/app/id6795523727"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 px-8 py-4 rounded-full text-sm font-semibold uppercase tracking-wider text-[#1b1810] bg-gradient-to-r from-[#f2a96f] to-[#e2682f] hover:opacity-95 shadow-xl transition-transform hover:scale-105"
+              >
+                <Smartphone className="w-5 h-5" />
+                <span>Get Aura for iOS</span>
+              </a>
+              <Link
+                href="/support"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-semibold uppercase tracking-wider text-[#dad5be] glass-panel hover:text-white"
+              >
+                <span>Need Help? Contact Support</span>
+              </Link>
+            </div>
 
-          <div className="pt-4 text-xs text-[#8a8265] relative z-10">
-            Requires iOS 16.0 or later · Compatible with iPhone and iPad
+            <div className="pt-2 text-xs text-[#8a8265]">
+              Requires iOS 16.0 or later · Compatible with iPhone and iPad
+            </div>
           </div>
         </div>
       </section>
