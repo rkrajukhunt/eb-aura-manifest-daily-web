@@ -158,37 +158,42 @@ export default function SupportPage() {
         </Link>
       </div>
 
-      {/* Hero Header Card */}
-      <div className="glass-panel-glow rounded-3xl p-6 sm:p-10 md:p-12 mb-8 sm:mb-12 border border-[#e2682f]/30 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 sm:w-80 h-64 sm:h-80 bg-radial from-[#e2682f]/15 to-transparent rounded-full blur-2xl pointer-events-none" />
-        <div className="max-w-2xl space-y-4 relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-xs font-semibold bg-[#e2682f]/12 text-[#c9531f] dark:text-[#f2a96f] border border-[#e2682f]/25 shadow-xs">
-            <LifeBuoy className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#e2682f]" />
-            <span>Support & Companion Care</span>
-          </div>
-          <h1 className="font-serif-luxury text-3xl sm:text-4xl md:text-5xl font-bold text-[#1b1810] dark:text-[#f5f2e8] tracking-tight">
-            We Are Here to Help
-          </h1>
-          <p className="text-sm sm:text-base md:text-lg text-[#4a4536] dark:text-[#dad5be] leading-relaxed">
-            {SUPPORT_DOC.intro[0]}
-          </p>
+      {/* Centered Editorial Header (No empty white box) */}
+      <div className="text-center space-y-4 mb-12 sm:mb-16 relative">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-[#e2682f]/12 text-[#c9531f] dark:text-[#f2a96f] border border-[#e2682f]/25 shadow-xs">
+          <LifeBuoy className="w-4 h-4 text-[#e2682f]" />
+          <span>Support & Companion Care</span>
+        </div>
 
-          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 pt-2 text-xs text-[#6f6a58] dark:text-[#8a8265]">
-            <span className="inline-flex items-center gap-1.5 font-medium">
-              <Clock className="w-3.5 h-3.5 text-[#e2682f] shrink-0" />
-              <span>Response Guarantee: 24–48 Business Hours</span>
-            </span>
-            <span className="hidden sm:inline text-black/20 dark:text-white/20">•</span>
-            <span className="inline-flex items-center gap-1.5 font-medium">
-              <CheckCircle2 className="w-3.5 h-3.5 text-[#e2682f] shrink-0" />
-              <span>Direct Developer & Engineering Support</span>
-            </span>
-          </div>
+        <h1 className="font-serif-luxury text-4xl sm:text-5xl md:text-6xl font-bold text-[#1b1810] dark:text-[#f5f2e8] tracking-tight max-w-3xl mx-auto leading-[1.15]">
+          How Can We Assist Your Journey?
+        </h1>
+
+        <p className="text-base sm:text-lg text-[#6f6a58] dark:text-[#dad5be] max-w-2xl mx-auto leading-relaxed">
+          {SUPPORT_DOC.intro[0]}
+        </p>
+
+        {/* Status badges */}
+        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 pt-2 text-xs text-[#6f6a58] dark:text-[#8a8265]">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full glass-panel font-medium">
+            <Clock className="w-3.5 h-3.5 text-[#e2682f] shrink-0" />
+            <span>Typical reply within 24 hours</span>
+          </span>
+          <span className="hidden sm:inline text-black/20 dark:text-white/20">•</span>
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full glass-panel font-medium">
+            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+            <span>Direct Engineering Care</span>
+          </span>
+          <span className="hidden sm:inline text-black/20 dark:text-white/20">•</span>
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full glass-panel font-medium">
+            <ShieldCheck className="w-3.5 h-3.5 text-[#e2682f] shrink-0" />
+            <span>Apple ID Preserved</span>
+          </span>
         </div>
       </div>
 
       {/* Main Grid: Form (Left) & Quick Solutions (Right) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Contact Form Column */}
         <div className="lg:col-span-7">
           <div className="glass-panel rounded-3xl p-5 sm:p-8 md:p-10 border border-black/10 dark:border-white/10 shadow-xl relative">

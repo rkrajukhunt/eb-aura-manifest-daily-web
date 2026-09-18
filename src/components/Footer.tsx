@@ -63,11 +63,6 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/#pricing" className="hover:text-[#1b1810] dark:hover:text-[#f5f2e8] transition-colors">
-                  Subscription Plans
-                </Link>
-              </li>
-              <li>
                 <Link href="/#faq" className="hover:text-[#1b1810] dark:hover:text-[#f5f2e8] transition-colors">
                   Frequently Asked Questions
                 </Link>

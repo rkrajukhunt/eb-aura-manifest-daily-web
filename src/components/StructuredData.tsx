@@ -11,22 +11,11 @@ export default function StructuredData() {
       'An AI companion that turns your dream life into personalized audio moments and daily affirmations — and gets to know you better every day.',
     url: 'https://eb-aura-manifest-daily.onrender.com',
     downloadUrl: 'https://apps.apple.com/app/id6795523727',
-    offers: [
-      {
-        '@type': 'Offer',
-        name: 'Annual Membership (7-Day Free Trial)',
-        price: '49.99',
-        priceCurrency: 'USD',
-        category: 'Subscription',
-      },
-      {
-        '@type': 'Offer',
-        name: 'Monthly Membership',
-        price: '7.99',
-        priceCurrency: 'USD',
-        category: 'Subscription',
-      },
-    ],
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
     aggregateRating: {
       '@type': 'AggregateRating',
       ratingValue: '4.9',

@@ -48,6 +48,21 @@
     max-width: 100vw;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
+
+  button,
+  [role="button"],
+  input[type="submit"],
+  input[type="button"],
+  select,
+  summary {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  [role="button"]:disabled,
+  input:disabled {
+    cursor: not-allowed;
+  }
 }
 
 /* Hide scrollbar for clean horizontal swipe on mobile */

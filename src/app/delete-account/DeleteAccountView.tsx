@@ -95,7 +95,7 @@ export default function DeleteAccountPage() {
                 />
                 <button
                   type="submit"
-                  className="px-6 py-3 rounded-xl text-xs font-semibold uppercase tracking-wider text-[#1b1810] bg-gradient-to-r from-[#f2a96f] to-[#e2682f] hover:opacity-95 shrink-0 shadow-lg transition-transform hover:scale-105"
+                  className="px-6 py-3 rounded-xl text-xs font-semibold uppercase tracking-wider text-[#1b1810] bg-gradient-to-r from-[#f2a96f] to-[#e2682f] hover:opacity-95 shrink-0 shadow-lg transition-all hover:scale-105 active:scale-95 cursor-pointer"
                 >
                   Submit Request
                 </button>
