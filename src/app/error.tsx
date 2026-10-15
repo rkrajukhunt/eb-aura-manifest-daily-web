@@ -24,10 +24,10 @@ export default function Error({
         </div>
 
         <div className="space-y-2">
-          <h2 className="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#f5f2e8]">
+          <h2 className="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#1b1810] dark:text-[#f5f2e8]">
             A Quiet Moment
           </h2>
-          <p className="text-sm text-[#dad5be]">
+          <p className="text-sm text-[#4a4536] dark:text-[#dad5be]">
             Something unexpected occurred while loading this page. Please try refreshing or return to the peaceful home.
           </p>
         </div>
@@ -42,7 +42,7 @@ export default function Error({
           </button>
           <Link
             href="/"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider text-[#dad5be] glass-panel hover:text-[#f5f2e8] transition-colors"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider text-[#1b1810] dark:text-[#dad5be] glass-panel hover:text-[#e2682f] dark:hover:text-[#f5f2e8] transition-colors"
           >
             <Home className="w-3.5 h-3.5" />
             <span>Return Home</span>

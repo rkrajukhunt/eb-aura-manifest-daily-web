@@ -5,8 +5,8 @@ import { Compass, Home } from 'lucide-react';
 export default function NotFound() {
   return (
     <main className="min-h-[75vh] flex items-center justify-center px-4 py-20">
-      <div className="glass-panel max-w-md w-full rounded-3xl p-8 sm:p-10 text-center space-y-6 border border-white/10">
-        <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mx-auto text-[#f2a96f]">
+      <div className="glass-panel max-w-md w-full rounded-3xl p-8 sm:p-10 text-center space-y-6 border border-black/10 dark:border-white/10">
+        <div className="w-16 h-16 rounded-full bg-[#e2682f]/10 dark:bg-white/5 border border-[#e2682f]/20 dark:border-white/10 flex items-center justify-center mx-auto text-[#e2682f] dark:text-[#f2a96f]">
           <Compass className="w-8 h-8 animate-pulse" />
         </div>
 
@@ -14,10 +14,10 @@ export default function NotFound() {
           <span className="text-xs font-mono uppercase tracking-widest text-[#e2682f]">
             404 — Page Not Found
           </span>
-          <h1 className="font-serif-luxury text-3xl font-bold text-[#f5f2e8]">
+          <h1 className="font-serif-luxury text-3xl font-bold text-[#1b1810] dark:text-[#f5f2e8]">
             Lost in the Quiet
           </h1>
-          <p className="text-sm text-[#dad5be] leading-relaxed">
+          <p className="text-sm text-[#4a4536] dark:text-[#dad5be] leading-relaxed">
             The page you are looking for has drifted away or does not exist. Let’s guide you back to familiar serenity.
           </p>
         </div>

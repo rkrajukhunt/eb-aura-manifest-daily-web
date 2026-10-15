@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Play, Pause, Volume2, Sparkles, RefreshCw } from 'lucide-react';
 
 interface MomentSample {
@@ -46,9 +46,14 @@ export default function AudioPreview() {
   const audioContextRef = useRef<AudioContext | null>(null);
   const oscillatorRef = useRef<OscillatorNode | null>(null);
   const gainNodeRef = useRef<GainNode | null>(null);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const timeRef = useRef(0);
 
   const sample = SAMPLES[activeSampleIndex];
+
+  const setTime = (seconds: number) => {
+    timeRef.current = seconds;
+    setCurrentTime(seconds);
+  };
 
   // Synthesize a soothing ambient harmonic tone using Web Audio API
   const startAmbientTone = () => {
@@ -77,38 +82,57 @@ export default function AudioPreview() {
     }
   };
 
-  const stopAmbientTone = () => {
-    if (gainNodeRef.current && audioContextRef.current) {
-      try {
-        gainNodeRef.current.gain.linearRampToValueAtTime(0.0001, audioContextRef.current.currentTime + 0.5);
-        setTimeout(() => {
-          oscillatorRef.current?.stop();
-          audioContextRef.current?.close();
-        }, 500);
-      } catch {
-        // Ignore
-      }
+  const stopAmbientTone = useCallback(() => {
+    // Capture the current nodes so a quick replay can't have its new context closed by this timeout
+    const ctx = audioContextRef.current;
+    const osc = oscillatorRef.current;
+    const gain = gainNodeRef.current;
+    audioContextRef.current = null;
+    oscillatorRef.current = null;
+    gainNodeRef.current = null;
+    if (!ctx || !osc || !gain) return;
+
+    try {
+      gain.gain.linearRampToValueAtTime(0.0001, ctx.currentTime + 0.5);
+      setTimeout(() => {
+        osc.stop();
+        ctx.close();
+      }, 500);
+    } catch {
+      // Ignore
     }
-  };
+  }, []);
+
+  // The ticker lives only while playing, so pausing, resetting or switching can never leave it running
+  useEffect(() => {
+    if (!isPlaying) return;
+
+    const id = setInterval(() => {
+      const next = timeRef.current + 1;
+      if (next > sample.duration) {
+        clearInterval(id);
+        timeRef.current = 0;
+        setCurrentTime(0);
+        setIsPlaying(false);
+        stopAmbientTone();
+        return;
+      }
+      timeRef.current = next;
+      setCurrentTime(next);
+    }, 1000);
+
+    return () => clearInterval(id);
+  }, [isPlaying, sample.duration, stopAmbientTone]);
+
+  useEffect(() => stopAmbientTone, [stopAmbientTone]);
 
   const togglePlay = () => {
     if (isPlaying) {
       setIsPlaying(false);
       stopAmbientTone();
-      if (intervalRef.current) clearInterval(intervalRef.current);
     } else {
       setIsPlaying(true);
       startAmbientTone();
-      intervalRef.current = setInterval(() => {
-        setCurrentTime((prev) => {
-          if (prev >= sample.duration) {
-            setIsPlaying(false);
-            stopAmbientTone();
-            return 0;
-          }
-          return prev + 1;
-        });
-      }, 1000);
     }
   };
 
@@ -117,17 +141,9 @@ export default function AudioPreview() {
       stopAmbientTone();
       setIsPlaying(false);
     }
-    setCurrentTime(0);
+    setTime(0);
     setActiveSampleIndex(index);
-    if (intervalRef.current) clearInterval(intervalRef.current);
   };
-
-  useEffect(() => {
-    return () => {
-      stopAmbientTone();
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-  }, []);
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -248,7 +264,7 @@ export default function AudioPreview() {
         {/* Reset button */}
         <button
           onClick={() => {
-            setCurrentTime(0);
+            setTime(0);
             if (isPlaying) {
               stopAmbientTone();
               setIsPlaying(false);

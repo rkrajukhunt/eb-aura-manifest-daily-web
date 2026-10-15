@@ -58,7 +58,7 @@ export default function FaqAccordion() {
           >
             <button
               onClick={() => toggle(idx)}
-              className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 focus:outline-none"
+              className="w-full text-left px-6 py-5 flex items-center justify-between gap-4"
               aria-expanded={isOpen}
             >
               <span className="font-serif-luxury text-lg sm:text-xl font-bold text-[#1b1810] dark:text-[#f5f2e8]">

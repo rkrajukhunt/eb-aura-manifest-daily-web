@@ -103,7 +103,8 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plusJakartaSans.variable} ${cormorantGaramond.variable} scroll-smooth antialiased dark w-full max-w-full overflow-x-hidden`}
+      className={`${plusJakartaSans.variable} ${cormorantGaramond.variable} scroll-smooth antialiased dark w-full max-w-full overflow-x-clip`}
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
     >
       <head>
@@ -125,7 +126,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-[#ece9df] text-[#1b1810] dark:bg-[#0b0a08] dark:text-[#f5f2e8] font-sans-ui selection:bg-[#e2682f]/30 selection:text-white relative w-full max-w-full overflow-x-hidden transition-colors duration-300">
+      <body className="min-h-screen flex flex-col bg-[#ece9df] text-[#1b1810] dark:bg-[#0b0a08] dark:text-[#f5f2e8] font-sans-ui selection:bg-[#e2682f]/30 selection:text-white relative w-full max-w-full overflow-x-clip transition-colors duration-300">
         {/* Ambient Glows strictly clipped within viewport */}
         <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10" aria-hidden="true">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] max-w-[120vw] h-[350px] bg-[#e2682f]/10 dark:bg-[#e2682f]/10 blur-[130px] rounded-full" />
@@ -133,7 +134,7 @@ export default function RootLayout({
         </div>
 
         <Navbar />
-        <div className="flex-1 w-full max-w-full overflow-x-hidden">{children}</div>
+        <div className="flex-1 w-full max-w-full overflow-x-clip">{children}</div>
         <Footer />
       </body>
     </html>

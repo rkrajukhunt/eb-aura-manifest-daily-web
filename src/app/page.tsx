@@ -14,10 +14,11 @@ import {
 import AudioPreview from '@/components/AudioPreview';
 import ScreenshotCarousel from '@/components/ScreenshotCarousel';
 import FaqAccordion from '@/components/FaqAccordion';
+import DaysBecoming from '@/components/DaysBecoming';
 
 export default function Home() {
   return (
-    <main className="relative overflow-hidden">
+    <main className="relative overflow-x-clip">
       {/* ============================================================ */}
       {/* 1. HERO SECTION                                              */}
       {/* ============================================================ */}
@@ -49,7 +50,9 @@ export default function Home() {
           {/* Dual CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
             <a
-              href="#download"
+              href="https://apps.apple.com/app/id6795523727"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full text-sm font-semibold uppercase tracking-wider text-[#1b1810] bg-gradient-to-r from-[#f2a96f] to-[#e2682f] hover:opacity-95 shadow-[0_0_35px_rgba(226,104,47,0.35)] transition-all transform hover:-translate-y-0.5 active:translate-y-0"
             >
               <Smartphone className="w-4 h-4" />
@@ -329,7 +332,12 @@ export default function Home() {
       </section>
 
       {/* ============================================================ */}
-      {/* 6. FREQUENTLY ASKED QUESTIONS                                */}
+      {/* 6. DAYS BECOMING: HELD DAYS & RESTORE                        */}
+      {/* ============================================================ */}
+      <DaysBecoming />
+
+      {/* ============================================================ */}
+      {/* 7. FREQUENTLY ASKED QUESTIONS                                */}
       {/* ============================================================ */}
       <section id="faq" className="py-24 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
         <div className="text-center space-y-4 mb-14">

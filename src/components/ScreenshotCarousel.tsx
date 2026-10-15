@@ -13,40 +13,46 @@ interface Slide {
 
 const SLIDES: Slide[] = [
   {
+    image: '/assets/screenshots/aura-07-1242x2688.png',
+    tag: 'Getting Started',
+    title: 'It Starts With a Conversation',
+    description: 'Eleven gentle questions about what matters most to you right now. After that, nothing Aura writes is generic.',
+  },
+  {
     image: '/assets/screenshots/aura-01-1242x2688.png',
-    tag: 'Daily Audio Moments',
-    title: 'Your Dreams Spoken Into Reality',
-    description: 'Every sunrise, wake up to an intimate, synthesized voice that speaks your specific dreams as if they are already coming to life.',
-  },
-  {
-    image: '/assets/screenshots/aura-02-1242x2688.png',
-    tag: 'Living Letter Engine',
-    title: 'Letters From Your Future Self',
-    description: 'Poetic, deeply tailored daily letters reflecting on your aspirations, challenges, and personal evolution.',
-  },
-  {
-    image: '/assets/screenshots/aura-03-1242x2688.png',
-    tag: 'Affirmations Suite',
-    title: 'Resonant Affirmation Cards',
-    description: 'Collect, replay, and share affirmations calibrated to your energy, free from generic toxic positivity.',
+    tag: 'Daily Moments',
+    title: 'A New Moment, Written Every Morning',
+    description: 'Each morning brings a fresh moment shaped around the life you described, in your own words.',
   },
   {
     image: '/assets/screenshots/aura-04-1242x2688.png',
-    tag: 'Privacy & Memory',
-    title: 'Living Memory: Total Transparency',
-    description: 'Aura remembers what you share. Review, edit, or purge every single memory node in "What Aura Knows".',
+    tag: 'Audio Player',
+    title: 'Every Moment Arrives Spoken',
+    description: 'Listen, or read it instead. Scrub, slow it down, or read along, and keep the ones that land.',
+  },
+  {
+    image: '/assets/screenshots/aura-03-1242x2688.png',
+    tag: 'Living Letters',
+    title: 'A Letter From the You Who Already Has It',
+    description: 'Word by word, in a voice that says your name. Every letter is kept, so you can hear it again.',
   },
   {
     image: '/assets/screenshots/aura-05-1242x2688.png',
-    tag: 'Evening Reflection',
-    title: 'Zero-Pressure Gratitude Journal',
-    description: 'Three quiet prompts to ground your nervous system before sleep, seamlessly weaving into tomorrow’s morning moment.',
+    tag: 'Affirmations',
+    title: 'Affirmations That Explain Themselves',
+    description: 'Identity phrasing, 369 and scripting, with the technique behind each line. Hear it read or share it as a card.',
   },
   {
     image: '/assets/screenshots/aura-06-1242x2688.png',
-    tag: 'Habit Progression',
-    title: 'Soft Streaks Without Shame',
-    description: 'A ritual tracker designed to encourage consistency rather than punish broken days. Growth is cyclical.',
+    tag: 'Living Memory',
+    title: 'It Remembers, and You Can Edit All of It',
+    description: 'Your evening gratitude returns in what Aura writes. Review or remove anything in "What Aura Knows", anytime.',
+  },
+  {
+    image: '/assets/screenshots/aura-02-1242x2688.png',
+    tag: 'Privacy',
+    title: 'Your Words Are Only for You',
+    description: 'What you share is used only to write to you. Edit or remove anything, and it is forgotten completely.',
   },
 ];
 
@@ -117,25 +123,17 @@ export default function ScreenshotCarousel() {
           </div>
         </div>
 
-        {/* Right / iPhone Mockup Display */}
+        {/* Right / App Store screenshot (already includes its own device frame) */}
         <div className="lg:col-span-6 flex justify-center">
-          <div className="relative w-[280px] sm:w-[320px] h-[580px] sm:h-[650px] rounded-[48px] p-3 bg-gradient-to-b from-[#2a261f] to-[#12110e] border-[4px] border-[#443e33] shadow-[0_25px_70px_rgba(0,0,0,0.35)] dark:shadow-[0_25px_70px_rgba(0,0,0,0.8)]">
-            {/* Speaker & camera notch */}
-            <div className="absolute top-6 left-1/2 -translate-x-1/2 w-28 h-5 bg-black rounded-full z-20" />
-
-            {/* Inner screen area */}
-            <div className="relative w-full h-full rounded-[40px] overflow-hidden bg-black">
-              <Image
-                src={SLIDES[current].image}
-                alt={SLIDES[current].title}
-                fill
-                sizes="(max-width: 768px) 280px, 320px"
-                className="object-cover"
-                priority
-              />
-              {/* Glass sheen overlay */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none" />
-            </div>
+          <div className="relative w-[260px] sm:w-[300px] aspect-[1242/2688] rounded-[28px] overflow-hidden border border-black/10 dark:border-white/10 shadow-[0_25px_70px_rgba(27,24,16,0.25)] dark:shadow-[0_25px_70px_rgba(0,0,0,0.7)]">
+            <Image
+              key={SLIDES[current].image}
+              src={SLIDES[current].image}
+              alt={SLIDES[current].title}
+              fill
+              sizes="(max-width: 640px) 260px, 300px"
+              className="object-cover"
+            />
           </div>
         </div>
       </div>

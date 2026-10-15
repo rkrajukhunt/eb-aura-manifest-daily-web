@@ -18,15 +18,19 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Prevent background scrolling when mobile menu is open
+  // Prevent background scrolling and allow Escape to close while the mobile menu is open
   useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
+    if (!mobileMenuOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMobileMenuOpen(false);
+    };
+
+    document.body.style.overflow = 'hidden';
+    document.addEventListener('keydown', handleKeyDown);
     return () => {
       document.body.style.overflow = '';
+      document.removeEventListener('keydown', handleKeyDown);
     };
   }, [mobileMenuOpen]);
 
@@ -101,8 +105,10 @@ export default function Navbar() {
             <ThemeToggle />
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl text-[#4a4536] dark:text-[#dad5be] hover:text-[#1b1810] dark:hover:text-[#f5f2e8] hover:bg-black/5 dark:hover:bg-white/5 transition-colors focus:outline-none cursor-pointer"
+              className="p-2 rounded-xl text-[#4a4536] dark:text-[#dad5be] hover:text-[#1b1810] dark:hover:text-[#f5f2e8] hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer"
               aria-label="Toggle navigation menu"
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -118,7 +124,7 @@ export default function Navbar() {
             onClick={() => setMobileMenuOpen(false)}
             aria-hidden="true"
           />
-          <div className="relative z-50 md:hidden bg-[#ece9df] dark:bg-[#12100d] border-b border-[#e2682f]/25 px-6 py-6 shadow-2xl animate-in slide-in-from-top-2 duration-200">
+          <div id="mobile-menu" className="relative z-50 md:hidden bg-[#ece9df] dark:bg-[#12100d] border-b border-[#e2682f]/25 px-6 py-6 shadow-2xl animate-in slide-in-from-top-2 duration-200">
             <nav className="flex flex-col gap-2">
               {navLinks.map((link) => (
                 <Link

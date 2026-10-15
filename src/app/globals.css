@@ -37,16 +37,45 @@
 
   html {
     scroll-behavior: smooth;
-    overflow-x: hidden;
+    /* Keep anchored sections clear of the fixed navbar */
+    scroll-padding-top: 96px;
+    /* clip (not hidden) avoids creating a scroll container, so smooth scrolling stays on the viewport */
+    overflow-x: clip;
     max-width: 100vw;
   }
 
   body {
     background-color: var(--background);
     color: var(--foreground);
-    overflow-x: hidden;
+    overflow-x: clip;
     max-width: 100vw;
     transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Visible keyboard focus everywhere, without showing rings on mouse clicks */
+  :focus-visible {
+    outline: 2px solid var(--ember);
+    outline-offset: 3px;
+    border-radius: 9999px;
+  }
+
+  input:focus-visible,
+  textarea:focus-visible {
+    outline: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 
   button,
