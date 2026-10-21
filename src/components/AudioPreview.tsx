@@ -1,7 +1,9 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import Image from 'next/image';
 import { Play, Pause, Volume2, Sparkles, RefreshCw } from 'lucide-react';
+import Glim from './Glim';
 
 interface MomentSample {
   id: string;
@@ -15,26 +17,26 @@ interface MomentSample {
 const SAMPLES: MomentSample[] = [
   {
     id: '1',
-    title: 'Morning Awakening: Grounded Momentum',
-    category: 'Daily Morning Moment',
+    title: 'What you planted yesterday',
+    category: 'Morning moment',
     duration: 38,
-    voice: 'Serene Dawn (Warm & Intimate)',
+    voice: 'Warm and unhurried, read by name in the app',
     text: 'Good morning. You don’t need to force today to be profound. You only need to meet it with open hands and an unhurried mind. What you planted yesterday is already taking root.',
   },
   {
     id: '2',
-    title: 'Self-Belief & Creative Flow',
-    category: 'Affirmation Meditation',
+    title: 'Beneath the noise',
+    category: 'Affirmation',
     duration: 32,
-    voice: 'Grounded Ember (Steady & Poetic)',
+    voice: 'Steady, one line at a time',
     text: 'I trust the pace of my evolution. My clarity does not depend on chaos fading away; it comes from knowing who I am beneath the noise.',
   },
   {
     id: '3',
-    title: 'Evening Release & Quiet Gratitude',
-    category: 'Night Reflection',
+    title: 'You did enough',
+    category: 'Evening',
     duration: 42,
-    voice: 'Twilight Breath (Gentle & Deep)',
+    voice: 'Gentle, for winding down',
     text: 'Lay down whatever you carried today that was not yours to resolve. You showed up. You did enough. Rest now and let tomorrow arrive in its own time.',
   },
 ];
@@ -152,130 +154,106 @@ export default function AudioPreview() {
   };
 
   return (
-    <div className="glass-panel-glow rounded-3xl p-6 sm:p-8 md:p-10 border border-[#e2682f]/30 max-w-4xl mx-auto shadow-[0_20px_60px_-15px_rgba(226,104,47,0.15)] relative overflow-hidden transition-colors duration-300">
-      {/* Background ambient glow */}
-      <div className="absolute top-0 right-0 -mr-24 -mt-24 w-80 h-80 bg-[#e2682f]/10 rounded-full blur-3xl pointer-events-none" />
-
-      {/* Header with tags */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-6 relative z-10">
-        <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#e2682f]/15 text-[#c9531f] dark:text-[#f2a96f] border border-[#e2682f]/30">
-            <Sparkles className="w-3.5 h-3.5 text-[#e2682f]" />
-            <span>Interactive Audio Moment</span>
-          </span>
-          <span className="text-xs text-[#6f6a58] dark:text-[#8a8265]">AI Voice by ElevenLabs</span>
+    <div className="card overflow-hidden grid grid-cols-1 lg:grid-cols-5 max-w-5xl mx-auto">
+      {/* The app's dusk player scene, with Glim listening in */}
+      <div className="relative lg:col-span-2 min-h-[260px] sm:min-h-[320px] overflow-hidden">
+        <Image
+          src="/assets/illustrations/player-dusk.jpg"
+          alt=""
+          fill
+          sizes="(max-width: 1024px) 100vw, 400px"
+          className="object-cover object-bottom"
+        />
+        <div className="absolute inset-0 flex items-end justify-center pb-6">
+          <Glim clip="listen" className="w-[120px] sm:w-[140px] drop-shadow-[0_10px_30px_rgba(242,169,111,0.45)]" />
         </div>
+        <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold text-[#f5f2e8] bg-black/30 backdrop-blur-md border border-white/10">
+          <Sparkles className="w-3.5 h-3.5 text-ember-soft" />
+          A moment from Aura
+        </div>
+      </div>
 
-        {/* Sample Switcher Tabs */}
-        <div className="flex items-center gap-1 sm:gap-1.5 bg-black/5 dark:bg-black/40 p-1 rounded-xl border border-black/5 dark:border-white/5 self-start sm:self-auto">
+      <div className="lg:col-span-3 p-6 sm:p-8 md:p-10 flex flex-col gap-6">
+        {/* Sample switcher */}
+        <div className="flex flex-wrap items-center gap-1.5" role="group" aria-label="Choose a sample">
           {SAMPLES.map((s, idx) => (
             <button
               key={s.id}
               onClick={() => switchSample(idx)}
-              className={`px-2.5 sm:px-3 py-1 text-xs rounded-lg transition-all cursor-pointer ${
-                activeSampleIndex === idx
-                  ? 'bg-[#e2682f] text-white font-medium shadow-md'
-                  : 'text-[#6f6a58] dark:text-[#8a8265] hover:text-[#1b1810] dark:hover:text-[#f5f2e8]'
+              aria-pressed={activeSampleIndex === idx}
+              className={`px-3.5 py-1.5 text-xs font-medium rounded-full transition-colors ${
+                activeSampleIndex === idx ? 'bg-pill text-pill-text' : 'text-muted hover:text-ink bg-ink/5'
               }`}
             >
-              Track {idx + 1}
+              {s.category}
             </button>
           ))}
         </div>
-      </div>
 
-      {/* Track Info */}
-      <div className="relative z-10 space-y-2 mb-6">
-        <span className="text-xs uppercase tracking-widest text-[#6f6a58] dark:text-[#8a8265] font-semibold">
-          {sample.category}
-        </span>
-        <h3 className="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#1b1810] dark:text-[#f5f2e8]">
-          {sample.title}
-        </h3>
-        <p className="text-xs text-[#4a4536] dark:text-[#dad5be]/80 flex items-center gap-1.5">
-          <Volume2 className="w-3.5 h-3.5 text-[#e2682f]" />
-          <span>Synthesized voice: {sample.voice}</span>
-        </p>
-      </div>
-
-      {/* Quote / Script text display */}
-      <div className="relative z-10 bg-[#f5f2e8]/90 dark:bg-[#0c0b09]/80 border border-black/5 dark:border-white/5 rounded-2xl p-5 sm:p-6 mb-8 shadow-sm">
-        <p className="font-serif-luxury italic text-lg sm:text-xl text-[#1b1810] dark:text-[#f5f2e8]/90 leading-relaxed">
-          &ldquo;{sample.text}&rdquo;
-        </p>
-      </div>
-
-      {/* Player transport & waveform */}
-      <div className="relative z-10 flex flex-col sm:flex-row items-center gap-6 sm:gap-8">
-        {/* Play/Pause CTA Button */}
-        <button
-          onClick={togglePlay}
-          className={`w-16 h-16 rounded-full flex items-center justify-center shrink-0 transition-all transform hover:scale-105 active:scale-95 shadow-xl ${
-            isPlaying
-              ? 'bg-[#e2682f] text-white shadow-[0_0_30px_rgba(226,104,47,0.6)]'
-              : 'bg-gradient-to-tr from-[#f2a96f] to-[#e2682f] text-[#1b1810]'
-          }`}
-          aria-label={isPlaying ? 'Pause audio preview' : 'Play audio preview'}
-        >
-          {isPlaying ? (
-            <Pause className="w-7 h-7 fill-current" />
-          ) : (
-            <Play className="w-7 h-7 fill-current ml-1" />
-          )}
-        </button>
-
-        {/* Dynamic Waveform Visualizer */}
-        <div className="flex-1 w-full space-y-2.5">
-          <div className="flex items-center justify-between text-xs text-[#6f6a58] dark:text-[#8a8265] font-mono">
-            <span>{formatTime(currentTime)}</span>
-            <span className="text-[#e2682f] font-medium">
-              {isPlaying ? 'Playing binaural sample...' : 'Tap play to listen'}
-            </span>
-            <span>{formatTime(sample.duration)}</span>
-          </div>
-
-          {/* Animated Waveform Bars */}
-          <div className="h-12 flex items-center justify-between gap-1 sm:gap-1.5 px-2 bg-black/5 dark:bg-black/40 rounded-xl border border-black/5 dark:border-white/5">
-            {Array.from({ length: 32 }).map((_, i) => {
-              const active = (currentTime / sample.duration) * 32 >= i;
-              const delay = (i % 8) * 0.15;
-              const baseHeight = 20 + ((i * 7) % 65);
-
-              return (
-                <div
-                  key={i}
-                  style={{
-                    height: isPlaying ? undefined : `${baseHeight}%`,
-                    animation: isPlaying
-                      ? `waveBar 1.2s ease-in-out infinite ${delay}s`
-                      : 'none',
-                  }}
-                  className={`w-1.5 rounded-full transition-colors duration-200 ${
-                    active || isPlaying
-                      ? 'bg-gradient-to-t from-[#e2682f] to-[#f2a96f]'
-                      : 'bg-black/10 dark:bg-white/10'
-                  }`}
-                />
-              );
-            })}
-          </div>
+        <div className="space-y-3">
+          <h3 className="font-serif text-2xl sm:text-3xl font-medium tracking-tight text-ink">{sample.title}</h3>
+          <p className="font-serif italic text-lg sm:text-xl text-body leading-relaxed">&ldquo;{sample.text}&rdquo;</p>
+          <p className="text-xs text-muted flex items-center gap-1.5">
+            <Volume2 className="w-3.5 h-3.5 text-ember" />
+            <span>{sample.voice}</span>
+          </p>
         </div>
 
-        {/* Reset button */}
-        <button
-          onClick={() => {
-            setTime(0);
-            if (isPlaying) {
-              stopAmbientTone();
-              setIsPlaying(false);
-            }
-          }}
-          className="p-3 text-[#6f6a58] dark:text-[#8a8265] hover:text-[#1b1810] dark:hover:text-[#f5f2e8] rounded-xl hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
-          title="Reset"
-          aria-label="Reset audio track"
-        >
-          <RefreshCw className="w-5 h-5" />
-        </button>
+        {/* Transport and waveform: the one place ember lives, because this is where Aura speaks */}
+        <div className="flex items-center gap-4 sm:gap-5 mt-auto">
+          <button
+            onClick={togglePlay}
+            className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center shrink-0 transition-transform hover:scale-105 active:scale-95 text-[#1b1810] bg-gradient-to-tr from-ember-soft to-ember ${
+              isPlaying ? 'shadow-[0_0_30px_rgba(226,104,47,0.55)]' : 'shadow-[0_12px_24px_-10px_rgba(226,104,47,0.7)]'
+            }`}
+            aria-label={isPlaying ? 'Pause audio preview' : 'Play audio preview'}
+          >
+            {isPlaying ? <Pause className="w-6 h-6 fill-current" /> : <Play className="w-6 h-6 fill-current ml-0.5" />}
+          </button>
+
+          <div className="flex-1 min-w-0 space-y-2">
+            <div className="h-10 flex items-center justify-between gap-[3px]">
+              {Array.from({ length: 36 }).map((_, i) => {
+                const active = (currentTime / sample.duration) * 36 >= i;
+                const delay = (i % 8) * 0.15;
+                const baseHeight = 20 + ((i * 7) % 65);
+
+                return (
+                  <div
+                    key={i}
+                    style={{
+                      height: isPlaying ? undefined : `${baseHeight}%`,
+                      animation: isPlaying ? `waveBar 1.2s ease-in-out infinite ${delay}s` : 'none',
+                    }}
+                    className={`flex-1 max-w-1.5 rounded-full transition-colors duration-200 ${
+                      active || isPlaying ? 'bg-gradient-to-t from-ember to-ember-soft' : 'bg-[#ebd9c4] dark:bg-white/10'
+                    }`}
+                  />
+                );
+              })}
+            </div>
+            <div className="flex items-center justify-between text-[11px] text-muted tabular-nums">
+              <span>{formatTime(currentTime)}</span>
+              <span className="truncate px-2">{isPlaying ? 'Ambient preview playing' : 'Tap play for an ambient preview'}</span>
+              <span>{formatTime(sample.duration)}</span>
+            </div>
+          </div>
+
+          <button
+            onClick={() => {
+              setTime(0);
+              if (isPlaying) {
+                stopAmbientTone();
+                setIsPlaying(false);
+              }
+            }}
+            className="p-2.5 text-muted hover:text-ink rounded-full hover:bg-ink/5 transition-colors"
+            title="Reset"
+            aria-label="Reset audio track"
+          >
+            <RefreshCw className="w-4 h-4" />
+          </button>
+        </div>
       </div>
     </div>
   );

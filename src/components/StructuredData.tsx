@@ -16,11 +16,6 @@ export default function StructuredData() {
       price: '0',
       priceCurrency: 'USD',
     },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      reviewCount: '1280',
-    },
     publisher: {
       '@type': 'Organization',
       name: 'EmperorBrains',

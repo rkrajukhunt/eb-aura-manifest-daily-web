@@ -15,43 +15,43 @@ const SLIDES: Slide[] = [
   {
     image: '/assets/screenshots/aura-07-1242x2688.png',
     tag: 'Getting Started',
-    title: 'It Starts With a Conversation',
+    title: 'It starts with a conversation',
     description: 'Eleven gentle questions about what matters most to you right now. After that, nothing Aura writes is generic.',
   },
   {
     image: '/assets/screenshots/aura-01-1242x2688.png',
     tag: 'Daily Moments',
-    title: 'A New Moment, Written Every Morning',
+    title: 'A new moment, written every morning',
     description: 'Each morning brings a fresh moment shaped around the life you described, in your own words.',
   },
   {
     image: '/assets/screenshots/aura-04-1242x2688.png',
     tag: 'Audio Player',
-    title: 'Every Moment Arrives Spoken',
+    title: 'Every moment arrives spoken',
     description: 'Listen, or read it instead. Scrub, slow it down, or read along, and keep the ones that land.',
   },
   {
     image: '/assets/screenshots/aura-03-1242x2688.png',
     tag: 'Living Letters',
-    title: 'A Letter From the You Who Already Has It',
+    title: 'A letter from the you who already has it',
     description: 'Word by word, in a voice that says your name. Every letter is kept, so you can hear it again.',
   },
   {
     image: '/assets/screenshots/aura-05-1242x2688.png',
     tag: 'Affirmations',
-    title: 'Affirmations That Explain Themselves',
+    title: 'Affirmations that explain themselves',
     description: 'Identity phrasing, 369 and scripting, with the technique behind each line. Hear it read or share it as a card.',
   },
   {
     image: '/assets/screenshots/aura-06-1242x2688.png',
     tag: 'Living Memory',
-    title: 'It Remembers, and You Can Edit All of It',
+    title: 'It remembers, and you can edit all of it',
     description: 'Your evening gratitude returns in what Aura writes. Review or remove anything in "What Aura Knows", anytime.',
   },
   {
     image: '/assets/screenshots/aura-02-1242x2688.png',
     tag: 'Privacy',
-    title: 'Your Words Are Only for You',
+    title: 'Your words are only for you',
     description: 'What you share is used only to write to you. Edit or remove anything, and it is forgotten completely.',
   },
 ];
@@ -77,8 +77,8 @@ export default function ScreenshotCarousel() {
             onClick={() => setCurrent(idx)}
             className={`px-3.5 sm:px-4 py-2 rounded-full text-xs font-medium transition-all shrink-0 cursor-pointer ${
               current === idx
-                ? 'bg-[#e2682f] text-white shadow-[0_0_20px_rgba(226,104,47,0.4)]'
-                : 'glass-panel text-[#6f6a58] dark:text-[#8a8265] hover:text-[#1b1810] dark:hover:text-[#f5f2e8] hover:border-black/20 dark:hover:border-white/20'
+                ? 'bg-pill text-pill-text'
+                : 'bg-card border border-line text-muted hover:text-ink'
             }`}
           >
             {slide.tag}
@@ -89,33 +89,33 @@ export default function ScreenshotCarousel() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
         {/* Left / Info Column */}
         <div className="lg:col-span-6 space-y-6 text-left">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-[#e2682f]/10 text-[#c9531f] dark:text-[#f2a96f] border border-[#e2682f]/20">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-card border border-line text-body">
             <Smartphone className="w-3.5 h-3.5" />
-            <span>Native iOS Experience</span>
+            <span>{SLIDES[current].tag}</span>
           </div>
 
-          <h3 className="font-serif-luxury text-3xl sm:text-4xl md:text-5xl font-bold text-[#1b1810] dark:text-[#f5f2e8] leading-tight">
+          <h3 className="font-serif text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-ink leading-tight text-balance">
             {SLIDES[current].title}
           </h3>
 
-          <p className="text-base sm:text-lg text-[#4a4536] dark:text-[#dad5be] leading-relaxed">
+          <p className="text-base sm:text-lg text-body leading-relaxed">
             {SLIDES[current].description}
           </p>
 
           <div className="pt-4 flex items-center gap-4">
             <button
               onClick={prev}
-              className="p-3.5 rounded-full glass-panel hover:border-[#e2682f] text-[#1b1810] dark:text-[#f5f2e8] hover:text-[#e2682f] transition-all transform hover:-translate-x-1"
+              className="p-3.5 rounded-full bg-card border border-line text-ink hover:border-ink/30 transition-all hover:-translate-x-0.5"
               aria-label="Previous screenshot"
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
-            <div className="text-sm font-mono text-[#6f6a58] dark:text-[#8a8265]">
-              <span className="text-[#1b1810] dark:text-[#f5f2e8] font-bold">{current + 1}</span> / {SLIDES.length}
+            <div className="text-sm tabular-nums text-muted">
+              <span className="text-ink font-semibold">{current + 1}</span> / {SLIDES.length}
             </div>
             <button
               onClick={next}
-              className="p-3.5 rounded-full glass-panel hover:border-[#e2682f] text-[#1b1810] dark:text-[#f5f2e8] hover:text-[#e2682f] transition-all transform hover:translate-x-1"
+              className="p-3.5 rounded-full bg-card border border-line text-ink hover:border-ink/30 transition-all hover:translate-x-0.5"
               aria-label="Next screenshot"
             >
               <ChevronRight className="w-6 h-6" />
@@ -125,7 +125,7 @@ export default function ScreenshotCarousel() {
 
         {/* Right / App Store screenshot (already includes its own device frame) */}
         <div className="lg:col-span-6 flex justify-center">
-          <div className="relative w-[260px] sm:w-[300px] aspect-[1242/2688] rounded-[28px] overflow-hidden border border-black/10 dark:border-white/10 shadow-[0_25px_70px_rgba(27,24,16,0.25)] dark:shadow-[0_25px_70px_rgba(0,0,0,0.7)]">
+          <div className="relative w-[260px] sm:w-[300px] aspect-[1242/2688] rounded-[28px] overflow-hidden border border-line shadow-[0_40px_80px_-30px_rgba(27,24,16,0.45)]">
             <Image
               key={SLIDES[current].image}
               src={SLIDES[current].image}

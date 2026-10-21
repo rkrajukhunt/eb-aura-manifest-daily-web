@@ -1,396 +1,305 @@
 import React from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
-import {
-  Sparkles,
-  Volume2,
-  Brain,
-  Moon,
-  ShieldCheck,
-  Check,
-  Smartphone,
-  Flame,
-  Headphones,
-} from 'lucide-react';
+import { ArrowRight, HeartHandshake, Lock, Smartphone } from 'lucide-react';
 import AudioPreview from '@/components/AudioPreview';
-import ScreenshotCarousel from '@/components/ScreenshotCarousel';
 import FaqAccordion from '@/components/FaqAccordion';
 import DaysBecoming from '@/components/DaysBecoming';
+import Glim from '@/components/Glim';
+import MoodDial from '@/components/MoodDial';
+import SectionHeading from '@/components/SectionHeading';
+import DayWithAura from '@/components/DayWithAura';
+import OnboardingStory from '@/components/OnboardingStory';
+import LetterRitual from '@/components/LetterRitual';
+import StudioStory from '@/components/StudioStory';
+import MemoryStory from '@/components/MemoryStory';
+import PlanStory from '@/components/PlanStory';
+import { APP_STORE_URL } from '@/data/site';
+
+const ALSO_BUILT_IN = [
+  {
+    icon: Lock,
+    title: 'Your words are only for you',
+    body: 'Used only to write to you. Never sold, never used to train public AI models. Delete everything from Settings.',
+  },
+  {
+    icon: HeartHandshake,
+    title: 'Care on hard days',
+    body: 'Aura is a mindset practice, not therapy. If things are really hard, it shows free support lines open around the clock.',
+  },
+  {
+    icon: Smartphone,
+    title: 'Waiting on any phone',
+    body: 'Sign in with Apple, Google or email, and your letters and memories follow you to a new phone.',
+  },
+];
 
 export default function Home() {
   return (
     <main className="relative overflow-x-clip">
       {/* ============================================================ */}
-      {/* 1. HERO SECTION                                              */}
+      {/* 1. HERO                                                       */}
       {/* ============================================================ */}
-      <section className="relative min-h-[92vh] flex items-center justify-center pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-        {/* Floating Glowing Aura Orb */}
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] sm:w-[500px] md:w-[600px] h-[340px] sm:h-[500px] md:h-[600px] rounded-full bg-gradient-to-tr from-[#e2682f]/25 via-[#f2a96f]/15 to-transparent blur-[90px] sm:blur-[130px] pointer-events-none animate-orb-glow -z-10" />
-
-        <div className="max-w-5xl mx-auto text-center space-y-8 relative z-10">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-[#e2682f]/15 text-[#c9531f] dark:text-[#f2a96f] border border-[#e2682f]/30 backdrop-blur-md shadow-lg shadow-[#e2682f]/5">
-            <Sparkles className="w-3.5 h-3.5 text-[#e2682f]" />
-            <span>AI Companion for Daily Audio Manifestation</span>
-          </div>
-
-          {/* Headline */}
-          <h1 className="font-serif-luxury text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-[#1b1810] dark:text-[#f5f2e8] leading-[1.08]">
-            Your dream life, <br />
-            <span className="italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-[#e2682f] via-[#f2a96f] to-[#8a8265] dark:from-[#f2a96f] dark:via-[#e2682f] dark:to-[#dad5be]">
-              spoken into reality
-            </span>{' '}
-            every morning.
-          </h1>
-
-          {/* Subtitle */}
-          <p className="max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-[#4a4536] dark:text-[#dad5be] leading-relaxed font-light">
-            Aura turns your deepest goals and evening reflections into personalized, studio-quality audio moments and daily affirmations that evolve with you.
-          </p>
-
-          {/* Dual CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-            <a
-              href="https://apps.apple.com/app/id6795523727"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full text-sm font-semibold uppercase tracking-wider text-[#1b1810] bg-gradient-to-r from-[#f2a96f] to-[#e2682f] hover:opacity-95 shadow-[0_0_35px_rgba(226,104,47,0.35)] transition-all transform hover:-translate-y-0.5 active:translate-y-0"
-            >
-              <Smartphone className="w-4 h-4" />
-              <span>Download on App Store</span>
-            </a>
-
-            <a
-              href="#experience"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-sm font-semibold uppercase tracking-wider text-[#1b1810] dark:text-[#dad5be] glass-panel hover:border-[#e2682f]/50 transition-colors"
-            >
-              <Headphones className="w-4 h-4 text-[#e2682f]" />
-              <span>Listen to a Sample</span>
-            </a>
-          </div>
-
-          {/* Trust points */}
-          <div className="pt-6 sm:pt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs text-[#6f6a58] dark:text-[#8a8265]">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/5 dark:bg-white/5 sm:bg-transparent sm:dark:bg-transparent">
-              <ShieldCheck className="w-4 h-4 text-[#e2682f] shrink-0" />
-              <span>Private & Encrypted</span>
+      <section className="relative pt-28 sm:pt-36 pb-16 sm:pb-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+          <div className="lg:col-span-7 space-y-8 text-center lg:text-left">
+            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold text-body bg-card border border-line">
+              <span className="w-1.5 h-1.5 rounded-full bg-ember" aria-hidden="true" />
+              For the life you are quietly building
             </span>
-            <span className="hidden sm:inline">•</span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/5 dark:bg-white/5 sm:bg-transparent sm:dark:bg-transparent">
-              <Sparkles className="w-4 h-4 text-[#e2682f] dark:text-[#f2a96f] shrink-0" />
-              <span>Zero Toxic Positivity</span>
-            </span>
-            <span className="hidden sm:inline">•</span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/5 dark:bg-white/5 sm:bg-transparent sm:dark:bg-transparent">
-              <Volume2 className="w-4 h-4 text-[#e2682f] shrink-0" />
-              <span>ElevenLabs AI Voices</span>
-            </span>
-          </div>
-        </div>
-      </section>
 
-      {/* ============================================================ */}
-      {/* 2. INTERACTIVE AUDIO EXPERIENCE DEMO                         */}
-      {/* ============================================================ */}
-      <section id="experience" className="py-24 px-4 sm:px-6 lg:px-8 relative">
-        <div className="max-w-4xl mx-auto text-center space-y-4 mb-12">
-          <span className="text-xs uppercase tracking-widest text-[#e2682f] font-mono font-semibold">
-            Audio Sanctuary
-          </span>
-          <h2 className="font-serif-luxury text-4xl sm:text-5xl font-bold text-[#1b1810] dark:text-[#f5f2e8]">
-            Hear What Morning Clarity Sounds Like
-          </h2>
-          <p className="text-base sm:text-lg text-[#6f6a58] dark:text-[#8a8265] max-w-xl mx-auto">
-            Experience the intimate tone and gentle pacing of an Aura daily moment. Click play to listen.
-          </p>
-        </div>
+            <h1 className="font-serif text-[2.9rem] leading-[1.02] sm:text-6xl md:text-7xl lg:text-[5.25rem] font-medium tracking-tight text-ink text-balance">
+              Your dream life, <em className="text-ember-text">read back to you</em> every morning
+              <span className="text-ember">.</span>
+            </h1>
 
-        <AudioPreview />
-      </section>
-
-      {/* ============================================================ */}
-      {/* 3. FOUR PILLARS / FEATURES                                   */}
-      {/* ============================================================ */}
-      <section id="features" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative">
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <span className="text-xs uppercase tracking-widest text-[#e2682f] font-mono font-semibold">
-            Product Foundations
-          </span>
-          <h2 className="font-serif-luxury text-4xl sm:text-5xl font-bold text-[#1b1810] dark:text-[#f5f2e8]">
-            Designed for Quiet Power
-          </h2>
-          <p className="text-base sm:text-lg text-[#6f6a58] dark:text-[#8a8265]">
-            Built from psychology, neuroscience, and ethical AI — without spammy notification tactics or guilt.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Card 1 */}
-          <div className="glass-panel rounded-3xl p-8 sm:p-10 border border-black/10 dark:border-white/5 hover:border-[#e2682f]/40 transition-all group space-y-4">
-            <div className="w-12 h-12 rounded-2xl bg-[#e2682f]/10 border border-[#e2682f]/20 flex items-center justify-center text-[#e2682f] group-hover:scale-110 transition-transform">
-              <Volume2 className="w-6 h-6" />
-            </div>
-            <h3 className="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#1b1810] dark:text-[#f5f2e8]">
-              Personalized Audio Moments
-            </h3>
-            <p className="text-sm sm:text-base text-[#4a4536] dark:text-[#dad5be] leading-relaxed">
-              Every day at your chosen ritual time, Aura synthesizes a custom audio letter crafted around your immediate intentions, speaking in an unhurried voice that feels like a wise companion.
+            <p className="max-w-xl mx-auto lg:mx-0 text-lg sm:text-xl text-body leading-relaxed text-pretty">
+              Tell Aura what you are building, once. Each morning it writes you a short moment in your own words,
+              and reads it to you by name.
             </p>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3">
+              <a href={APP_STORE_URL} target="_blank" rel="noopener noreferrer" className="btn-pill w-full sm:w-auto">
+                Download on the App Store
+                <ArrowRight className="w-4 h-4" />
+              </a>
+              <a href="#day" className="btn-ghost w-full sm:w-auto">
+                See a day with Aura
+              </a>
+            </div>
+
+            <p className="text-sm text-muted">Free to download · iPhone and iPad · iOS 16 or later</p>
           </div>
 
-          {/* Card 2 */}
-          <div className="glass-panel rounded-3xl p-8 sm:p-10 border border-black/10 dark:border-white/5 hover:border-[#e2682f]/40 transition-all group space-y-4">
-            <div className="w-12 h-12 rounded-2xl bg-[#e2682f]/10 border border-[#e2682f]/20 flex items-center justify-center text-[#e2682f] group-hover:scale-110 transition-transform">
-              <Brain className="w-6 h-6" />
-            </div>
-            <h3 className="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#1b1810] dark:text-[#f5f2e8]">
-              The Living Memory Engine
-            </h3>
-            <p className="text-sm sm:text-base text-[#4a4536] dark:text-[#dad5be] leading-relaxed">
-              Aura connects the dots across your journal reflections. It remembers when you overcome hesitation, reminds you of past breakthroughs, and lets you view and edit everything it stores.
-            </p>
-          </div>
-
-          {/* Card 3 */}
-          <div className="glass-panel rounded-3xl p-8 sm:p-10 border border-black/10 dark:border-white/5 hover:border-[#e2682f]/40 transition-all group space-y-4">
-            <div className="w-12 h-12 rounded-2xl bg-[#e2682f]/10 border border-[#e2682f]/20 flex items-center justify-center text-[#e2682f] group-hover:scale-110 transition-transform">
-              <Moon className="w-6 h-6" />
-            </div>
-            <h3 className="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#1b1810] dark:text-[#f5f2e8]">
-              Zero-Pressure Evening Gratitude
-            </h3>
-            <p className="text-sm sm:text-base text-[#4a4536] dark:text-[#dad5be] leading-relaxed">
-              Three quiet evening prompts to down-regulate your nervous system. What you write tonight gently weaves into tomorrow morning’s audio meditation.
-            </p>
-          </div>
-
-          {/* Card 4 */}
-          <div className="glass-panel rounded-3xl p-8 sm:p-10 border border-black/10 dark:border-white/5 hover:border-[#e2682f]/40 transition-all group space-y-4">
-            <div className="w-12 h-12 rounded-2xl bg-[#e2682f]/10 border border-[#e2682f]/20 flex items-center justify-center text-[#e2682f] group-hover:scale-110 transition-transform">
-              <Flame className="w-6 h-6" />
-            </div>
-            <h3 className="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#1b1810] dark:text-[#f5f2e8]">
-              Resonant Affirmations & Soft Streaks
-            </h3>
-            <p className="text-sm sm:text-base text-[#4a4536] dark:text-[#dad5be] leading-relaxed">
-              Keep, replay, and share affirmation cards that resonate with you. Plus, a ritual counter that respects the rhythm of life — missing a day never wipes out your progress.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================================ */}
-      {/* 4. APP SHOWCASE / SCREENSHOT GALLERY                         */}
-      {/* ============================================================ */}
-      <section id="showcase" className="py-24 px-4 sm:px-6 lg:px-8 relative bg-black/[0.02] dark:bg-black/30 border-y border-black/5 dark:border-white/5">
-        <div className="max-w-4xl mx-auto text-center space-y-4 mb-16">
-          <span className="text-xs uppercase tracking-widest text-[#e2682f] font-mono font-semibold">
-            Visual Craftsmanship
-          </span>
-          <h2 className="font-serif-luxury text-4xl sm:text-5xl font-bold text-[#1b1810] dark:text-[#f5f2e8]">
-            Experience the Interface
-          </h2>
-          <p className="text-base sm:text-lg text-[#6f6a58] dark:text-[#8a8265]">
-            Built with tactile haptics, warm editorial typography, and buttery 60fps animations.
-          </p>
-        </div>
-
-        <ScreenshotCarousel />
-      </section>
-
-      {/* ============================================================ */}
-      {/* 5. AURA VS TRADITIONAL MEDITATION APPS                       */}
-      {/* ============================================================ */}
-      <section className="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-        <div className="text-center space-y-3 sm:space-y-4 mb-10 sm:mb-14">
-          <span className="text-xs uppercase tracking-widest text-[#e2682f] font-mono font-semibold">
-            Intentional Difference
-          </span>
-          <h2 className="font-serif-luxury text-3xl sm:text-4xl md:text-5xl font-bold text-[#1b1810] dark:text-[#f5f2e8]">
-            Why Aura Feels Different
-          </h2>
-          <p className="text-xs sm:text-sm text-[#6f6a58] dark:text-[#8a8265] max-w-md mx-auto">
-            Traditional apps play the same generic audio for millions. Aura speaks directly to your journey.
-          </p>
-        </div>
-
-        {/* Desktop Table View (Hidden on mobile) */}
-        <div className="hidden sm:block glass-panel rounded-3xl overflow-hidden border border-black/10 dark:border-white/10">
-          <div className="grid grid-cols-12 bg-black/5 dark:bg-white/5 p-4 sm:p-6 text-xs uppercase tracking-wider font-semibold text-[#6f6a58] dark:text-[#8a8265] border-b border-black/10 dark:border-white/10">
-            <div className="col-span-5 sm:col-span-6">Experience</div>
-            <div className="col-span-4 sm:col-span-3 text-center text-[#e2682f]">Aura</div>
-            <div className="col-span-3 sm:col-span-3 text-center">Typical Apps</div>
-          </div>
-
-          <div className="divide-y divide-black/5 dark:divide-white/5 text-sm sm:text-base text-[#4a4536] dark:text-[#dad5be]">
-            <div className="grid grid-cols-12 p-4 sm:p-6 items-center">
-              <div className="col-span-5 sm:col-span-6 font-medium text-[#1b1810] dark:text-[#f5f2e8]">
-                Audio Personalization
-              </div>
-              <div className="col-span-4 sm:col-span-3 text-center text-[#e2682f] dark:text-[#f2a96f] font-medium">
-                Unique daily AI generation
-              </div>
-              <div className="col-span-3 sm:col-span-3 text-center text-[#6f6a58] dark:text-[#8a8265]">
-                Static recorded tracks
+          {/* The app's day scene in an arch, with Glim floating in it */}
+          <div className="lg:col-span-5 relative mx-auto w-full max-w-[420px]">
+            <div className="relative aspect-[4/5] rounded-t-[999px] rounded-b-[44px] overflow-hidden border border-line shadow-[0_40px_80px_-40px_rgba(27,24,16,0.45)]">
+              <Image
+                src="/assets/illustrations/player-day.jpg"
+                alt=""
+                fill
+                preload
+                sizes="(max-width: 1024px) 420px, 40vw"
+                className="object-cover object-bottom dark:hidden"
+              />
+              <Image
+                src="/assets/illustrations/player-dusk.jpg"
+                alt=""
+                fill
+                sizes="(max-width: 1024px) 420px, 40vw"
+                className="object-cover object-bottom hidden dark:block"
+              />
+              <div className="absolute inset-0 flex items-end justify-center pb-[12%]">
+                <Glim
+                  clip="idle_float"
+                  eager
+                  alt="Glim, Aura's firefly companion, floating with its lantern glowing"
+                  className="w-[46%] drop-shadow-[0_20px_30px_rgba(226,104,47,0.3)]"
+                />
               </div>
             </div>
 
-            <div className="grid grid-cols-12 p-4 sm:p-6 items-center bg-black/[0.02] dark:bg-white/[0.02]">
-              <div className="col-span-5 sm:col-span-6 font-medium text-[#1b1810] dark:text-[#f5f2e8]">
-                Memory & Continuity
-              </div>
-              <div className="col-span-4 sm:col-span-3 text-center text-[#e2682f] dark:text-[#f2a96f] font-medium">
-                Remembers your goals & reflections
-              </div>
-              <div className="col-span-3 sm:col-span-3 text-center text-[#6f6a58] dark:text-[#8a8265]">
-                Zero memory of user
-              </div>
-            </div>
-
-            <div className="grid grid-cols-12 p-4 sm:p-6 items-center">
-              <div className="col-span-5 sm:col-span-6 font-medium text-[#1b1810] dark:text-[#f5f2e8]">
-                Habit Loops
-              </div>
-              <div className="col-span-4 sm:col-span-3 text-center text-[#e2682f] dark:text-[#f2a96f] font-medium">
-                Gentle soft streaks, zero shame
-              </div>
-              <div className="col-span-3 sm:col-span-3 text-center text-[#6f6a58] dark:text-[#8a8265]">
-                Guilt-inducing streak resets
-              </div>
-            </div>
-
-            <div className="grid grid-cols-12 p-4 sm:p-6 items-center bg-black/[0.02] dark:bg-white/[0.02]">
-              <div className="col-span-5 sm:col-span-6 font-medium text-[#1b1810] dark:text-[#f5f2e8]">
-                Voice Quality
-              </div>
-              <div className="col-span-4 sm:col-span-3 text-center text-[#e2682f] dark:text-[#f2a96f] font-medium">
-                ElevenLabs studio synthesis
-              </div>
-              <div className="col-span-3 sm:col-span-3 text-center text-[#6f6a58] dark:text-[#8a8265]">
-                Robotic TTS or generic narrator
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile Cards View (Visible on small screens) */}
-        <div className="block sm:hidden space-y-3.5">
-          {[
-            {
-              feature: 'Audio Personalization',
-              aura: 'Unique daily AI moment generated for your goals',
-              others: 'Static pre-recorded audio libraries',
-            },
-            {
-              feature: 'Memory & Continuity',
-              aura: 'Living Memory Engine remembers your reflections',
-              others: 'Zero memory — starts over every time',
-            },
-            {
-              feature: 'Habit Loops',
-              aura: 'Gentle soft streaks with zero guilt or shame',
-              others: 'Punishing streak counters that reset to 0',
-            },
-            {
-              feature: 'Voice Quality',
-              aura: 'ElevenLabs hyper-realistic studio voices',
-              others: 'Robotic synthetic speech or monotone audio',
-            },
-          ].map((item, idx) => (
-            <div
-              key={idx}
-              className="glass-panel rounded-2xl p-4 border border-black/10 dark:border-white/10 space-y-3"
-            >
-              <span className="text-xs font-bold uppercase tracking-wider text-[#1b1810] dark:text-[#f5f2e8]">
-                {item.feature}
-              </span>
-
-              {/* Aura advantage */}
-              <div className="p-3 rounded-xl bg-[#e2682f]/10 dark:bg-[#e2682f]/15 border border-[#e2682f]/25 space-y-1">
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-[#e2682f] dark:text-[#f2a96f]">
-                    Aura
-                  </span>
-                  <Check className="w-3.5 h-3.5 text-[#e2682f]" />
-                </div>
-                <p className="text-xs font-medium text-[#1b1810] dark:text-[#f5f2e8]">
-                  {item.aura}
-                </p>
-              </div>
-
-              {/* Typical Apps */}
-              <div className="px-3 py-2 rounded-xl bg-black/5 dark:bg-white/5 space-y-0.5">
-                <span className="text-[10px] font-semibold uppercase tracking-widest text-[#8a8265]">
-                  Typical Apps
+            {/* Arrival notification, in the app's voice */}
+            <div className="absolute -left-2 sm:-left-10 top-[14%] max-w-[230px] liquid-glass rounded-2xl p-3 animate-float-soft">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="relative w-5 h-5 rounded-md overflow-hidden bg-card">
+                  <Image src="/assets/logo.png" alt="" fill sizes="20px" className="object-contain" />
                 </span>
-                <p className="text-xs text-[#6f6a58] dark:text-[#8a8265]">
-                  {item.others}
-                </p>
+                <span className="text-[11px] font-semibold text-ink">Aura</span>
+                <span className="text-[11px] text-muted ml-auto">7:00</span>
               </div>
+              <p className="text-[13px] leading-snug text-ink">Maya, this morning&rsquo;s is about the studio.</p>
             </div>
-          ))}
+
+            {/* A kept affirmation, on parchment */}
+            <div
+              className="absolute -right-2 sm:-right-8 bottom-[8%] max-w-[220px] rounded-2xl p-4 bg-parchment border border-line shadow-[0_20px_40px_-20px_rgba(27,24,16,0.35)] animate-float-soft"
+              style={{ animationDelay: '-3s' }}
+            >
+              <p className="font-serif italic text-[15px] leading-snug text-ink">
+                &ldquo;I am building the studio with my own hands, one quiet morning at a time.&rdquo;
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* ============================================================ */}
-      {/* 6. DAYS BECOMING: HELD DAYS & RESTORE                        */}
+      {/* 2. A DAY WITH AURA (pinned phone scroll story)                */}
+      {/* ============================================================ */}
+      <section id="day" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <SectionHeading
+          eyebrow="A day with Aura"
+          title="Three minutes, spread through your day"
+          intro="Scroll through one ordinary Tuesday. Every screen here is the app, in its own words."
+        />
+        <div className="mt-10 lg:mt-4">
+          <DayWithAura />
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* 3. IT BEGINS WITH A CONVERSATION (onboarding)                 */}
+      {/* ============================================================ */}
+      <section id="begin" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-bg-deep/60 border-y border-line">
+        <div className="max-w-6xl mx-auto">
+          <SectionHeading
+            eyebrow="Before the first morning"
+            title="It begins with a conversation"
+            intro="A few unhurried questions, so nothing Aura writes is generic. Every few answers, it reflects back what it heard."
+          />
+          <div className="mt-14">
+            <OnboardingStory />
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* 4. THE FIRST LETTER + LISTEN                                  */}
+      {/* ============================================================ */}
+      <section id="listen" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8">
+        <SectionHeading
+          eyebrow="Your first letter"
+          title="A letter from the you who already has it"
+          intro="Written from everything you shared, recorded in a voice that says your name, and kept forever on every plan."
+        />
+        <div className="mt-14 space-y-5">
+          <LetterRitual />
+          <div className="reveal">
+            <AudioPreview />
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* 5. STUDIO: MANIFEST ANYTHING + GUIDED AFFIRMATIONS           */}
+      {/* ============================================================ */}
+      <section id="studio" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <SectionHeading
+          eyebrow="When you want more"
+          title="Ask for exactly what you need"
+          intro="A moment about the one situation on your mind, or a line written for what today needs."
+        />
+        <div className="mt-14">
+          <StudioStory />
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* 6. MEMORY                                                     */}
+      {/* ============================================================ */}
+      <section id="memory" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <SectionHeading
+          eyebrow="Living memory"
+          title="It remembers, and you are in charge"
+          intro="The more Aura knows, the realer it feels. So it shows you everything it knows, and forgets anything you ask it to."
+        />
+        <div className="mt-14">
+          <MemoryStory />
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* 7. MEET GLIM                                                  */}
+      {/* ============================================================ */}
+      <section id="glim" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <SectionHeading
+          eyebrow="Meet Glim"
+          title="A small light that keeps yours"
+          intro="Glim is Aura's firefly. Every small good thing you tell Aura becomes a spark in its lantern. Move the dial to see how Glim meets you on different days."
+        />
+        <div className="reveal mt-12">
+          <MoodDial />
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* 8. DAYS BECOMING: HELD DAYS & RESTORE                        */}
       {/* ============================================================ */}
       <DaysBecoming />
 
       {/* ============================================================ */}
-      {/* 7. FREQUENTLY ASKED QUESTIONS                                */}
+      {/* 9. HONEST PRICING                                             */}
       {/* ============================================================ */}
-      <section id="faq" className="py-24 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
-        <div className="text-center space-y-4 mb-14">
-          <span className="text-xs uppercase tracking-widest text-[#e2682f] font-mono font-semibold">
-            Common Inquiries
-          </span>
-          <h2 className="font-serif-luxury text-4xl sm:text-5xl font-bold text-[#1b1810] dark:text-[#f5f2e8]">
-            Frequently Asked Questions
-          </h2>
+      <section id="pricing" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <SectionHeading
+          eyebrow="Plans"
+          title="Free to begin, honest about the rest"
+          intro="The free plan is a real daily practice. Premium adds more ways to ask, keep and share. You see every term before you decide."
+        />
+        <div className="mt-14">
+          <PlanStory />
         </div>
 
-        <FaqAccordion />
+        <div className="mt-5 grid grid-cols-1 md:grid-cols-3 gap-5">
+          {ALSO_BUILT_IN.map(({ icon: Icon, title, body }) => (
+            <div key={title} className="reveal card p-6 space-y-3">
+              <span className="w-11 h-11 rounded-full bg-bg-deep flex items-center justify-center text-ink">
+                <Icon className="w-5 h-5" />
+              </span>
+              <h3 className="font-serif text-xl font-medium text-ink">{title}</h3>
+              <p className="text-sm text-body leading-relaxed">{body}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="reveal mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 text-center">
+          <p className="text-body">Want the full list, screen by screen?</p>
+          <Link href="/features" className="btn-ghost">
+            See every feature
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
       </section>
 
       {/* ============================================================ */}
-      {/* 8. FINAL DOWNLOAD CTA BANNER                                 */}
+      {/* 10. FAQ                                                        */}
       {/* ============================================================ */}
-      <section id="download" className="py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-        <div className="relative rounded-[40px] p-8 sm:p-14 md:p-16 overflow-hidden glass-panel-glow border-2 border-[#e2682f]/40 text-center shadow-[0_20px_80px_rgba(226,104,47,0.15)] dark:shadow-[0_20px_80px_rgba(226,104,47,0.2)]">
-          {/* Internal Glow Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#e2682f]/10 via-[#e2682f]/5 to-[#e2682f]/15 pointer-events-none" />
+      <section id="faq" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+        <SectionHeading eyebrow="Questions" title="Asked, and answered plainly" />
+        <div className="mt-12">
+          <FaqAccordion />
+        </div>
+      </section>
 
-          {/* Inner Content with vertical spacing */}
-          <div className="relative z-10 space-y-8">
-            <div className="max-w-2xl mx-auto space-y-4">
-              <h2 className="font-serif-luxury text-4xl sm:text-5xl md:text-6xl font-bold text-[#1b1810] dark:text-[#f5f2e8] leading-tight">
-                Begin your morning with clarity tomorrow.
+      {/* ============================================================ */}
+      {/* 11. FINAL CTA                                                 */}
+      {/* ============================================================ */}
+      <section id="download" className="pb-24 pt-8 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <div className="reveal relative rounded-[40px] overflow-hidden min-h-[520px] flex items-center">
+          <Image
+            src="/assets/illustrations/player-dusk.jpg"
+            alt=""
+            fill
+            sizes="(max-width: 1152px) 100vw, 1152px"
+            className="object-cover object-[50%_70%]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#1b1810]/70 via-[#1b1810]/30 to-transparent" />
+
+          <div className="relative w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-end p-8 sm:p-14">
+            <div className="space-y-6 text-[#f5f2e8]">
+              <h2 className="font-serif text-4xl sm:text-5xl lg:text-[3.5rem] font-medium tracking-tight leading-[1.05] text-balance">
+                Tomorrow morning, something written for you
+                <span className="text-ember-soft">.</span>
               </h2>
-              <p className="text-base sm:text-lg text-[#4a4536] dark:text-[#dad5be]">
-                Download Aura on iOS. Set your intentions, rest with peaceful gratitude, and let your future self speak to you.
+              <p className="text-lg text-[#dad5be] max-w-md">
+                Set your intentions tonight. Wake to a moment that already knows them.
               </p>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <a
+                  href={APP_STORE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-pill !bg-[#f5f2e8] !text-[#1b1810]"
+                >
+                  Download on the App Store
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
+              <p className="text-sm text-[#dad5be]/80">Requires iOS 16 or later · iPhone and iPad</p>
             </div>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href="https://apps.apple.com/app/id6795523727"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 px-8 py-4 rounded-full text-sm font-semibold uppercase tracking-wider text-[#1b1810] bg-gradient-to-r from-[#f2a96f] to-[#e2682f] hover:opacity-95 shadow-xl transition-transform hover:scale-105"
-              >
-                <Smartphone className="w-5 h-5" />
-                <span>Get Aura for iOS</span>
-              </a>
-              <Link
-                href="/support"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-semibold uppercase tracking-wider text-[#1b1810] dark:text-[#dad5be] glass-panel hover:text-[#e2682f] dark:hover:text-white"
-              >
-                <span>Need Help? Contact Support</span>
-              </Link>
-            </div>
-
-            <div className="pt-2 text-xs text-[#6f6a58] dark:text-[#8a8265]">
-              Requires iOS 16.0 or later · Compatible with iPhone and iPad
+            <div className="hidden md:flex justify-center">
+              <Glim clip="wave_hello" alt="Glim waving hello" className="w-[170px] drop-shadow-[0_20px_40px_rgba(242,169,111,0.45)]" />
             </div>
           </div>
         </div>

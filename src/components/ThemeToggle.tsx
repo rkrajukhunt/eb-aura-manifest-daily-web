@@ -34,13 +34,13 @@ export default function ThemeToggle() {
   };
 
   if (!theme) {
-    return <div className="w-9 h-9 rounded-full p-2 text-transparent" />;
+    return <div className="w-9 h-9 rounded-full p-2.5 text-transparent" />;
   }
 
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 rounded-full border border-black/10 dark:border-white/10 text-[#4a4536] dark:text-[#dad5be] hover:text-[#e2682f] dark:hover:text-[#f2a96f] bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 transition-all"
+      className="p-2.5 rounded-full text-body hover:text-ink hover:bg-ink/5 transition-colors"
       aria-label={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
       title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
     >

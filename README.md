@@ -9,7 +9,7 @@ Official web application and landing experience for **Aura: Manifest Daily**, fe
 - **Framework**: [Next.js 16 (App Router)](https://nextjs.org/)
 - **Library**: [React 19](https://react.dev/)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **Typography**: [Cormorant Garamond](https://fonts.google.com/specimen/Cormorant+Garamond) (Luxury Editorial) & [Plus Jakarta Sans](https://fonts.google.com/specimen/Plus+Jakarta+Sans) (Modern UI)
+- **Typography**: [Newsreader](https://fonts.google.com/specimen/Newsreader) (voice and display) & [Figtree](https://fonts.google.com/specimen/Figtree) (interface), the same pairing as the app
 - **Icons**: [Lucide React](https://lucide.dev/)
 - **Language**: TypeScript
 
@@ -17,7 +17,7 @@ Official web application and landing experience for **Aura: Manifest Daily**, fe
 
 ## Pages & Routes
 
-- `/` — Master Landing Page with interactive audio player, living letter showcase, screenshot carousel, honest pricing, and FAQ.
+- `/` — Landing page: hero with Glim, how it works, audio preview, feature bento, Glim mood dial, screenshot carousel, held days, promises, and FAQ.
 - `/privacy` — Comprehensive Privacy Policy with real-time keyword search, table of contents, and AI processing disclosures.
 - `/terms` — Terms of Service including subscription clauses, auto-renew rules, and intellectual property.
 - `/support` — Help & Support Center with direct inquiry form and troubleshooting guides.

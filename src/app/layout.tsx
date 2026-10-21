@@ -1,20 +1,21 @@
 import type { Metadata, Viewport } from 'next';
-import { Plus_Jakarta_Sans, Cormorant_Garamond } from 'next/font/google';
+import { Figtree, Newsreader } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import StructuredData from '@/components/StructuredData';
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+// The app's own pairing: Newsreader for the voice, Figtree for the interface
+const figtree = Figtree({
   subsets: ['latin'],
-  variable: '--font-sans',
+  variable: '--font-figtree',
   display: 'swap',
 });
 
-const cormorantGaramond = Cormorant_Garamond({
+const newsreader = Newsreader({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-serif',
+  style: ['normal', 'italic'],
+  variable: '--font-newsreader',
   display: 'swap',
 });
 
@@ -89,7 +90,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#ece9df' },
-    { media: '(prefers-color-scheme: dark)', color: '#0b0a08' },
+    { media: '(prefers-color-scheme: dark)', color: '#1b1810' },
   ],
   width: 'device-width',
   initialScale: 1,
@@ -103,7 +104,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plusJakartaSans.variable} ${cormorantGaramond.variable} scroll-smooth antialiased dark w-full max-w-full overflow-x-clip`}
+      className={`${figtree.variable} ${newsreader.variable} scroll-smooth antialiased w-full max-w-full overflow-x-clip`}
       data-scroll-behavior="smooth"
       suppressHydrationWarning
     >
@@ -114,11 +115,8 @@ export default function RootLayout({
             __html: `
               try {
                 const storedTheme = localStorage.getItem('aura-theme');
-                if (storedTheme === 'light') {
-                  document.documentElement.classList.remove('dark');
-                } else if (storedTheme === 'dark') {
-                  document.documentElement.classList.add('dark');
-                } else {
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (storedTheme === 'dark' || (storedTheme !== 'light' && prefersDark)) {
                   document.documentElement.classList.add('dark');
                 }
               } catch (_) {}
@@ -126,13 +124,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-[#ece9df] text-[#1b1810] dark:bg-[#0b0a08] dark:text-[#f5f2e8] font-sans-ui selection:bg-[#e2682f]/30 selection:text-white relative w-full max-w-full overflow-x-clip transition-colors duration-300">
-        {/* Ambient Glows strictly clipped within viewport */}
-        <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10" aria-hidden="true">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] max-w-[120vw] h-[350px] bg-[#e2682f]/10 dark:bg-[#e2682f]/10 blur-[130px] rounded-full" />
-          <div className="absolute top-1/2 left-[-150px] w-[500px] max-w-[100vw] h-[500px] bg-[#8a8265]/10 dark:bg-[#8a8265]/5 blur-[150px] rounded-full" />
-        </div>
-
+      <body className="min-h-screen flex flex-col bg-bg text-ink font-sans selection:bg-ember/25 relative w-full max-w-full overflow-x-clip">
         <Navbar />
         <div className="flex-1 w-full max-w-full overflow-x-clip">{children}</div>
         <Footer />

@@ -2,54 +2,94 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/*
+ * Ember & Bone v3, mirrored from the app (apps/mobile/src/theme/palette.ts).
+ * Bone backgrounds, white cards, ink pills for action. Ember is earned: it only
+ * appears where Aura speaks or plays (audio, the letter, the signature period).
+ */
 @layer base {
   :root {
-    --background: #ece9df;
-    --foreground: #1b1810;
+    --bg: #ece9df;
+    --bg-deep: #e2decf;
     --card: #ffffff;
-    --card-foreground: #1b1810;
-    --border: rgba(138, 130, 101, 0.2);
-    --border-hover: rgba(226, 104, 47, 0.4);
+    --ink: #1b1810;
+    --body: #4a4536;
+    --muted: #5c5747;
+    --line: rgba(138, 130, 101, 0.22);
     --ember: #e2682f;
     --ember-soft: #f2a96f;
-    --ember-deep: #c9531f;
-    --bone: #ece9df;
-    --cream: #f5f2e8;
-    --ink: #1b1810;
-    --ink-body: #4a4536;
-    --olive: #8a8265;
-    --olive-soft: #dad5be;
+    --ember-text: #9c3d17;
     --parchment: #f4ebd6;
+    --blush: #f6d3df;
+    --gold: #e5a93c;
+    --pill: #1b1810;
+    --pill-text: #f5f2e8;
+
+    /* Legacy names still used by the legal pages */
+    --background: var(--bg);
+    --foreground: var(--ink);
+    --border: var(--line);
   }
 
   .dark {
-    --background: #0b0a08;
-    --foreground: #f5f2e8;
-    --card: #141310;
-    --card-foreground: #f5f2e8;
-    --border: rgba(218, 213, 190, 0.12);
-    --border-hover: rgba(226, 104, 47, 0.35);
+    --bg: #1b1810;
+    --bg-deep: #13110c;
+    --card: #242019;
+    --ink: #f5f2e8;
+    --body: #dad5be;
+    --muted: #9e977f;
+    --line: rgba(218, 213, 190, 0.12);
+    --ember-text: #f2a96f;
+    --parchment: #2a241b;
+    --pill: #f5f2e8;
+    --pill-text: #1b1810;
+  }
+
+  /* The phone mock always shows the app in its light palette, whatever the page theme */
+  .dark .app-light,
+  .app-light {
+    --card: #ffffff;
+    --ink: #1b1810;
+    --body: #4a4536;
+    --muted: #5c5747;
+    --line: rgba(138, 130, 101, 0.22);
   }
 
   * {
-    border-color: var(--border);
+    border-color: var(--line);
   }
 
   html {
     scroll-behavior: smooth;
-    /* Keep anchored sections clear of the fixed navbar */
-    scroll-padding-top: 96px;
+    /* Keep anchored sections clear of the floating navbar */
+    scroll-padding-top: 104px;
     /* clip (not hidden) avoids creating a scroll container, so smooth scrolling stays on the viewport */
     overflow-x: clip;
     max-width: 100vw;
   }
 
   body {
-    background-color: var(--background);
-    color: var(--foreground);
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-figtree), system-ui, sans-serif;
     overflow-x: clip;
     max-width: 100vw;
     transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Paper grain: a tactile layer so bone reads as a surface, not a flat fill */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .dark body::before {
+    opacity: 0.07;
   }
 
   /* Visible keyboard focus everywhere, without showing rings on mouse clicks */
@@ -94,6 +134,26 @@
   }
 }
 
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-deep: var(--bg-deep);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-body: var(--body);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-ember: var(--ember);
+  --color-ember-soft: var(--ember-soft);
+  --color-ember-text: var(--ember-text);
+  --color-parchment: var(--parchment);
+  --color-blush: var(--blush);
+  --color-gold: var(--gold);
+  --color-pill: var(--pill);
+  --color-pill-text: var(--pill-text);
+  --font-serif: var(--font-newsreader), Georgia, serif;
+  --font-sans: var(--font-figtree), system-ui, sans-serif;
+}
+
 /* Hide scrollbar for clean horizontal swipe on mobile */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
@@ -108,30 +168,14 @@
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--background);
+  background: var(--bg);
 }
 ::-webkit-scrollbar-thumb {
   background: #c9c3ac;
   border-radius: 9999px;
 }
 .dark ::-webkit-scrollbar-thumb {
-  background: #25221b;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #e2682f;
-}
-
-/* Aura Glow & Orb Keyframes */
-@keyframes orbFloat {
-  0%, 100% {
-    transform: translate(0px, 0px) scale(1);
-  }
-  33% {
-    transform: translate(25px, -35px) scale(1.08);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.95);
-  }
+  background: #3a3428;
 }
 
 @keyframes waveBar {
@@ -152,8 +196,28 @@
   }
 }
 
-.animate-orb-glow {
-  animation: orbFloat 14s ease-in-out infinite;
+@keyframes floatSoft {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-float-soft {
+  animation: floatSoft 6s ease-in-out infinite;
 }
 
 .animate-shimmer {
@@ -167,39 +231,223 @@
   animation: shimmer 2.2s infinite;
 }
 
-/* Frosted glass utilities for Light & Dark */
+/* Scroll-driven reveal: pure CSS, and simply visible where unsupported */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: revealUp linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+  }
+}
+
+/* Cards: white on bone, like the app */
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 18px 40px -24px rgba(27, 24, 16, 0.18);
+}
+
+.dark .card {
+  box-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.6);
+}
+
+/* Liquid glass: the floating nav and chips over illustrations */
+.liquid-glass {
+  background: rgba(255, 255, 255, 0.62);
+  backdrop-filter: blur(22px) saturate(1.6);
+  -webkit-backdrop-filter: blur(22px) saturate(1.6);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 12px 32px -14px rgba(27, 24, 16, 0.25);
+}
+
+.dark .liquid-glass {
+  background: rgba(36, 32, 25, 0.62);
+  border: 1px solid rgba(245, 242, 232, 0.1);
+  box-shadow: 0 1px 0 rgba(245, 242, 232, 0.06) inset, 0 12px 32px -14px rgba(0, 0, 0, 0.7);
+}
+
+/* Ink pill: every primary action */
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  background: var(--pill);
+  color: var(--pill-text);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.95rem 1.6rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 10px 24px -12px rgba(27, 24, 16, 0.55);
+}
+.btn-pill:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px -12px rgba(27, 24, 16, 0.6);
+}
+.btn-pill:active {
+  transform: translateY(0);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.95rem 1.4rem;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--card) 55%, transparent);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.btn-ghost:hover {
+  border-color: color-mix(in srgb, var(--ink) 30%, transparent);
+}
+
+/* Frosted panels kept for the legal and support pages */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(138, 130, 101, 0.18);
-  box-shadow: 0 10px 30px -10px rgba(27, 24, 16, 0.06);
+  background: var(--card);
+  border: 1px solid var(--line);
+  box-shadow: 0 18px 40px -26px rgba(27, 24, 16, 0.2);
 }
 
 .dark .glass-panel {
-  background: rgba(20, 19, 16, 0.72);
-  border: 1px solid rgba(218, 213, 190, 0.1);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 18px 40px -26px rgba(0, 0, 0, 0.6);
 }
 
 .glass-panel-glow {
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  background: var(--card);
   border: 1px solid rgba(226, 104, 47, 0.28);
-  box-shadow: 0 12px 35px -8px rgba(226, 104, 47, 0.12);
-}
-
-.dark .glass-panel-glow {
-  background: rgba(24, 21, 17, 0.85);
-  border: 1px solid rgba(226, 104, 47, 0.22);
-  box-shadow: 0 0 35px -10px rgba(226, 104, 47, 0.15);
+  box-shadow: 0 18px 40px -22px rgba(226, 104, 47, 0.25);
 }
 
 .font-serif-luxury {
-  font-family: var(--font-serif), Georgia, serif;
+  font-family: var(--font-newsreader), Georgia, serif;
 }
 
 .font-sans-ui {
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family: var(--font-figtree), system-ui, sans-serif;
+}
+
+/*
+ * Mock app screens. Every keyframe animates FROM a starting state, so an element's
+ * resting style is its finished state: a paused (.mock-static) or reduced-motion
+ * screen simply shows the end of the story.
+ */
+@keyframes mkIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+@keyframes mkDrop {
+  from {
+    opacity: 0;
+    transform: translateY(-24px) scale(0.96);
+  }
+}
+@keyframes mkPop {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+}
+@keyframes mkFade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes mkFadeOut {
+  from {
+    opacity: 1;
+  }
+}
+@keyframes mkSelect {
+  from {
+    background-color: var(--card);
+    color: var(--ink);
+    border-color: var(--line);
+  }
+}
+@keyframes mkWord {
+  0% {
+    color: #c9c3ac;
+  }
+  40% {
+    color: #c9531f;
+  }
+}
+@keyframes mkFill {
+  from {
+    background-color: transparent;
+  }
+}
+@keyframes mkGrow {
+  from {
+    transform: scaleX(0);
+  }
+}
+@keyframes mkGrowY {
+  from {
+    transform: scaleY(0);
+  }
+}
+@keyframes mkDraw {
+  from {
+    stroke-dashoffset: var(--len, 600);
+  }
+}
+@keyframes mkCollapse {
+  from {
+    opacity: 1;
+    max-height: 60px;
+    transform: translateX(0);
+  }
+  40% {
+    opacity: 0;
+    transform: translateX(40%);
+    max-height: 60px;
+  }
+}
+@keyframes mkCaret {
+  50% {
+    opacity: 0;
+  }
+}
+@keyframes mkSun {
+  from {
+    transform: rotate(var(--from, -80deg));
+  }
+}
+
+.mk {
+  animation-duration: 0.6s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-fill-mode: both;
+}
+.mk-in { animation-name: mkIn; }
+.mk-drop { animation-name: mkDrop; animation-duration: 0.8s; }
+.mk-pop { animation-name: mkPop; }
+.mk-fade { animation-name: mkFade; }
+.mk-fade-out { animation-name: mkFadeOut; animation-duration: 0.5s; }
+.mk-select { animation-name: mkSelect; animation-duration: 0.35s; }
+.mk-type-char { animation-name: mkFade; animation-duration: 0.01s; }
+.mk-word { animation-name: mkWord; animation-duration: 0.9s; animation-timing-function: ease-out; }
+.mk-fill { animation-name: mkFill; animation-duration: 0.3s; }
+.mk-grow { animation-name: mkGrow; animation-duration: 1.2s; transform-origin: left; }
+.mk-grow-y { animation-name: mkGrowY; animation-duration: 1.4s; transform-origin: top; }
+.mk-draw { animation-name: mkDraw; animation-duration: 1.6s; animation-timing-function: ease-in-out; }
+.mk-collapse { animation-name: mkCollapse; animation-duration: 0.9s; overflow: hidden; }
+.mk-sun { animation-name: mkSun; animation-duration: 1.6s; }
+.mk-caret { animation: mkCaret 1s steps(1) infinite; }
+
+.mock-static .mk,
+.mock-static .mk-caret {
+  animation: none !important;
 }

@@ -12,12 +12,12 @@ const FAQS: FaqItem[] = [
   {
     question: 'How does Aura generate my personalized morning moments?',
     answer:
-      'Aura synthesizes your onboarding dreams, daily evening gratitude entries, and ongoing aspirations using advanced language intelligence and ElevenLabs studio-quality voice models. Each morning’s moment is unique, intimate, and addresses you by name.',
+      'Aura writes from what you told it during onboarding, your evening gratitude lines, and what it has learned since. The moment is then read aloud with an ElevenLabs voice. Each one is new, and it addresses you by name.',
   },
   {
     question: 'Is my personal information and journal data private?',
     answer:
-      'Absolutely. Your thoughts and vulnerability are sacrosanct. We use strict database Row-Level Security (RLS) and encrypted storage. We never sell your personal data, nor do we train public AI models on your private memories. You can view, edit, or delete every memory node in "What Aura Knows" at any time.',
+      'Yes. Your entries are protected with row-level security and encrypted storage. We never sell your data, and we never train public AI models on what you write. You can view, edit, or delete everything in "What Aura Knows" at any time.',
   },
   {
     question: 'How do subscriptions and the free trial work?',
@@ -32,7 +32,7 @@ const FAQS: FaqItem[] = [
   {
     question: 'Why doesn’t Aura use streaks that shame me for missing a day?',
     answer:
-      'True personal growth is cyclical, not linear. Unlike apps that punish missed days with broken streak guilt, Aura uses "Soft Streaks" designed to gently welcome you back whenever you are ready.',
+      'Growth comes in seasons, not straight lines. A missed day is held for you, and a longer pause can be restored, so coming back always feels like a welcome.',
   },
 ];
 
@@ -44,34 +44,30 @@ export default function FaqAccordion() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto space-y-4">
+    <div className="max-w-3xl mx-auto space-y-3">
       {FAQS.map((faq, idx) => {
         const isOpen = openIndex === idx;
         return (
           <div
             key={idx}
-            className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
-              isOpen
-                ? 'glass-panel-glow border-[#e2682f]/40 dark:border-[#e2682f]/30'
-                : 'glass-panel border-black/10 dark:border-white/5 hover:border-black/20 dark:hover:border-white/10'
-            }`}
+            className="card !rounded-[22px] overflow-hidden"
           >
             <button
               onClick={() => toggle(idx)}
               className="w-full text-left px-6 py-5 flex items-center justify-between gap-4"
               aria-expanded={isOpen}
             >
-              <span className="font-serif-luxury text-lg sm:text-xl font-bold text-[#1b1810] dark:text-[#f5f2e8]">
+              <span className="font-serif text-lg sm:text-xl font-medium text-ink">
                 {faq.question}
               </span>
               <ChevronDown
-                className={`w-5 h-5 text-[#e2682f] shrink-0 transition-transform duration-300 ${
+                className={`w-5 h-5 text-muted shrink-0 transition-transform duration-300 ${
                   isOpen ? 'rotate-180' : 'rotate-0'
                 }`}
               />
             </button>
             {isOpen && (
-              <div className="px-6 pb-6 pt-1 text-sm sm:text-base text-[#4a4536] dark:text-[#dad5be] leading-relaxed border-t border-black/5 dark:border-white/5 animate-in fade-in duration-200">
+              <div className="px-6 pb-6 pt-1 text-sm sm:text-base text-body leading-relaxed">
                 {faq.answer}
               </div>
             )}
