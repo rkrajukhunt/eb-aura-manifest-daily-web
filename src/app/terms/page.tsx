@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import TermsView from './TermsView';
+import PageTransition from '@/components/PageTransition';
 
 export const metadata: Metadata = {
   title: 'Terms of Service',
@@ -17,5 +18,9 @@ export const metadata: Metadata = {
 };
 
 export default function TermsPage() {
-  return <TermsView />;
+  return (
+    <PageTransition>
+      <TermsView />
+    </PageTransition>
+  );
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { APP_STORE_URL, PLAY_STORE_URL } from '@/data/site';
 
 export default function StructuredData() {
   const schemaApp = {
@@ -10,7 +11,8 @@ export default function StructuredData() {
     description:
       'An AI companion that turns your dream life into personalized audio moments and daily affirmations — and gets to know you better every day.',
     url: 'https://eb-aura-manifest-daily.onrender.com',
-    downloadUrl: 'https://apps.apple.com/app/id6795523727',
+    downloadUrl: [APP_STORE_URL, PLAY_STORE_URL],
+    installUrl: [APP_STORE_URL, PLAY_STORE_URL],
     offers: {
       '@type': 'Offer',
       price: '0',

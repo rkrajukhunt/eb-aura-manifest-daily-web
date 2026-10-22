@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
 import React from 'react';
-import { ArrowRight, Check } from 'lucide-react';
+import { Check } from 'lucide-react';
 import Glim, { type GlimClip } from '@/components/Glim';
 import ScreenshotCarousel from '@/components/ScreenshotCarousel';
-import SectionHeading from '@/components/SectionHeading';
+import SectionHeading, { Accent, Eyebrow } from '@/components/SectionHeading';
 import { FEATURE_GROUPS } from '@/data/features';
-import { APP_STORE_URL, SITE_URL } from '@/data/site';
+import { SITE_URL } from '@/data/site';
+import PageTransition from '@/components/PageTransition';
 
 export const metadata: Metadata = {
   title: 'Every feature',
@@ -33,104 +34,93 @@ const freeCount = FEATURE_GROUPS.reduce((sum, group) => sum + group.features.fil
 
 export default function FeaturesPage() {
   return (
-    <main className="relative">
-      <section className="pt-32 sm:pt-40 pb-12 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto text-center space-y-6">
-        <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold text-body bg-card border border-line">
-          <span className="w-1.5 h-1.5 rounded-full bg-ember" aria-hidden="true" />
-          {featureCount} features · {freeCount} of them free
-        </span>
-        <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl font-medium tracking-tight text-ink text-balance max-w-4xl mx-auto leading-[1.04]">
-          Everything Aura does, in one place<span className="text-ember">.</span>
-        </h1>
-        <p className="text-lg sm:text-xl text-body max-w-2xl mx-auto leading-relaxed">
-          From the first conversation to the hundredth morning. Each feature is described the way the app describes it,
-          and marked free or premium.
-        </p>
-      </section>
+    <PageTransition>
+      <main className="relative">
+        <section className="pt-32 sm:pt-40 pb-12 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto text-center space-y-6">
+          <Eyebrow>
+            {featureCount} features · {freeCount} of them free
+          </Eyebrow>
+          <h1 className="font-sans text-5xl sm:text-6xl md:text-7xl font-semibold tracking-[-0.045em] text-ink text-balance max-w-4xl mx-auto leading-[1.02]">
+            Everything Aura does, <Accent>in one place</Accent>
+            <span className="text-ember">.</span>
+          </h1>
+          <p className="text-lg sm:text-xl text-body max-w-2xl mx-auto leading-relaxed">
+            From the first conversation to the hundredth morning. Each feature is described the way the app describes it,
+            and marked free or premium.
+          </p>
+        </section>
 
-      {/* Jump bar, pinned under the navbar */}
-      <nav
-        aria-label="Feature groups"
-        className="sticky top-[76px] sm:top-[84px] z-40 px-4 sm:px-6 lg:px-8 pb-2"
-      >
-        <div className="max-w-6xl mx-auto flex gap-2 overflow-x-auto no-scrollbar justify-start md:justify-center">
-          {FEATURE_GROUPS.map((group) => (
-            <a
-              key={group.id}
-              href={`#${group.id}`}
-              className="shrink-0 liquid-glass rounded-full px-4 py-2 text-sm font-medium text-ink hover:bg-card transition-colors"
-            >
-              {group.eyebrow}
-            </a>
-          ))}
-        </div>
-      </nav>
-
-      {FEATURE_GROUPS.map((group, gi) => (
-        <section
-          key={group.id}
-          id={group.id}
-          className={`scroll-mt-40 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 ${gi % 2 === 1 ? 'bg-bg-deep/60 border-y border-line' : ''}`}
+        {/* Jump bar, pinned under the navbar */}
+        <nav
+          aria-label="Feature groups"
+          className="sticky top-[76px] sm:top-[84px] z-40 px-4 sm:px-6 lg:px-8 pb-2"
         >
-          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
-            <div className="lg:col-span-4">
-              <div className="lg:sticky lg:top-44 space-y-6">
-                <SectionHeading eyebrow={group.eyebrow} title={group.title} intro={group.intro} align="left" />
-                <Glim clip={GROUP_GLIM[group.id]} className="hidden lg:block w-28" />
+          <div className="max-w-6xl mx-auto flex gap-2 overflow-x-auto no-scrollbar justify-start md:justify-center">
+            {FEATURE_GROUPS.map((group) => (
+              <a
+                key={group.id}
+                href={`#${group.id}`}
+                className="shrink-0 liquid-glass rounded-full px-4 py-2 text-sm font-medium text-ink hover:bg-card transition-colors"
+              >
+                {group.eyebrow}
+              </a>
+            ))}
+          </div>
+        </nav>
+
+        {FEATURE_GROUPS.map((group, gi) => (
+          <section
+            key={group.id}
+            id={group.id}
+            className={`scroll-mt-40 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 ${gi % 2 === 1 ? 'bg-bg-deep/60 border-y border-line' : ''}`}
+          >
+            <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
+              <div className="lg:col-span-4">
+                <div className="lg:sticky lg:top-44 space-y-6">
+                  <SectionHeading eyebrow={group.eyebrow} title={group.title} intro={group.intro} align="left" />
+                  <Glim clip={GROUP_GLIM[group.id]} className="hidden lg:block w-28" />
+                </div>
+              </div>
+
+              <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-5">
+                {group.features.map((feature) => (
+                  <article key={feature.id} id={feature.id} className="reveal card p-6 sm:p-7 flex flex-col gap-3 scroll-mt-40">
+                    <span
+                      className={`self-start text-[11px] font-semibold uppercase tracking-[0.14em] rounded-full px-2.5 py-1 ${
+                        feature.plan === 'premium'
+                          ? 'bg-[#e5a93c]/20 text-[#8a5a10] dark:text-[#f6d289]'
+                          : 'bg-bg-deep text-muted'
+                      }`}
+                    >
+                      {feature.plan === 'premium' ? 'Premium' : 'Free'}
+                    </span>
+                    <h3 className="font-serif text-2xl font-medium tracking-tight text-ink text-balance">{feature.title}</h3>
+                    <p className="text-body leading-relaxed">{feature.body}</p>
+                    {feature.details.length > 0 && (
+                      <ul className="mt-auto pt-2 space-y-2">
+                        {feature.details.map((detail) => (
+                          <li key={detail} className="flex gap-2.5 text-sm text-muted">
+                            <Check className="w-4 h-4 text-ember shrink-0 mt-0.5" />
+                            {detail}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </article>
+                ))}
               </div>
             </div>
+          </section>
+        ))}
 
-            <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-5">
-              {group.features.map((feature) => (
-                <article key={feature.id} id={feature.id} className="reveal card p-6 sm:p-7 flex flex-col gap-3 scroll-mt-40">
-                  <span
-                    className={`self-start text-[11px] font-semibold uppercase tracking-[0.14em] rounded-full px-2.5 py-1 ${
-                      feature.plan === 'premium'
-                        ? 'bg-[#e5a93c]/20 text-[#8a5a10] dark:text-[#f6d289]'
-                        : 'bg-bg-deep text-muted'
-                    }`}
-                  >
-                    {feature.plan === 'premium' ? 'Premium' : 'Free'}
-                  </span>
-                  <h3 className="font-serif text-2xl font-medium tracking-tight text-ink text-balance">{feature.title}</h3>
-                  <p className="text-body leading-relaxed">{feature.body}</p>
-                  {feature.details.length > 0 && (
-                    <ul className="mt-auto pt-2 space-y-2">
-                      {feature.details.map((detail) => (
-                        <li key={detail} className="flex gap-2.5 text-sm text-muted">
-                          <Check className="w-4 h-4 text-ember shrink-0 mt-0.5" />
-                          {detail}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </article>
-              ))}
-            </div>
+        <section id="screens" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8">
+          <SectionHeading eyebrow="Inside the app" title="Quiet screens," accent="warm type" />
+          <div className="mt-12">
+            <ScreenshotCarousel />
           </div>
         </section>
-      ))}
 
-      <section id="screens" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8">
-        <SectionHeading eyebrow="Inside the app" title="Quiet screens, warm type" />
-        <div className="mt-12">
-          <ScreenshotCarousel />
-        </div>
-      </section>
-
-      <section className="pb-24 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
-        <div className="reveal card p-8 sm:p-12 text-center space-y-6">
-          <Glim clip="wave_hello" className="w-20 mx-auto" />
-          <h2 className="font-serif text-4xl sm:text-5xl font-medium tracking-tight text-ink text-balance">
-            Your first letter is free, and yours to keep<span className="text-ember">.</span>
-          </h2>
-          <a href={APP_STORE_URL} target="_blank" rel="noopener noreferrer" className="btn-pill">
-            Download on the App Store
-            <ArrowRight className="w-4 h-4" />
-          </a>
-          <p className="text-sm text-muted">iPhone and iPad · iOS 16 or later</p>
-        </div>
-      </section>
-    </main>
+      </main>
+    </PageTransition>
   );
 }

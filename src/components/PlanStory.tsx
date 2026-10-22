@@ -40,7 +40,7 @@ export default function PlanStory() {
         </ol>
         <p className="text-xs text-muted mt-7 leading-relaxed">
           Weekly prices also show the monthly figure, so you never have to do the arithmetic yourself. Cancel in two taps
-          from your Apple ID.
+          from your App Store or Google Play subscriptions.
         </p>
       </PlayOnView>
 

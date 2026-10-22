@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { Minus, Plus } from 'lucide-react';
 
 interface FaqItem {
   question: string;
@@ -50,26 +50,28 @@ export default function FaqAccordion() {
         return (
           <div
             key={idx}
-            className="card !rounded-[22px] overflow-hidden"
+            className={`rounded-[28px] border transition-colors duration-300 ${
+              isOpen
+                ? 'border-ember/25 bg-gradient-to-br from-parchment via-card to-card'
+                : 'border-line bg-card/70 hover:bg-card'
+            }`}
           >
             <button
               onClick={() => toggle(idx)}
-              className="w-full text-left px-6 py-5 flex items-center justify-between gap-4"
+              className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 !rounded-[28px]"
               aria-expanded={isOpen}
             >
-              <span className="font-serif text-lg sm:text-xl font-medium text-ink">
-                {faq.question}
-              </span>
-              <ChevronDown
-                className={`w-5 h-5 text-muted shrink-0 transition-transform duration-300 ${
-                  isOpen ? 'rotate-180' : 'rotate-0'
+              <span className="text-base sm:text-lg font-semibold tracking-[-0.01em] text-ink">{faq.question}</span>
+              <span
+                className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors ${
+                  isOpen ? 'bg-pill text-pill-text' : 'bg-bg-deep text-ink'
                 }`}
-              />
+              >
+                {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+              </span>
             </button>
             {isOpen && (
-              <div className="px-6 pb-6 pt-1 text-sm sm:text-base text-body leading-relaxed">
-                {faq.answer}
-              </div>
+              <div className="px-6 pb-6 -mt-1 text-sm sm:text-base text-body leading-relaxed">{faq.answer}</div>
             )}
           </div>
         );

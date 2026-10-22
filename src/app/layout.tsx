@@ -4,6 +4,8 @@ import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import StructuredData from '@/components/StructuredData';
+import SmoothScroll from '@/components/SmoothScroll';
+import { APP_STORE_URL, PLAY_STORE_URL } from '@/data/site';
 
 // The app's own pairing: Newsreader for the voice, Figtree for the interface
 const figtree = Figtree({
@@ -41,6 +43,12 @@ export const metadata: Metadata = {
   creator: 'EmperorBrains',
   publisher: 'EmperorBrains',
   applicationName: 'Aura: Manifest Daily',
+  // Safari's Smart App Banner, plus app links that point iPhone and Android visitors at their store
+  itunes: { appId: '6795523727' },
+  appLinks: {
+    ios: { url: APP_STORE_URL, app_store_id: '6795523727', app_name: 'Aura: Manifest Daily' },
+    android: { url: PLAY_STORE_URL, package: 'com.aura.manifestdaily', app_name: 'Aura: Manifest Daily' },
+  },
   category: 'lifestyle',
   metadataBase: new URL('https://eb-aura-manifest-daily.onrender.com'),
   alternates: {
@@ -125,6 +133,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col bg-bg text-ink font-sans selection:bg-ember/25 relative w-full max-w-full overflow-x-clip">
+        <SmoothScroll />
         <Navbar />
         <div className="flex-1 w-full max-w-full overflow-x-clip">{children}</div>
         <Footer />

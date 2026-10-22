@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import PrivacyView from './PrivacyView';
+import PageTransition from '@/components/PageTransition';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
@@ -17,5 +18,9 @@ export const metadata: Metadata = {
 };
 
 export default function PrivacyPage() {
-  return <PrivacyView />;
+  return (
+    <PageTransition>
+      <PrivacyView />
+    </PageTransition>
+  );
 }

@@ -63,7 +63,8 @@ export default function DaysBecoming() {
     <section id="rhythm" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
       <SectionHeading
         eyebrow="Gentle rhythm"
-        title="Your days becoming, protected"
+        title="Your days becoming,"
+        accent="protected"
         intro="Aura counts the days you show up for yourself. Life gets busy, so a missed day is quietly held, never held against you."
       />
 

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import SupportView from './SupportView';
+import PageTransition from '@/components/PageTransition';
 
 export const metadata: Metadata = {
   title: 'Support & Help Center',
@@ -17,5 +18,9 @@ export const metadata: Metadata = {
 };
 
 export default function SupportPage() {
-  return <SupportView />;
+  return (
+    <PageTransition>
+      <SupportView />
+    </PageTransition>
+  );
 }

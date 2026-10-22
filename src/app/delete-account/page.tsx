@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import DeleteAccountView from './DeleteAccountView';
+import PageTransition from '@/components/PageTransition';
 
 export const metadata: Metadata = {
   title: 'Delete Account & Data',
@@ -17,5 +18,9 @@ export const metadata: Metadata = {
 };
 
 export default function DeleteAccountPage() {
-  return <DeleteAccountView />;
+  return (
+    <PageTransition>
+      <DeleteAccountView />
+    </PageTransition>
+  );
 }

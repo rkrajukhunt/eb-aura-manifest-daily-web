@@ -39,7 +39,7 @@ const CATEGORIES: CategoryItem[] = [
   {
     id: 'billing',
     label: 'Billing & Subscriptions',
-    description: 'Apple ID purchases, restore access, refunds & Pro pass',
+    description: 'App Store and Google Play purchases, restore access & refunds',
     badge: 'Payment',
     icon: CreditCard,
   },
@@ -187,7 +187,7 @@ export default function SupportPage() {
           <span className="hidden sm:inline text-black/20 dark:text-white/20">•</span>
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full glass-panel font-medium">
             <ShieldCheck className="w-3.5 h-3.5 text-[#e2682f] shrink-0" />
-            <span>Apple ID Preserved</span>
+            <span>iPhone and Android</span>
           </span>
         </div>
       </div>

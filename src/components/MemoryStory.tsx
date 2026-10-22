@@ -34,12 +34,11 @@ export default function MemoryStory() {
               ))}
               {group === 'Your dream' && (
                 // One memory being forgotten: it slides away and the list closes over it
-                <div
-                  className="mk mk-collapse max-h-0 opacity-0 rounded-2xl bg-bg border border-line px-4 py-2.5 text-sm text-ink flex items-center justify-between"
-                  style={{ ...d(1.4), animationDuration: '1.6s' }}
-                >
-                  <span>Moving to a bigger city</span>
-                  <span className="text-xs text-ember-text font-semibold">Forget this</span>
+                <div className="mk mk-collapse max-h-0 opacity-0 !mt-0" style={{ ...d(1.4), animationDuration: '1.6s' }}>
+                  <div className="rounded-2xl bg-bg border border-line px-4 py-2.5 text-sm text-ink flex items-center justify-between">
+                    <span>Moving to a bigger city</span>
+                    <span className="text-xs text-ember-text font-semibold">Forget this</span>
+                  </div>
                 </div>
               )}
             </div>

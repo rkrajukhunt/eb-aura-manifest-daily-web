@@ -222,14 +222,15 @@ export const SUPPORT_DOC: LegalDocument = {
     {
       heading: 'Restoring Purchases on a New Device',
       body: [
-        'If you switched devices or reinstalled Aura, your purchase is safely preserved on your Apple ID.',
+        'If you switched devices or reinstalled Aura, your purchase is safely preserved on your Apple ID or Google account.',
         'Open Aura -> Go to Profile / Settings -> Tap "Restore Purchases". Your subscription will immediately reactivate.',
       ],
     },
     {
       heading: 'Managing or Cancelling Subscriptions',
       body: [
-        'On iOS: Open your iPhone "Settings" app -> Tap your Name/Apple ID at the top -> Tap "Subscriptions" -> Select "Aura: Manifest Daily" -> Tap "Cancel Subscription".',
+        'On iPhone or iPad: Open the "Settings" app -> Tap your Name/Apple ID at the top -> Tap "Subscriptions" -> Select "Aura: Manifest Daily" -> Tap "Cancel Subscription".',
+        'On Android: Open the Google Play Store app -> Tap your profile icon -> Tap "Payments & subscriptions" -> "Subscriptions" -> Select "Aura: Manifest Daily" -> Tap "Cancel subscription".',
         'You will retain full premium access until the end of your prepaid billing period.',
       ],
     },

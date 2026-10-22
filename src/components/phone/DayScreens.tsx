@@ -415,6 +415,28 @@ export function StreakScreen() {
             Yesterday stayed open. I kept your place.
           </p>
         </div>
+        <div className="rounded-[20px] bg-white border border-[#8a8265]/20 p-4 space-y-2.5">
+          <p className="text-[11px] font-semibold">Every day you showed up</p>
+          <div className="grid grid-cols-10 gap-1.5">
+            {Array.from({ length: 30 }).map((_, i) => {
+              const held = i === 14 || i === 27;
+              const on = i >= 17 && !held;
+              return (
+                <span
+                  key={i}
+                  className={`aspect-square rounded-full ${
+                    held ? 'border border-dashed border-[#b4ae9c]' : on ? 'mk mk-pop bg-[#e2682f]' : 'bg-[#e2decf]'
+                  }`}
+                  style={on ? d(1 + (i - 17) * 0.06) : undefined}
+                />
+              );
+            })}
+          </div>
+          <div className="flex justify-between text-[8px] text-[#655e48]">
+            <span>30 days ago</span>
+            <span>Today</span>
+          </div>
+        </div>
         <div className="mk mk-in rounded-[20px] bg-[#1b1810] text-[#f5f2e8] p-4 flex items-center gap-3" style={d(2.2)}>
           <div className="flex-1 space-y-1">
             <p className="text-[9px] uppercase tracking-[0.16em] text-[#f2a96f]">A letter for you</p>

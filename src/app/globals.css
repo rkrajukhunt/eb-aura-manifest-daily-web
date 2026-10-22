@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "lenis/dist/lenis.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -205,14 +206,19 @@
   }
 }
 
+/* Uses the individual translate/scale/filter properties, so it never fights a Tailwind rotate on the same element */
 @keyframes revealUp {
   from {
     opacity: 0;
-    transform: translateY(28px);
+    translate: 0 36px;
+    scale: 0.97;
+    filter: blur(6px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    translate: 0 0;
+    scale: 1;
+    filter: blur(0);
   }
 }
 
@@ -235,96 +241,107 @@
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     .reveal {
-      animation: revealUp linear both;
+      animation: revealUp cubic-bezier(0.22, 1, 0.36, 1) both;
       animation-timeline: view();
-      animation-range: entry 0% entry 40%;
+      animation-range: entry 0% entry 45%;
+    }
+
+    /* Siblings in a row arrive one after another instead of all at once */
+    .reveal:nth-child(3n + 2) {
+      animation-range: entry 6% entry 51%;
+    }
+    .reveal:nth-child(3n + 3) {
+      animation-range: entry 12% entry 57%;
     }
   }
 }
 
-/* Cards: white on bone, like the app */
-.card {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 28px;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 18px 40px -24px rgba(27, 24, 16, 0.18);
-}
+/* Component classes sit in the components layer so Tailwind utilities (hidden, sm:inline-flex) can override them */
+@layer components {
+  /* Cards: white on bone, like the app */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 28px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 18px 40px -24px rgba(27, 24, 16, 0.18);
+  }
 
-.dark .card {
-  box-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.6);
-}
+  .dark .card {
+    box-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.6);
+  }
 
-/* Liquid glass: the floating nav and chips over illustrations */
-.liquid-glass {
-  background: rgba(255, 255, 255, 0.62);
-  backdrop-filter: blur(22px) saturate(1.6);
-  -webkit-backdrop-filter: blur(22px) saturate(1.6);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 12px 32px -14px rgba(27, 24, 16, 0.25);
-}
+  /* Liquid glass: the floating nav and chips over illustrations */
+  .liquid-glass {
+    background: rgba(255, 255, 255, 0.62);
+    backdrop-filter: blur(22px) saturate(1.6);
+    -webkit-backdrop-filter: blur(22px) saturate(1.6);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 12px 32px -14px rgba(27, 24, 16, 0.25);
+  }
 
-.dark .liquid-glass {
-  background: rgba(36, 32, 25, 0.62);
-  border: 1px solid rgba(245, 242, 232, 0.1);
-  box-shadow: 0 1px 0 rgba(245, 242, 232, 0.06) inset, 0 12px 32px -14px rgba(0, 0, 0, 0.7);
-}
+  .dark .liquid-glass {
+    background: rgba(36, 32, 25, 0.62);
+    border: 1px solid rgba(245, 242, 232, 0.1);
+    box-shadow: 0 1px 0 rgba(245, 242, 232, 0.06) inset, 0 12px 32px -14px rgba(0, 0, 0, 0.7);
+  }
 
-/* Ink pill: every primary action */
-.btn-pill {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  border-radius: 9999px;
-  background: var(--pill);
-  color: var(--pill-text);
-  font-weight: 600;
-  font-size: 0.95rem;
-  padding: 0.95rem 1.6rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 10px 24px -12px rgba(27, 24, 16, 0.55);
-}
-.btn-pill:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 14px 28px -12px rgba(27, 24, 16, 0.6);
-}
-.btn-pill:active {
-  transform: translateY(0);
-}
+  /* Ink pill: every primary action */
+  .btn-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    background: var(--pill);
+    color: var(--pill-text);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.95rem 1.6rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 10px 24px -12px rgba(27, 24, 16, 0.55);
+  }
+  .btn-pill:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 28px -12px rgba(27, 24, 16, 0.6);
+  }
+  .btn-pill:active {
+    transform: translateY(0);
+  }
 
-.btn-ghost {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  border-radius: 9999px;
-  color: var(--ink);
-  font-weight: 600;
-  font-size: 0.95rem;
-  padding: 0.95rem 1.4rem;
-  border: 1px solid var(--line);
-  background: color-mix(in srgb, var(--card) 55%, transparent);
-  transition: border-color 0.2s ease, background 0.2s ease;
-}
-.btn-ghost:hover {
-  border-color: color-mix(in srgb, var(--ink) 30%, transparent);
-}
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.95rem 1.4rem;
+    border: 1px solid var(--line);
+    background: color-mix(in srgb, var(--card) 55%, transparent);
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .btn-ghost:hover {
+    border-color: color-mix(in srgb, var(--ink) 30%, transparent);
+  }
 
-/* Frosted panels kept for the legal and support pages */
-.glass-panel {
-  background: var(--card);
-  border: 1px solid var(--line);
-  box-shadow: 0 18px 40px -26px rgba(27, 24, 16, 0.2);
-}
+  /* Frosted panels kept for the legal and support pages */
+  .glass-panel {
+    background: var(--card);
+    border: 1px solid var(--line);
+    box-shadow: 0 18px 40px -26px rgba(27, 24, 16, 0.2);
+  }
 
-.dark .glass-panel {
-  box-shadow: 0 18px 40px -26px rgba(0, 0, 0, 0.6);
-}
+  .dark .glass-panel {
+    box-shadow: 0 18px 40px -26px rgba(0, 0, 0, 0.6);
+  }
 
-.glass-panel-glow {
-  background: var(--card);
-  border: 1px solid rgba(226, 104, 47, 0.28);
-  box-shadow: 0 18px 40px -22px rgba(226, 104, 47, 0.25);
+  .glass-panel-glow {
+    background: var(--card);
+    border: 1px solid rgba(226, 104, 47, 0.28);
+    box-shadow: 0 18px 40px -22px rgba(226, 104, 47, 0.25);
+  }
 }
 
 .font-serif-luxury {
@@ -450,4 +467,249 @@
 .mock-static .mk,
 .mock-static .mk-caret {
   animation: none !important;
+}
+
+/* Endless chip rows: each track slides exactly its own width, so two copies loop seamlessly */
+@keyframes marquee {
+  to {
+    transform: translateX(-100%);
+  }
+}
+.marquee-track {
+  animation: marquee 48s linear infinite;
+}
+.marquee-reverse {
+  animation-direction: reverse;
+}
+.marquee-mask {
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+/* A wall of kept lines behind a section: clear in the middle where the heading sits, fading at the sides */
+.text-wall-mask {
+  mask-image: radial-gradient(ellipse 38% 55% at center, transparent 60%, #000 100%),
+    linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+  mask-composite: intersect;
+}
+
+/* Lenis drives wheel scrolling itself, so the browser's own smoothing must step aside */
+html.lenis {
+  scroll-behavior: auto !important;
+}
+
+/* Reading progress: a thin ember line that fills with the page, no JavaScript */
+@keyframes progressFill {
+  to {
+    scale: 1 1;
+  }
+}
+
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .scroll-progress {
+      animation: progressFill linear both;
+      animation-timeline: scroll(root);
+    }
+
+    /* Hero: as the page leaves the sky, the phones open like a hand of cards and the sky drifts slower */
+    .hero-sky {
+      animation: heroSky linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100vh;
+    }
+    .hero-fan-left,
+    .hero-fan-center,
+    .hero-fan-right {
+      animation: linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 80vh;
+    }
+    .hero-fan-left {
+      animation-name: fanLeft;
+    }
+    .hero-fan-center {
+      animation-name: fanCenter;
+    }
+    .hero-fan-right {
+      animation-name: fanRight;
+    }
+    .hero-copy {
+      animation: heroCopy linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 60vh;
+    }
+  }
+}
+
+@keyframes heroSky {
+  to {
+    translate: 0 18%;
+  }
+}
+@keyframes fanLeft {
+  to {
+    translate: -48px 24px;
+    rotate: -6deg;
+  }
+}
+@keyframes fanCenter {
+  to {
+    translate: 0 -40px;
+  }
+}
+@keyframes fanRight {
+  to {
+    translate: 48px 24px;
+    rotate: 6deg;
+  }
+}
+@keyframes heroCopy {
+  to {
+    opacity: 0.2;
+    translate: 0 -48px;
+  }
+}
+
+/* Page changes: the old page settles away and the new one rises in; the navbar stays put */
+::view-transition-old(.page-fade) {
+  animation: pageOut 220ms cubic-bezier(0.4, 0, 1, 1) both;
+}
+::view-transition-new(.page-fade) {
+  animation: pageIn 420ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
+}
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+
+@keyframes pageOut {
+  to {
+    opacity: 0;
+    translate: 0 -12px;
+    filter: blur(4px);
+  }
+}
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    translate: 0 20px;
+    filter: blur(4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* Hero sky palette, sampled from the app's player-day and player-dusk scenes: far ridges pale, near ones deep */
+.hero-sky-art {
+  --sky-top: #ece8dd;
+  --sun-glow: rgba(250, 226, 186, 0.75);
+  --dune-1-top: #efe4d3;
+  --dune-1-bottom: #ecdcc6;
+  --dune-2-top: #eedbc2;
+  --dune-2-bottom: #ebd1b2;
+  --dune-3-top: #ecceac;
+  --dune-3-bottom: #e8c49f;
+  --dune-4-top: #e6bc97;
+  --dune-4-bottom: #ddac84;
+  --dune-5-top: #d4a079;
+  --dune-5-bottom: #c9936b;
+  --dune-6-top: #ba8664;
+  --dune-6-bottom: #a97553;
+}
+.dark .hero-sky-art {
+  --sky-top: #17140f;
+  --sun-glow: rgba(226, 104, 47, 0.32);
+  --dune-1-top: #1f1812;
+  --dune-1-bottom: #1d1611;
+  --dune-2-top: #2a1d14;
+  --dune-2-bottom: #261a12;
+  --dune-3-top: #3a2418;
+  --dune-3-bottom: #331f15;
+  --dune-4-top: #4a2c1c;
+  --dune-4-bottom: #3e2519;
+  --dune-5-top: #34211a;
+  --dune-5-bottom: #2b1c13;
+  --dune-6-top: #221811;
+  --dune-6-bottom: #1b140e;
+}
+
+/* The footer's first stars, breathing slowly */
+@keyframes starTwinkle {
+  0%, 100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+.footer-star {
+  animation: starTwinkle 4.2s ease-in-out infinite;
+  box-shadow: 0 0 6px rgba(248, 231, 201, 0.6);
+}
+
+/* Onboarding steps: the active step's timer line, and each new screen settling in */
+@keyframes onboardingProgress {
+  from {
+    scale: 0 1;
+  }
+  to {
+    scale: 1 1;
+  }
+}
+.onboarding-progress {
+  animation-name: onboardingProgress;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+}
+@keyframes onboardingEnter {
+  from {
+    opacity: 0;
+    translate: 0 12px;
+  }
+}
+.onboarding-enter {
+  animation: onboardingEnter 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* The onboarding chat: older lines fade out at the top as new ones arrive below */
+.chat-mask {
+  mask-image: linear-gradient(180deg, transparent 0%, #000 22%);
+}
+@keyframes typingDot {
+  0%, 60%, 100% {
+    translate: 0 0;
+    opacity: 0.4;
+  }
+  30% {
+    translate: 0 -3px;
+    opacity: 1;
+  }
+}
+.typing-dot {
+  animation: typingDot 0.9s ease-in-out infinite;
+}
+
+/* A new chat line opens its row from zero height, so the lines above slide up smoothly */
+@keyframes chatRow {
+  from {
+    grid-template-rows: 0fr;
+    opacity: 0;
+    translate: 0 10px;
+  }
+  to {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+.chat-row {
+  display: grid;
+  grid-template-rows: 1fr;
+  animation: chatRow 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
