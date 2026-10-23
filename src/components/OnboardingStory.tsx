@@ -161,7 +161,7 @@ function Bubble({ message }: { message: Message }) {
     return (
       <div className="flex items-end gap-2.5 max-w-[88%]">
         <span className="relative w-7 h-7 shrink-0 rounded-full overflow-hidden ring-1 ring-line bg-card">
-          <Image src="/assets/logo-icon-light.png" alt="" fill sizes="28px" className="object-cover" />
+          <Image src="/assets/logo-icon-light.png" alt="Aura Guide Avatar" fill sizes="28px" className="object-cover" />
         </span>
         <div
           className={`relative rounded-[20px] rounded-bl-md px-4 py-3 font-serif text-[17px] leading-snug ${
@@ -266,7 +266,7 @@ export default function OnboardingStory() {
           <div className="lg:col-span-6 card !rounded-[32px] flex flex-col min-h-0 overflow-hidden">
             <div className="flex items-center gap-3 px-5 sm:px-6 py-4 border-b border-line">
               <span className="relative w-9 h-9 rounded-full overflow-hidden ring-1 ring-line">
-                <Image src="/assets/logo-icon-light.png" alt="" fill sizes="36px" className="object-cover" />
+                <Image src="/assets/logo-icon-light.png" alt="Aura Manifest Daily" fill sizes="36px" className="object-cover" />
               </span>
               <div className="leading-tight">
                 <p className="text-sm font-semibold text-ink">Aura</p>

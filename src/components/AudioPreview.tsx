@@ -159,7 +159,7 @@ export default function AudioPreview() {
       <div className="relative lg:col-span-2 min-h-[260px] sm:min-h-[320px] overflow-hidden">
         <Image
           src="/assets/illustrations/player-dusk.jpg"
-          alt=""
+          alt="Aura dusk audio sanctuary meditation moment"
           fill
           sizes="(max-width: 1024px) 100vw, 400px"
           className="object-cover object-bottom"

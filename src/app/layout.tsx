@@ -34,25 +34,36 @@ export const metadata: Metadata = {
     'AI affirmations',
     'audio manifestation',
     'personalized mindfulness',
-    'gratitude journal',
-    'daily meditation',
+    'gratitude journal app',
+    'daily meditation audio',
     'living memory AI',
     'morning audio meditation',
+    'affirmation techniques',
+    'positive affirmations app',
+    'manifestation coach',
+    'daily morning ritual',
+    'law of attraction audio',
+    'mindfulness companion iOS Android',
   ],
   authors: [{ name: 'EmperorBrains', url: 'https://eb-aura-manifest-daily.onrender.com' }],
   creator: 'EmperorBrains',
   publisher: 'EmperorBrains',
   applicationName: 'Aura: Manifest Daily',
-  // Safari's Smart App Banner, plus app links that point iPhone and Android visitors at their store
+  // Safari Smart App Banner & Mobile Store linking
   itunes: { appId: '6795523727' },
   appLinks: {
     ios: { url: APP_STORE_URL, app_store_id: '6795523727', app_name: 'Aura: Manifest Daily' },
     android: { url: PLAY_STORE_URL, package: 'com.aura.manifestdaily', app_name: 'Aura: Manifest Daily' },
   },
   category: 'lifestyle',
+  classification: 'Health & Fitness / Lifestyle / Mindfulness',
   metadataBase: new URL('https://eb-aura-manifest-daily.onrender.com'),
   alternates: {
-    canonical: 'https://eb-aura-manifest-daily.onrender.com',
+    canonical: '/',
+    languages: {
+      'en-US': '/',
+      'x-default': '/',
+    },
   },
   robots: {
     index: true,
@@ -68,15 +79,17 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Aura: Manifest Daily — Your Dream Life Spoken Into Reality',
     description:
-      'Personalized audio moments and daily affirmations tailored to who you are becoming.',
+      'Personalized audio moments and daily affirmations tailored to who you are becoming. Hear your dreams spoken back to you each morning.',
     url: 'https://eb-aura-manifest-daily.onrender.com',
     siteName: 'Aura: Manifest Daily',
     images: [
       {
         url: '/assets/banner.png',
+        secureUrl: 'https://eb-aura-manifest-daily.onrender.com/assets/banner.png',
         width: 1200,
         height: 630,
-        alt: 'Aura: Manifest Daily — Morning Audio Moments & Affirmations',
+        alt: 'Aura: Manifest Daily — Personalized Audio Moments & Daily Affirmations',
+        type: 'image/png',
       },
     ],
     locale: 'en_US',
@@ -84,14 +97,34 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Aura: Manifest Daily',
+    title: 'Aura: Manifest Daily — Personalized Audio Moments & Daily Affirmations',
     description:
       'Personalized audio moments and daily affirmations tailored to who you are becoming.',
-    images: ['/assets/banner.png'],
+    images: ['https://eb-aura-manifest-daily.onrender.com/assets/banner.png'],
+    creator: '@EmperorBrains',
+    site: '@EmperorBrains',
   },
   icons: {
-    icon: '/assets/logo.png',
-    apple: '/assets/logo.png',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon.png', sizes: '512x512', type: 'image/png' },
+      { url: '/assets/logo-circular.png', sizes: '192x192', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+      { url: '/assets/logo-circular.png', sizes: '180x180', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico',
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'Aura',
+  },
+  formatDetection: {
+    telephone: false,
+    email: false,
+    address: false,
   },
 };
 

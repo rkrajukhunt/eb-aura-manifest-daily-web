@@ -98,7 +98,7 @@ export default function Hero() {
         >
           <div className="flex items-center gap-2 mb-1">
             <span className="relative w-5 h-5 rounded-md overflow-hidden bg-card">
-              <Image src="/assets/logo.png" alt="" fill sizes="20px" className="object-contain" />
+              <Image src="/assets/logo.png" alt="Aura Morning Notification Icon" fill sizes="20px" className="object-contain" />
             </span>
             <span className="text-[11px] font-semibold text-ink">Aura</span>
             <span className="text-[11px] text-muted ml-auto">7:00</span>

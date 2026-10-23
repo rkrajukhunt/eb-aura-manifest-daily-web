@@ -116,7 +116,7 @@ export default function Footer() {
             <div className="col-span-2 md:col-span-5 space-y-4">
               <Link href="/" className="inline-flex items-center gap-2.5">
                 <span className="relative w-9 h-9 rounded-full overflow-hidden ring-1 ring-[#f5f2e8]/15">
-                  <Image src="/assets/logo-icon-dark.png" alt="" fill sizes="36px" className="object-cover" />
+                  <Image src="/assets/logo-icon-dark.png" alt="Aura: Manifest Daily Logo" fill sizes="36px" className="object-cover" />
                 </span>
                 <span className="font-serif text-2xl font-medium tracking-tight">
                   Aura<span className="text-ember">.</span>

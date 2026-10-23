@@ -30,7 +30,7 @@ export default function TrustBento() {
       <div className="mt-12 grid grid-cols-1 md:grid-cols-3 md:grid-rows-[auto_auto] gap-5">
         {/* Privacy: the tall card */}
         <div className="reveal relative md:row-span-2 rounded-[28px] overflow-hidden min-h-[420px] p-7 flex flex-col justify-between">
-          <Image src="/assets/illustrations/sheet-locked.jpg" alt="" fill sizes="(max-width: 768px) 100vw, 380px" className="object-cover" />
+          <Image src="/assets/illustrations/sheet-locked.jpg" alt="Encrypted private manifestation journal sheet" fill sizes="(max-width: 768px) 100vw, 380px" className="object-cover" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#1b1810]/10 via-[#1b1810]/20 to-[#1b1810]/85" aria-hidden="true" />
           <span className="relative w-11 h-11 rounded-full liquid-glass flex items-center justify-center text-ink">
             <Lock className="w-5 h-5" />
@@ -71,7 +71,7 @@ export default function TrustBento() {
 
         {/* No streaks to break: the wide card */}
         <div className="reveal relative md:col-span-2 rounded-[28px] overflow-hidden min-h-[260px] p-7 flex items-end">
-          <Image src="/assets/illustrations/sheet-restore.jpg" alt="" fill sizes="(max-width: 768px) 100vw, 760px" className="object-cover" />
+          <Image src="/assets/illustrations/sheet-restore.jpg" alt="Gentle ritual restoration and streak preservation" fill sizes="(max-width: 768px) 100vw, 760px" className="object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#1b1810]/85 via-[#1b1810]/45 to-transparent" aria-hidden="true" />
           <div className="relative flex-1">
             <CardText

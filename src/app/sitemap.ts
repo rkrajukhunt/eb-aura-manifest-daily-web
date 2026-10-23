@@ -9,7 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${BASE_URL}/`,
       lastModified,
-      changeFrequency: 'weekly',
+      changeFrequency: 'daily',
       priority: 1.0,
     },
     {
@@ -19,28 +19,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${BASE_URL}/privacy`,
-      lastModified,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${BASE_URL}/terms`,
-      lastModified,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
       url: `${BASE_URL}/support`,
       lastModified,
       changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
+      url: `${BASE_URL}/privacy`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/terms`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/delete-account`,
       lastModified,
       changeFrequency: 'monthly',
-      priority: 0.6,
+      priority: 0.5,
     },
   ];
 }

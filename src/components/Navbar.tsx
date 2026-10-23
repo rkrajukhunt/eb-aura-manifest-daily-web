@@ -79,7 +79,7 @@ export default function Navbar() {
               <span className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden ring-1 ring-line/80 shadow-xs shrink-0 transition-transform duration-200 group-hover:scale-105">
                 <Image
                   src="/assets/logo-icon-light.png"
-                  alt="Aura"
+                  alt="Aura: Manifest Daily Logo"
                   fill
                   sizes="36px"
                   className="object-cover dark:hidden"
@@ -87,7 +87,7 @@ export default function Navbar() {
                 />
                 <Image
                   src="/assets/logo-icon-dark.png"
-                  alt="Aura"
+                  alt="Aura: Manifest Daily Logo"
                   fill
                   sizes="36px"
                   className="object-cover hidden dark:block"

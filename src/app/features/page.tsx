@@ -7,16 +7,24 @@ import SectionHeading, { Accent, Eyebrow } from '@/components/SectionHeading';
 import { FEATURE_GROUPS } from '@/data/features';
 import { SITE_URL } from '@/data/site';
 import PageTransition from '@/components/PageTransition';
+import BreadcrumbData from '@/components/BreadcrumbData';
 
 export const metadata: Metadata = {
-  title: 'Every feature',
+  title: 'Every Feature',
   description:
-    'Everything in Aura: Manifest Daily, from the first conversation and your letter from your future self to daily moments, affirmations with their technique, evening gratitude, living memory, held days and honest pricing.',
+    'Explore every feature in Aura: Manifest Daily — from your onboarding future letter and personalized audio moments to living memory and soft streaks.',
   alternates: { canonical: `${SITE_URL}/features` },
   openGraph: {
-    title: 'Every feature in Aura',
+    title: 'Every Feature in Aura: Manifest Daily',
     description: 'A daily moment in your own words, affirmations that explain themselves, and a memory you control.',
     url: `${SITE_URL}/features`,
+    images: [`${SITE_URL}/assets/banner.png`],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Every Feature in Aura: Manifest Daily',
+    description: 'A daily moment in your own words, affirmations that explain themselves, and a memory you control.',
+    images: [`${SITE_URL}/assets/banner.png`],
   },
 };
 
@@ -35,6 +43,7 @@ const freeCount = FEATURE_GROUPS.reduce((sum, group) => sum + group.features.fil
 export default function FeaturesPage() {
   return (
     <PageTransition>
+      <BreadcrumbData items={[{ name: 'Features', path: '/features' }]} />
       <main className="relative">
         <section className="pt-32 sm:pt-40 pb-12 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto text-center space-y-6">
           <Eyebrow>
