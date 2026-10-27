@@ -118,7 +118,7 @@ export default function StructuredData() {
         name: 'How do subscriptions and the free trial work?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Aura offers Annual and Monthly subscription plans with a 7-day complimentary free trial. You will not be charged until the trial period concludes, and you can cancel anytime directly via Apple App Store / Google Play Subscriptions without hassle.',
+          text: 'Aura is free to start, and your first letter is always free. Premium comes yearly, monthly or weekly, and every price is shown on this page. Plans with a free trial show the exact day you would be charged, Aura reminds you two days before, and you can cancel anytime from your App Store or Google Play subscriptions.',
         },
       },
       {

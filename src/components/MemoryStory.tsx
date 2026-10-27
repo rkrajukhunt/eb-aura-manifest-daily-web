@@ -1,5 +1,5 @@
 import React from 'react';
-import { X } from 'lucide-react';
+import { Check, X } from 'lucide-react';
 import PlayOnView from './PlayOnView';
 
 // What Aura knows, Never mention, and the library (apps/mobile/src/copy/memory.ts, moments.ts)
@@ -33,18 +33,26 @@ export default function MemoryStory() {
                 </div>
               ))}
               {group === 'Your dream' && (
-                // One memory being forgotten: it slides away and the list closes over it
-                <div className="mk mk-collapse max-h-0 opacity-0 !mt-0" style={{ ...d(1.4), animationDuration: '1.6s' }}>
-                  <div className="rounded-2xl bg-bg border border-line px-4 py-2.5 text-sm text-ink flex items-center justify-between">
-                    <span>Moving to a bigger city</span>
-                    <span className="text-xs text-ember-text font-semibold">Forget this</span>
+                // One memory being forgotten: "Forget this" is pressed, the line is struck, then the list closes over it
+                <div className="mk forget-collapse !mt-0">
+                  <div className="min-h-0 overflow-hidden">
+                    <div className="pt-2">
+                      <div className="rounded-2xl bg-bg border border-line px-4 py-2.5 text-sm text-ink flex items-center justify-between gap-3">
+                        <span className="mk forget-strike">Moving to a bigger city</span>
+                        <span className="mk forget-press shrink-0 rounded-full px-2.5 py-1 text-xs text-ember-text font-semibold">Forget this</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               )}
             </div>
           ))}
         </div>
-        <p className="text-xs text-muted mt-6">Removing a memory removes it from every future moment.</p>
+        <p className="mk mk-in mt-6 self-start w-fit inline-flex items-center gap-2 rounded-full bg-[#2f6b4f]/10 px-3 py-1.5 text-xs font-semibold text-[#2f6b4f] dark:text-[#8fd1ad]" style={d(3)}>
+          <Check className="w-3.5 h-3.5" strokeWidth={3} />
+          Forgotten. It won&rsquo;t come up again.
+        </p>
+        <p className="text-xs text-muted mt-3">Removing a memory removes it from every future moment.</p>
       </PlayOnView>
 
       <div className="lg:col-span-2 grid grid-cols-1 gap-5">

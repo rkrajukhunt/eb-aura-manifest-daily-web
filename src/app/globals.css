@@ -511,27 +511,11 @@ html.lenis {
       animation-timeline: scroll(root);
     }
 
-    /* Hero: as the page leaves the sky, the phones open like a hand of cards and the sky drifts slower */
+    /* Hero: as the page leaves the sky, the sky drifts slower than the page */
     .hero-sky {
       animation: heroSky linear both;
       animation-timeline: scroll(root);
       animation-range: 0 100vh;
-    }
-    .hero-fan-left,
-    .hero-fan-center,
-    .hero-fan-right {
-      animation: linear both;
-      animation-timeline: scroll(root);
-      animation-range: 0 80vh;
-    }
-    .hero-fan-left {
-      animation-name: fanLeft;
-    }
-    .hero-fan-center {
-      animation-name: fanCenter;
-    }
-    .hero-fan-right {
-      animation-name: fanRight;
     }
     .hero-copy {
       animation: heroCopy linear both;
@@ -544,23 +528,6 @@ html.lenis {
 @keyframes heroSky {
   to {
     translate: 0 18%;
-  }
-}
-@keyframes fanLeft {
-  to {
-    translate: -48px 24px;
-    rotate: -6deg;
-  }
-}
-@keyframes fanCenter {
-  to {
-    translate: 0 -40px;
-  }
-}
-@keyframes fanRight {
-  to {
-    translate: 48px 24px;
-    rotate: 6deg;
   }
 }
 @keyframes heroCopy {
@@ -712,4 +679,106 @@ html.lenis {
   display: grid;
   grid-template-rows: 1fr;
   animation: chatRow 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* "Forget this" in What Aura knows: the button is pressed, the memory is struck through, then the row
+   closes smoothly. The resting styles are the end state, which is what shows before the card plays. */
+.forget-collapse {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  animation: forgetCollapse 3s cubic-bezier(0.65, 0, 0.35, 1) 0.6s both;
+}
+@keyframes forgetCollapse {
+  0%, 62% {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    translate: 0 0;
+  }
+  82% {
+    grid-template-rows: 1fr;
+    opacity: 0;
+    translate: 28px 0;
+  }
+  100% {
+    grid-template-rows: 0fr;
+    opacity: 0;
+    translate: 28px 0;
+  }
+}
+.forget-strike {
+  text-decoration: line-through;
+  text-decoration-color: currentColor;
+  opacity: 0.5;
+  animation: forgetStrike 3s ease 0.6s both;
+}
+@keyframes forgetStrike {
+  0%, 32% {
+    text-decoration-color: transparent;
+    opacity: 1;
+  }
+  46%, 100% {
+    text-decoration-color: currentColor;
+    opacity: 0.5;
+  }
+}
+.forget-press {
+  background: color-mix(in srgb, var(--ember) 12%, transparent);
+  animation: forgetPress 3s ease 0.6s both;
+}
+@keyframes forgetPress {
+  0%, 20% {
+    background: transparent;
+    scale: 1;
+  }
+  27% {
+    background: color-mix(in srgb, var(--ember) 22%, transparent);
+    scale: 0.92;
+  }
+  36%, 100% {
+    background: color-mix(in srgb, var(--ember) 12%, transparent);
+    scale: 1;
+  }
+}
+
+/* Hero phones: --fan runs from 0 (closed) to 1 (wide open) with the scroll, eased in HeroFan.tsx */
+.hero-fan-left {
+  translate: calc(var(--fan, 0) * -110px) calc(var(--fan, 0) * 30px);
+  rotate: calc(var(--fan, 0) * -8deg);
+}
+.hero-fan-center {
+  translate: 0 calc(var(--fan, 0) * -36px);
+  scale: calc(1 + var(--fan, 0) * 0.03);
+}
+.hero-fan-right {
+  translate: calc(var(--fan, 0) * 110px) calc(var(--fan, 0) * 30px);
+  rotate: calc(var(--fan, 0) * 8deg);
+}
+
+/* Features page jump bar: the dark pill slides between chips */
+.jump-indicator {
+  opacity: 0;
+  transition: translate 0.55s cubic-bezier(0.22, 1, 0.36, 1), width 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
+}
+
+/* Features page, wide screens: the flying chips stay hidden until first placed, and leave with the last group */
+.feature-fly {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.feature-fly[data-ready] {
+  opacity: 1;
+}
+.feature-fly.is-done {
+  opacity: 0;
+  pointer-events: none;
+}
+.feature-fly.is-done a {
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .jump-indicator,
+  .feature-fly {
+    transition: none;
+  }
 }

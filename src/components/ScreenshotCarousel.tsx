@@ -129,7 +129,7 @@ export default function ScreenshotCarousel() {
             <Image
               key={SLIDES[current].image}
               src={SLIDES[current].image}
-              alt={`${SLIDES[current].title} — Aura App Interface Preview`}
+              alt={`${SLIDES[current].title} - Aura App Interface Preview`}
               fill
               sizes="(max-width: 640px) 260px, 300px"
               className="object-cover"

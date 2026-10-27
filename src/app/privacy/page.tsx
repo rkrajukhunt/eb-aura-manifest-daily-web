@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import PrivacyView from './PrivacyView';
 import BreadcrumbData from '@/components/BreadcrumbData';
 import PageTransition from '@/components/PageTransition';
-import { SITE_URL } from '@/data/site';
+import { SHARE_IMAGE, SITE_URL } from '@/data/site';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
@@ -16,14 +16,14 @@ export const metadata: Metadata = {
     description:
       'Learn how Aura handles and secures your personal journal, affirmations, and memory reflections with strict privacy guarantees.',
     url: `${SITE_URL}/privacy`,
-    images: [`${SITE_URL}/assets/banner.png`],
+    images: [SHARE_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Privacy Policy | Aura: Manifest Daily',
     description:
       'Learn how Aura handles and secures your personal journal, affirmations, and memory reflections with strict privacy guarantees.',
-    images: [`${SITE_URL}/assets/banner.png`],
+    images: [SHARE_IMAGE],
   },
 };
 

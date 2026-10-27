@@ -96,7 +96,7 @@ export default function HowItWorks() {
         {STEPS.map(({ title, accent, body, image, Chip }, i) => (
           <li key={title} className="reveal card overflow-hidden flex flex-col">
             <div className="relative aspect-[5/4] flex items-center justify-center overflow-hidden">
-              <Image src={image} alt={`${title} ${accent} — Aura Manifest Daily`} fill sizes="(max-width: 768px) 100vw, 360px" className="object-cover" />
+              <Image src={image} alt={`${title} ${accent} - Aura Manifest Daily`} fill sizes="(max-width: 768px) 100vw, 360px" className="object-cover" />
               <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-b from-transparent to-card" aria-hidden="true" />
               <span className="absolute top-4 left-4 w-9 h-9 rounded-full liquid-glass flex items-center justify-center text-xs font-semibold text-ink tabular-nums">
                 {String(i + 1).padStart(2, '0')}

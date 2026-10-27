@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import Image from 'next/image';
 import { Check } from 'lucide-react';
 import Glim from './Glim';
@@ -202,7 +202,7 @@ function Bubble({ message }: { message: Message }) {
   );
 }
 
-export default function OnboardingStory() {
+function PinnedConversation() {
   const ref = useRef<HTMLDivElement>(null);
   const railRef = useRef<HTMLSpanElement>(null);
   // How many beats have been reached. It only changes when a new line is due, so scrolling
@@ -237,7 +237,6 @@ export default function OnboardingStory() {
   const letter = beat === BEATS;
   const chapter = FLOW[lines - 1].chapter;
   const notesPinned = NOTE_AT.filter((at) => at < lines).length;
-  const latestNote = notesPinned > 0 ? CHAPTERS[notesPinned - 1].note : null;
 
   return (
     <div ref={ref} className="relative" style={{ height: `${100 + BEATS * SVH_PER_BEAT}svh` }}>
@@ -327,16 +326,6 @@ export default function OnboardingStory() {
               })}
             </div>
 
-            {/* Phones: the newest note under the conversation */}
-            {!letter && latestNote && (
-              <div key={notesPinned} className="lg:hidden absolute inset-x-0 bottom-0 flex justify-center onboarding-enter">
-                <div className="rounded-2xl bg-parchment border border-line px-4 py-2.5 shadow-[0_16px_30px_-18px_rgba(27,24,16,0.45)] text-center">
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-ember-text">{latestNote.label}</p>
-                  <p className="font-serif italic text-[15px] text-ink">{latestNote.text}</p>
-                </div>
-              </div>
-            )}
-
             {/* The letter */}
             <div
               className={`absolute left-1/2 bottom-0 lg:bottom-[6%] -translate-x-1/2 w-full max-w-[340px] transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
@@ -355,4 +344,61 @@ export default function OnboardingStory() {
       </div>
     </div>
   );
+}
+
+// Phones get the same conversation without pinning: pinning a tall section on a small screen reads as the page
+// opening and then snapping shut. Each line simply rises in as it scrolls into view.
+function FlowingConversation() {
+  return (
+    <div className="space-y-5">
+      <div className="card !rounded-[28px] overflow-hidden">
+        <div className="flex items-center gap-3 px-5 py-4 border-b border-line">
+          <span className="relative w-9 h-9 rounded-full overflow-hidden ring-1 ring-line">
+            <Image src="/assets/logo-icon-light.png" alt="" fill sizes="36px" className="object-cover" />
+          </span>
+          <div className="leading-tight">
+            <p className="text-sm font-semibold text-ink">Aura</p>
+            <p className="text-xs text-muted">getting to know you</p>
+          </div>
+        </div>
+        <div className="px-4 py-5 space-y-3">
+          {CHAPTERS.map((chapter) => (
+            <React.Fragment key={chapter.label}>
+              {chapter.messages.map((message, i) => (
+                <div key={i} className="reveal">
+                  <Bubble message={message} />
+                </div>
+              ))}
+              <div className="reveal flex justify-center py-1">
+                <span className="inline-flex items-center gap-2 rounded-full bg-parchment border border-line px-3 py-1 text-[11px]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-ember" aria-hidden="true" />
+                  <span className="font-semibold uppercase tracking-[0.14em] text-ember-text">{chapter.note.label}</span>
+                  <span className="font-serif italic text-ink">{chapter.note.text}</span>
+                </span>
+              </div>
+            </React.Fragment>
+          ))}
+        </div>
+      </div>
+
+      <div className="reveal rounded-[22px] bg-card border border-ember/25 p-5 text-center shadow-[0_30px_60px_-30px_rgba(226,104,47,0.45)]">
+        <Glim clip="deliver_letter" alt="Glim carrying your first letter" className="w-16 mx-auto" />
+        <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-ember-text mt-2">Your first letter</p>
+        <p className="font-serif text-xl text-ink mt-1 leading-snug">From the you who already has it</p>
+        <p className="text-sm text-body mt-2">Written from all six answers. Free, and yours to keep.</p>
+      </div>
+    </div>
+  );
+}
+
+const DESKTOP_QUERY = '(min-width: 1024px)';
+const subscribeDesktop = (onChange: () => void) => {
+  const query = window.matchMedia(DESKTOP_QUERY);
+  query.addEventListener('change', onChange);
+  return () => query.removeEventListener('change', onChange);
+};
+
+export default function OnboardingStory() {
+  const desktop = useSyncExternalStore(subscribeDesktop, () => window.matchMedia(DESKTOP_QUERY).matches, () => false);
+  return desktop ? <PinnedConversation /> : <FlowingConversation />;
 }

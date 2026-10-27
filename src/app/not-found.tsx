@@ -14,7 +14,7 @@ export default function NotFound() {
 
           <div className="space-y-2">
             <span className="text-xs font-mono uppercase tracking-widest text-[#e2682f]">
-              404 — Page Not Found
+              404 - Page Not Found
             </span>
             <h1 className="font-serif-luxury text-3xl font-bold text-[#1b1810] dark:text-[#f5f2e8]">
               Lost in the Quiet

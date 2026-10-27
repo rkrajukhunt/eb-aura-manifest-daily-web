@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import DeleteAccountView from './DeleteAccountView';
 import BreadcrumbData from '@/components/BreadcrumbData';
 import PageTransition from '@/components/PageTransition';
-import { SITE_URL } from '@/data/site';
+import { SHARE_IMAGE, SITE_URL } from '@/data/site';
 
 export const metadata: Metadata = {
   title: 'Delete Account & Data',
@@ -16,14 +16,14 @@ export const metadata: Metadata = {
     description:
       'Instructions for permanent account and data erasure in Aura: Manifest Daily.',
     url: `${SITE_URL}/delete-account`,
-    images: [`${SITE_URL}/assets/banner.png`],
+    images: [SHARE_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Delete Account & Data | Aura: Manifest Daily',
     description:
       'Instructions for permanent account and data erasure in Aura: Manifest Daily.',
-    images: [`${SITE_URL}/assets/banner.png`],
+    images: [SHARE_IMAGE],
   },
 };
 

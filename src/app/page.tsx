@@ -157,7 +157,7 @@ export default function Home() {
             eyebrow="Plans"
             title="Free to begin,"
             accent="honest about the rest"
-            intro="The free plan is a real daily practice. Premium adds more ways to ask, keep and share. You see every term before you decide."
+            intro="The free plan is a real daily practice. Premium adds more ways to ask, keep and share. Every price, and the day you would be charged, is right here."
           />
           <div className="mt-14">
             <PlanStory />

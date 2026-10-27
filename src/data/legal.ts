@@ -29,7 +29,7 @@ export const PRIVACY_DOC: LegalDocument = {
       heading: '1. What You Share With Aura (And Why)',
       body: [
         'Your Account: When you sign up, we save your email address so your daily moments, affirmations, and practice history stay synced if you switch phones. If you use "Sign in with Apple" or "Sign in with Google", we only receive the basic sign-in confirmation from them. We never ask for your contacts or social media profiles.',
-        'Your Goals & Onboarding Dreams: When you first meet Aura, you tell it what you are building — whether that is creative work, financial peace, career growth, or a calmer mind. You also pick a voice you enjoy and set topics you want Aura to never mention. This helps Aura speak to you with care and respect from day one.',
+        'Your Goals & Onboarding Dreams: When you first meet Aura, you tell it what you are building - whether that is creative work, financial peace, career growth, or a calmer mind. You also pick a voice you enjoy and set topics you want Aura to never mention. This helps Aura speak to you with care and respect from day one.',
         'Your Daily Gratitude & Journal Reflections: When you write an evening gratitude line or reflect in the app, those words are saved to your private journal and help your companion understand your journey over time.',
         'Your Living Memory ("What Aura Knows"): As you use Aura, it remembers the aspirations and themes you have shared so your morning moments feel continuous rather than generic. You have complete visibility and control over this memory at all times.',
         'Your Morning Audio & Letters: The audio moments and future-self letters Aura creates for you are saved to your account so you can listen back to them whenever you wish.',
@@ -121,7 +121,7 @@ export const TERMS_DOC: LegalDocument = {
         'Daily Affirmation Practice: You receive daily affirmations paired with practical, evidence-based mindset techniques (such as sensory visualization, present-tense reframing, and the 369 method) that you can practice in two to three quiet minutes.',
         'Evening Gratitude: An unhurried space to record a line or two of gratitude each evening, closing out your day and gently informing the next morning’s moment.',
         'Living Memory: Aura remembers the themes of your life so your conversations feel real and continuous, and gives you a dedicated screen ("What Aura Knows") where you can review or delete memories at any time.',
-        'Studio Moments: When a specific situation arises in your life — such as preparing for a big presentation, soothing anxiety before sleep, or resetting after a difficult conversation — you can create tailored on-demand moments.',
+        'Studio Moments: When a specific situation arises in your life - such as preparing for a big presentation, soothing anxiety before sleep, or resetting after a difficult conversation - you can create tailored on-demand moments.',
         'Soft Streaks & Held Days: Aura does not punish you for being human. If you miss a day, it is quietly held for you without guilt or broken streaks, and returning always feels like a warm welcome.',
       ],
     },
@@ -156,7 +156,7 @@ export const TERMS_DOC: LegalDocument = {
     {
       heading: '5. Your Words Belong to You',
       body: [
-        'You Own Your Words: You retain 100% ownership of everything you write, reflect on, or share in Aura — your dreams, your gratitude entries, and your thoughts are yours and yours alone.',
+        'You Own Your Words: You retain 100% ownership of everything you write, reflect on, or share in Aura - your dreams, your gratitude entries, and your thoughts are yours and yours alone.',
         'Our Limited Permission: You give Aura permission to process your words solely to create your personalized audio moments, affirmations, and memory reflections. We never broadcast, publish, or publicly share your private words.',
         'Aura’s Intellectual Property: The Aura app, our visual designs, the ember-and-bone theme, logos, animations, Glim mascot illustrations, and software are protected by copyright and belong to EmperorBrains.',
       ],
@@ -174,7 +174,7 @@ export const TERMS_DOC: LegalDocument = {
       heading: '7. About AI & Creative Inspiration',
       body: [
         'AI-Powered Creativity: Aura uses modern AI voice and language technology to compose moments that speak directly to what is on your mind. While designed with deep care, these moments are creative and motivational outputs.',
-        'Your Life Is in Your Hands: Manifestation and mindset practices help build confidence, focus, and clarity. Aura does not guarantee financial riches, lottery winnings, or supernatural events — your growth and decisions are always your own.',
+        'Your Life Is in Your Hands: Manifestation and mindset practices help build confidence, focus, and clarity. Aura does not guarantee financial riches, lottery winnings, or supernatural events - your growth and decisions are always your own.',
       ],
     },
     {
@@ -258,7 +258,7 @@ export const SUPPORT_DOC: LegalDocument = {
       heading: 'Direct Email Support',
       body: [
         `Email our friendly support team at: ${CONTACT_EMAIL}`,
-        'We strive to answer all inquiries within 24–48 business hours.',
+        'We strive to answer all inquiries within 24-48 business hours.',
         'Tip: Please include your registered email address and iPhone/Android model for faster troubleshooting.',
       ],
     },

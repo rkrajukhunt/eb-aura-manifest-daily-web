@@ -5,7 +5,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import StructuredData from '@/components/StructuredData';
 import SmoothScroll from '@/components/SmoothScroll';
-import { APP_STORE_URL, PLAY_STORE_URL } from '@/data/site';
+import { APP_STORE_URL, PLAY_STORE_URL, SITE_URL } from '@/data/site';
 
 // The app's own pairing: Newsreader for the voice, Figtree for the interface
 const figtree = Figtree({
@@ -23,11 +23,11 @@ const newsreader = Newsreader({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Aura: Manifest Daily — Personalized Audio Moments & Daily Affirmations',
+    default: 'Aura: Manifest Daily - Personalized Audio Moments & Daily Affirmations',
     template: '%s | Aura: Manifest Daily',
   },
   description:
-    'An AI companion that transforms your dream life into intimate, personalized audio moments and daily affirmations. Designed with warm editorial elegance, living memory intelligence, and zero guilt.',
+    'Aura is a personal affirmation app for iPhone and Android. Tell it your goals once, and every morning it writes a two-minute audio affirmation in your own words and reads it to you by name.',
   keywords: [
     'Aura',
     'Manifest Daily',
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     'law of attraction audio',
     'mindfulness companion iOS Android',
   ],
-  authors: [{ name: 'EmperorBrains', url: 'https://eb-aura-manifest-daily.onrender.com' }],
+  authors: [{ name: 'EmperorBrains', url: SITE_URL }],
   creator: 'EmperorBrains',
   publisher: 'EmperorBrains',
   applicationName: 'Aura: Manifest Daily',
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
   },
   category: 'lifestyle',
   classification: 'Health & Fitness / Lifestyle / Mindfulness',
-  metadataBase: new URL('https://eb-aura-manifest-daily.onrender.com'),
+  metadataBase: new URL(SITE_URL),
   alternates: {
     canonical: '/',
     languages: {
@@ -76,31 +76,21 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  // The share image comes from app/opengraph-image.jpg and app/twitter-image.jpg, sized and tagged by Next
   openGraph: {
-    title: 'Aura: Manifest Daily — Your Dream Life Spoken Into Reality',
+    title: 'Aura: Daily affirmations, written for your goals',
     description:
-      'Personalized audio moments and daily affirmations tailored to who you are becoming. Hear your dreams spoken back to you each morning.',
-    url: 'https://eb-aura-manifest-daily.onrender.com',
+      'Tell Aura your goals once. Every morning it writes a two-minute audio affirmation in your own words and reads it to you by name. Free on iPhone and Android.',
+    url: SITE_URL,
     siteName: 'Aura: Manifest Daily',
-    images: [
-      {
-        url: '/assets/banner.png',
-        secureUrl: 'https://eb-aura-manifest-daily.onrender.com/assets/banner.png',
-        width: 1200,
-        height: 630,
-        alt: 'Aura: Manifest Daily — Personalized Audio Moments & Daily Affirmations',
-        type: 'image/png',
-      },
-    ],
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Aura: Manifest Daily — Personalized Audio Moments & Daily Affirmations',
+    title: 'Aura: Daily affirmations, written for your goals',
     description:
-      'Personalized audio moments and daily affirmations tailored to who you are becoming.',
-    images: ['https://eb-aura-manifest-daily.onrender.com/assets/banner.png'],
+      'Tell Aura your goals once. Every morning it writes a two-minute audio affirmation in your own words and reads it to you by name. Free on iPhone and Android.',
     creator: '@EmperorBrains',
     site: '@EmperorBrains',
   },

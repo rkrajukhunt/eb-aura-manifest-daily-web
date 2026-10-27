@@ -5,26 +5,27 @@ import Glim, { type GlimClip } from '@/components/Glim';
 import ScreenshotCarousel from '@/components/ScreenshotCarousel';
 import SectionHeading, { Accent, Eyebrow } from '@/components/SectionHeading';
 import { FEATURE_GROUPS } from '@/data/features';
-import { SITE_URL } from '@/data/site';
+import { SHARE_IMAGE, SITE_URL } from '@/data/site';
 import PageTransition from '@/components/PageTransition';
 import BreadcrumbData from '@/components/BreadcrumbData';
+import FeatureJumpBar from '@/components/FeatureJumpBar';
 
 export const metadata: Metadata = {
   title: 'Every Feature',
   description:
-    'Explore every feature in Aura: Manifest Daily — from your onboarding future letter and personalized audio moments to living memory and soft streaks.',
+    'Explore every feature in Aura: Manifest Daily - from your onboarding future letter and personalized audio moments to living memory and soft streaks.',
   alternates: { canonical: `${SITE_URL}/features` },
   openGraph: {
     title: 'Every Feature in Aura: Manifest Daily',
     description: 'A daily moment in your own words, affirmations that explain themselves, and a memory you control.',
     url: `${SITE_URL}/features`,
-    images: [`${SITE_URL}/assets/banner.png`],
+    images: [SHARE_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Every Feature in Aura: Manifest Daily',
     description: 'A daily moment in your own words, affirmations that explain themselves, and a memory you control.',
-    images: [`${SITE_URL}/assets/banner.png`],
+    images: [SHARE_IMAGE],
   },
 };
 
@@ -60,22 +61,7 @@ export default function FeaturesPage() {
         </section>
 
         {/* Jump bar, pinned under the navbar */}
-        <nav
-          aria-label="Feature groups"
-          className="sticky top-[76px] sm:top-[84px] z-40 px-4 sm:px-6 lg:px-8 pb-2"
-        >
-          <div className="max-w-6xl mx-auto flex gap-2 overflow-x-auto no-scrollbar justify-start md:justify-center">
-            {FEATURE_GROUPS.map((group) => (
-              <a
-                key={group.id}
-                href={`#${group.id}`}
-                className="shrink-0 liquid-glass rounded-full px-4 py-2 text-sm font-medium text-ink hover:bg-card transition-colors"
-              >
-                {group.eyebrow}
-              </a>
-            ))}
-          </div>
-        </nav>
+        <FeatureJumpBar groups={FEATURE_GROUPS.map((group) => ({ id: group.id, label: group.eyebrow }))} />
 
         {FEATURE_GROUPS.map((group, gi) => (
           <section

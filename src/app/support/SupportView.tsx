@@ -501,7 +501,7 @@ export default function SupportPage() {
             </div>
 
             <p className="text-xs text-[#6f6a58] dark:text-[#8a8265] leading-relaxed">
-              We strive to answer all direct emails within 24–48 business hours. For immediate troubleshooting, check the solutions below.
+              We strive to answer all direct emails within 24-48 business hours. For immediate troubleshooting, check the solutions below.
             </p>
           </div>
 

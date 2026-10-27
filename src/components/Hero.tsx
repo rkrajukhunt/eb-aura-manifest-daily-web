@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
-import { ArrowDown } from 'lucide-react';
+import { ArrowDown, Clock, Sparkles, Sun } from 'lucide-react';
+import HeroFan from './HeroFan';
 import HeroSky from './HeroSky';
 import PhoneFrame from './phone/PhoneFrame';
 import { AffirmationScreen, HomeScreen, PlayerScreen } from './phone/DayScreens';
@@ -9,7 +10,14 @@ import StoreButtons from './StoreButtons';
 import { Accent } from './SectionHeading';
 import { PLATFORMS_LINE } from '@/data/site';
 
-const DREAMS = ['the studio', 'a calm mind', 'the promotion', 'a new home', 'the marathon'];
+const DREAMS = ['your goals', 'the studio', 'a calm mind', 'the promotion', 'a new home'];
+
+// What a visitor gets, said as outcomes rather than features
+const OUTCOMES = [
+  { Icon: Clock, text: '2 minutes a morning' },
+  { Icon: Sparkles, text: 'Written from your own goals' },
+  { Icon: Sun, text: 'Start every day focused and calm' },
+];
 
 export default function Hero() {
   return (
@@ -20,28 +28,47 @@ export default function Hero() {
         <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-b from-transparent to-bg" />
       </div>
 
-      <div className="hero-copy max-w-4xl mx-auto text-center space-y-7">
-        <h1 className="font-sans text-[2.7rem] leading-[1.04] sm:text-6xl md:text-7xl lg:text-[5.4rem] font-semibold tracking-[-0.045em] text-ink text-balance">
-          Wake up to <RotatingWord words={DREAMS} />
+      <div className="hero-copy max-w-5xl mx-auto text-center space-y-7">
+        {/* Say plainly what Aura is before anything poetic */}
+        <span className="inline-flex items-center gap-2 rounded-full liquid-glass !shadow-none px-4 py-1.5 text-xs sm:text-sm font-semibold text-body">
+          <span className="w-1.5 h-1.5 rounded-full bg-ember" aria-hidden="true" />
+          <span className="sm:hidden">Personal affirmation app</span>
+          <span className="hidden sm:inline">The personal affirmation app for iPhone and Android</span>
+        </span>
+
+        <h1 className="font-sans text-[2.5rem] leading-[1.05] sm:text-6xl md:text-[4.1rem] lg:text-[4.6rem] font-semibold tracking-[-0.045em] text-ink text-balance">
+          Daily affirmations,
           <br />
-          <Accent>already yours</Accent>
-          <span className="text-ember">.</span>
+          <Accent>written for</Accent>{' '}
+          <span className="whitespace-nowrap">
+            <RotatingWord words={DREAMS} />
+            <span className="text-ember">.</span>
+          </span>
         </h1>
 
-        <p className="max-w-xl mx-auto text-lg sm:text-xl text-body leading-relaxed text-pretty">
-          Tell Aura what you are building, once. Each morning it writes you a short moment in your own words, and
-          reads it to you by name.
+        <p className="max-w-2xl mx-auto text-lg sm:text-xl text-body leading-relaxed text-pretty">
+          Tell Aura what you are working toward, once. Every morning it writes a two-minute audio affirmation in your own
+          words and reads it to you by name, so you start the day knowing exactly what you are building.
         </p>
 
         <div className="space-y-3">
           <StoreButtons className="items-center justify-center" />
-          <p className="text-sm text-muted">{PLATFORMS_LINE}</p>
+          <p className="text-sm text-muted">{PLATFORMS_LINE} · Your first letter is free</p>
         </div>
+
+        <ul className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+          {OUTCOMES.map(({ Icon, text }) => (
+            <li key={text} className="inline-flex items-center gap-2 rounded-full bg-card/70 border border-line px-3.5 py-2 text-sm text-ink">
+              <Icon className="w-4 h-4 text-ember-text" />
+              {text}
+            </li>
+          ))}
+        </ul>
       </div>
 
       {/* A fan of three phones, cropped by the horizon like the app's hill */}
       <div className="relative max-w-6xl mx-auto mt-14 sm:mt-16 h-[440px] sm:h-[540px]">
-        <div className="absolute left-1/2 top-0 -translate-x-1/2 flex items-start justify-center">
+        <HeroFan className="absolute left-1/2 top-0 -translate-x-1/2 flex items-start justify-center">
           <div className="hero-fan-left hidden sm:block -mr-16 mt-16">
             <div className="w-[230px] -rotate-[9deg] origin-bottom-right">
               <PhoneFrame className="opacity-95">
@@ -68,7 +95,7 @@ export default function Hero() {
               </PhoneFrame>
             </div>
           </div>
-        </div>
+        </HeroFan>
 
         {/* Floating chips, in the app's own words */}
         <div className="hidden md:flex absolute left-[4%] lg:left-[10%] top-[14%] z-20 liquid-glass rounded-2xl px-4 py-3 items-center gap-3 -rotate-3 animate-float-soft">

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import TermsView from './TermsView';
 import BreadcrumbData from '@/components/BreadcrumbData';
 import PageTransition from '@/components/PageTransition';
-import { SITE_URL } from '@/data/site';
+import { SHARE_IMAGE, SITE_URL } from '@/data/site';
 
 export const metadata: Metadata = {
   title: 'Terms of Service',
@@ -16,14 +16,14 @@ export const metadata: Metadata = {
     description:
       'Official Terms of Service for Aura: Manifest Daily applications and services.',
     url: `${SITE_URL}/terms`,
-    images: [`${SITE_URL}/assets/banner.png`],
+    images: [SHARE_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Terms of Service | Aura: Manifest Daily',
     description:
       'Official Terms of Service for Aura: Manifest Daily applications and services.',
-    images: [`${SITE_URL}/assets/banner.png`],
+    images: [SHARE_IMAGE],
   },
 };
 
