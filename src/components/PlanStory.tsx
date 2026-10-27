@@ -15,10 +15,13 @@ export default function PlanStory() {
   const [selected, setSelected] = useState<BillingPeriod>(DEFAULT_PLAN);
   const plan = PREMIUM_PLANS.find((p) => p.id === selected) ?? PREMIUM_PLANS[0];
 
+  // The reminder comes on the trial's second-to-last day at the latest, never on day 1
+  const remindOn = plan.trialDays ? Math.max(2, plan.trialDays - 2) : 0;
+  const daysLeft = (plan.trialDays ?? 0) - remindOn;
   const timeline = plan.trialDays
     ? [
         { when: 'Today · Day 1', what: 'Full access begins. Nothing charged.' },
-        { when: `Day ${plan.trialDays - 2}`, what: 'We remind you. Two days left.' },
+        { when: `Day ${remindOn}`, what: `We remind you. ${daysLeft === 1 ? 'One day' : `${daysLeft} days`} left.` },
         { when: `Day ${plan.trialDays}`, what: `${plan.price}${plan.cadence} begins, unless you have cancelled.` },
       ]
     : [

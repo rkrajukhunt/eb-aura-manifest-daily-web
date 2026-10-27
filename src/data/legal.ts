@@ -142,11 +142,11 @@ export const TERMS_DOC: LegalDocument = {
       ],
     },
     {
-      heading: '4. Subscriptions, 7-Day Free Trial & Billing',
+      heading: '4. Subscriptions, 3-Day Free Trial & Billing',
       body: [
         'Free Daily Practice: Aura includes a generous free tier featuring daily affirmations, your onboarding letter, and core mindfulness tools without requiring a credit card or subscription.',
         'Aura Premium Membership: We offer optional annual and monthly subscriptions that unlock unlimited personalized morning audio moments, living memory continuity, custom voice models, and full studio generation.',
-        '7-Day Complimentary Free Trial: When you start a free trial, you enjoy full premium access for 7 days at zero charge. To avoid being charged, you can cancel at any time up to 24 hours before the 7 days end.',
+        '3-Day Complimentary Free Trial: When you start a free trial, you enjoy full premium access for 3 days at zero charge. To avoid being charged, you can cancel at any time up to 24 hours before the 3 days end.',
         'Automatic Renewal: Subscriptions automatically renew at the end of each billing cycle (every year or every month) unless you turn off auto-renewal in your device settings at least 24 hours before your current period ends.',
         'In-App Billing by Apple and Google: All purchases, trial activations, and renewals are handled safely and directly by Apple App Store (In-App Purchases) or Google Play. We never ask for or store your credit card numbers.',
         'How to Cancel: You can cancel your subscription at any time through your phone: On iPhone/iPad: Open Settings -> Tap your Apple ID at the top -> Subscriptions -> Aura: Manifest Daily -> Cancel Subscription. On Android: Open Google Play Store -> Tap your profile icon -> Payments & Subscriptions -> Subscriptions -> Aura: Manifest Daily -> Cancel Subscription.',

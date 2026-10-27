@@ -118,7 +118,7 @@ export default function StructuredData() {
         name: 'How do subscriptions and the free trial work?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Aura is free to start, and your first letter is always free. Premium comes yearly, monthly or weekly, and every price is shown on this page. Plans with a free trial show the exact day you would be charged, Aura reminds you two days before, and you can cancel anytime from your App Store or Google Play subscriptions.',
+          text: 'Aura is free to start, and your first letter is always free. Premium comes yearly, monthly or weekly, and every price is shown on this page. Plans with a free trial show the exact day you would be charged, Aura reminds you before the trial ends, and you can cancel anytime from your App Store or Google Play subscriptions.',
         },
       },
       {

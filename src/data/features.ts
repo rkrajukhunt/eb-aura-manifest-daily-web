@@ -232,7 +232,7 @@ export const FEATURE_GROUPS: FeatureGroup[] = [
       {
         id: 'pricing',
         title: 'Exactly what happens, and when',
-        body: 'The trial timeline is shown before you start: nothing charged today, a reminder two days before, then the price.',
+        body: 'The trial timeline is shown before you start: nothing charged today, a reminder before it ends, then the price.',
         details: ['Weekly prices also show the monthly figure', 'The free tier stays available', 'Cancel in two taps from your App Store or Google Play subscriptions'],
         plan: 'free',
       },

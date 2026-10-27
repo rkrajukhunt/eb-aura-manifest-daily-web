@@ -761,7 +761,7 @@ html.lenis {
   transition: translate 0.55s cubic-bezier(0.22, 1, 0.36, 1), width 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
 }
 
-/* Features page, wide screens: the flying chips stay hidden until first placed, and leave with the last group */
+/* Features page, wide screens: the flying chips stay hidden until first placed */
 .feature-fly {
   opacity: 0;
   transition: opacity 0.4s ease;
@@ -769,16 +769,130 @@ html.lenis {
 .feature-fly[data-ready] {
   opacity: 1;
 }
-.feature-fly.is-done {
-  opacity: 0;
-  pointer-events: none;
+
+/* The row under the hero: chips strung on a dashed thread */
+.feature-thread {
+  position: relative;
 }
-.feature-fly.is-done a {
-  pointer-events: none;
+.feature-thread::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  border-top: 1px dashed var(--line);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
 }
+
+/* The column's thread: a track, and an ember fill down to the group being read */
+.feature-rail-line {
+  position: absolute;
+  left: var(--rail-x, 36px);
+  top: var(--rail-top, 0);
+  width: 2px;
+  height: var(--rail-len, 0);
+  margin-left: -1px;
+  border-radius: 2px;
+  background: var(--line);
+  transform-origin: top;
+  scale: 1 var(--rail-draw, 0);
+}
+.feature-rail-line.is-fill {
+  height: var(--rail-fill, 0);
+  background: linear-gradient(var(--ember-soft), var(--ember));
+  transition: height 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Chip labels; where the side margin is narrow, docked chips shrink to their icon and open on hover */
+.chip-label {
+  display: block;
+  max-width: 12rem;
+  overflow: hidden;
+  transition: max-width 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
+}
+@media (max-width: 95.99rem) {
+  .feature-fly.is-docked:not(:hover):not(:focus-within) .chip-label {
+    max-width: 0;
+    opacity: 0;
+    transition-delay: 0.15s;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .jump-indicator,
-  .feature-fly {
+  .feature-fly,
+  .feature-rail-line,
+  .chip-label {
+    transition: none;
+  }
+}
+
+/* Hero goals: glass chips drift in the side margins, one at a time flies into the headline */
+.dream-chip {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+  border-radius: 999px;
+  padding: 7px 15px 7px 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--card) 62%, transparent);
+  border: 1px solid color-mix(in srgb, var(--card) 70%, transparent);
+  box-shadow: 0 10px 26px -16px rgba(27, 24, 16, 0.45);
+  backdrop-filter: blur(18px) saturate(1.5);
+  -webkit-backdrop-filter: blur(18px) saturate(1.5);
+  animation: dreamDrift var(--drift, 7s) ease-in-out infinite alternate;
+  transition: transform 0.95s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.5s ease, box-shadow 0.4s ease, background-color 0.4s ease;
+}
+.dream-chip-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  color: var(--ember-text);
+  background: color-mix(in srgb, var(--ember-soft) 40%, var(--card));
+}
+.dream-chip.is-picked {
+  background: var(--card);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--ember) 22%, transparent), 0 14px 30px -14px rgba(226, 104, 47, 0.6);
+}
+.dream-chip.is-hidden {
+  opacity: 0;
+}
+@keyframes dreamDrift {
+  from {
+    translate: 0 -6px;
+  }
+  to {
+    translate: 0 8px;
+  }
+}
+.dream-word {
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.dream-word-layer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  scale: 0.9;
+  filter: blur(6px);
+  transition: opacity 0.45s ease, scale 0.6s cubic-bezier(0.22, 1, 0.36, 1), filter 0.45s ease;
+}
+.dream-word-layer.is-on {
+  opacity: 1;
+  scale: 1;
+  filter: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .dream-chip,
+  .dream-word,
+  .dream-word-layer {
+    animation: none;
     transition: none;
   }
 }

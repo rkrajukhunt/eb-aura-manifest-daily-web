@@ -5,12 +5,11 @@ import HeroFan from './HeroFan';
 import HeroSky from './HeroSky';
 import PhoneFrame from './phone/PhoneFrame';
 import { AffirmationScreen, HomeScreen, PlayerScreen } from './phone/DayScreens';
+import DreamFloat from './DreamFloat';
 import RotatingWord from './RotatingWord';
 import StoreButtons from './StoreButtons';
 import { Accent } from './SectionHeading';
 import { PLATFORMS_LINE } from '@/data/site';
-
-const DREAMS = ['your goals', 'the studio', 'a calm mind', 'the promotion', 'a new home'];
 
 // What a visitor gets, said as outcomes rather than features
 const OUTCOMES = [
@@ -28,6 +27,7 @@ export default function Hero() {
         <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-b from-transparent to-bg" />
       </div>
 
+      <DreamFloat className="max-w-[88rem] mx-auto">
       <div className="hero-copy max-w-5xl mx-auto text-center space-y-7">
         {/* Say plainly what Aura is before anything poetic */}
         <span className="inline-flex items-center gap-2 rounded-full liquid-glass !shadow-none px-4 py-1.5 text-xs sm:text-sm font-semibold text-body">
@@ -41,7 +41,7 @@ export default function Hero() {
           <br />
           <Accent>written for</Accent>{' '}
           <span className="whitespace-nowrap">
-            <RotatingWord words={DREAMS} />
+            <RotatingWord />
             <span className="text-ember">.</span>
           </span>
         </h1>
@@ -65,6 +65,7 @@ export default function Hero() {
           ))}
         </ul>
       </div>
+      </DreamFloat>
 
       {/* A fan of three phones, cropped by the horizon like the app's hill */}
       <div className="relative max-w-6xl mx-auto mt-14 sm:mt-16 h-[440px] sm:h-[540px]">

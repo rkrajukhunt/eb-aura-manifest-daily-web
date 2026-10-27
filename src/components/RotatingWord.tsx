@@ -1,40 +1,54 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
+import { DREAMS, useDream } from './DreamFloat';
 
-interface RotatingWordProps {
-  words: string[];
-  /** Milliseconds each word stays */
-  interval?: number;
-}
+// The headline's goal word, driven by DreamFloat. Every word sits in the same spot and the current one
+// shows; the space eases to each word's width, so the headline never carries an empty gap.
+export default function RotatingWord() {
+  const { index, slotRef, reportWidths } = useDream();
+  const [measured, setMeasured] = useState<number[]>([]);
+  const measureRef = useRef<HTMLSpanElement>(null);
 
-// A glass pill whose word changes every few seconds; reduced motion keeps the first word
-export default function RotatingWord({ words, interval = 2600 }: RotatingWordProps) {
-  const [index, setIndex] = useState(0);
+  // Measure every word in the headline's own font, again whenever the size changes
+  useLayoutEffect(() => {
+    const box = measureRef.current;
+    if (!box) return;
+    const measure = () => {
+      const next = [...box.children].map((el) => (el as HTMLElement).offsetWidth);
+      reportWidths(next);
+      setMeasured(next);
+    };
+    measure();
+    window.addEventListener('resize', measure);
+    document.fonts?.ready.then(measure);
+    return () => window.removeEventListener('resize', measure);
+  }, [reportWidths]);
 
-  useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const id = window.setInterval(() => setIndex((i) => (i + 1) % words.length), interval);
-    return () => window.clearInterval(id);
-  }, [words.length, interval]);
-
-  // The longest word sizes the pill, so the headline never reflows as words change
-  const longest = words.reduce((a, b) => (b.length > a.length ? b : a), '');
+  const width = measured[index];
 
   return (
-    <span className="relative inline-grid align-baseline mx-1 px-[0.35em] rounded-full liquid-glass !shadow-none">
-      <span className="invisible font-serif italic font-normal tracking-[-0.02em] whitespace-nowrap" aria-hidden="true">
-        {longest}
+    <span
+      ref={slotRef}
+      className="dream-word relative inline-block align-baseline ml-1 text-left font-serif italic font-normal tracking-[-0.02em] whitespace-nowrap text-ember-text"
+      style={width ? { width: width + 1 } : undefined}
+    >
+      {/* Hidden copies, only to measure each word */}
+      <span ref={measureRef} className="absolute left-0 top-0 invisible pointer-events-none" aria-hidden="true">
+        {DREAMS.map(({ word }) => (
+          <span key={word} className="absolute left-0 top-0 whitespace-nowrap">
+            {word}
+          </span>
+        ))}
       </span>
-      <span className="sr-only">{words[0]}</span>
-      {words.map((word, i) => (
-        <span
-          key={word}
-          aria-hidden="true"
-          className={`absolute inset-0 flex items-center justify-center font-serif italic font-normal tracking-[-0.02em] text-ember-text whitespace-nowrap transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-            i === index ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-[0.4em] blur-[6px]'
-          }`}
-        >
+
+      {/* Keeps the baseline; the visible words sit on top of it */}
+      <span className="invisible" aria-hidden="true">
+        {DREAMS[index].word}
+      </span>
+      <span className="sr-only">{DREAMS[0].word}</span>
+      {DREAMS.map(({ word }, i) => (
+        <span key={word} aria-hidden="true" className={`dream-word-layer ${i === index ? 'is-on' : ''}`}>
           {word}
         </span>
       ))}
