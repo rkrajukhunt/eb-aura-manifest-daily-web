@@ -82,7 +82,7 @@ export const metadata: Metadata = {
     description:
       'Tell Aura your goals once. Every morning it writes a two-minute audio affirmation in your own words and reads it to you by name. Free on iPhone and Android.',
     url: SITE_URL,
-    siteName: 'Aura: Manifest Daily',
+    siteName: 'Aura',
     locale: 'en_US',
     type: 'website',
   },
@@ -94,16 +94,17 @@ export const metadata: Metadata = {
     creator: '@EmperorBrains',
     site: '@EmperorBrains',
   },
+  // Every size is what the file really is. Google's search-result icon needs a square that is a
+  // multiple of 48px, so 48, 96 and 192 are listed alongside the 16/32/48 favicon.ico.
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.ico', sizes: '16x16 32x32 48x48' },
+      { url: '/assets/icons/icon-48.png', sizes: '48x48', type: 'image/png' },
+      { url: '/assets/icons/icon-96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/assets/icons/icon-192.png', sizes: '192x192', type: 'image/png' },
       { url: '/icon.png', sizes: '512x512', type: 'image/png' },
-      { url: '/assets/logo-circular.png', sizes: '192x192', type: 'image/png' },
     ],
-    apple: [
-      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
-      { url: '/assets/logo-circular.png', sizes: '180x180', type: 'image/png' },
-    ],
+    apple: [{ url: '/apple-icon.png', sizes: '180x180', type: 'image/png' }],
     shortcut: '/favicon.ico',
   },
   appleWebApp: {

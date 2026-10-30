@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: post.description,
     keywords: post.keywords,
     alternates: { canonical: url },
-    openGraph: { type: 'article', title: post.title, description: post.description, url, siteName: 'Aura: Manifest Daily', publishedTime: post.date, images: [image] },
+    openGraph: { type: 'article', title: post.title, description: post.description, url, siteName: 'Aura', publishedTime: post.date, images: [image] },
     twitter: { card: 'summary_large_image', title: post.title, description: post.description, images: [image] },
   };
 }

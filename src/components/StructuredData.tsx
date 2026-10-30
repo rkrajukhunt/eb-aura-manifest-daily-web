@@ -13,7 +13,7 @@ export default function StructuredData() {
     url: SITE_URL,
     logo: {
       '@type': 'ImageObject',
-      url: `${SITE_URL}/assets/logo.png`,
+      url: `${SITE_URL}/assets/icons/icon-512.png`,
       width: 512,
       height: 512,
     },
@@ -31,8 +31,9 @@ export default function StructuredData() {
     '@type': 'WebSite',
     '@id': `${SITE_URL}/#website`,
     url: SITE_URL,
-    name: 'Aura: Manifest Daily',
-    alternateName: ['Aura', 'Aura App', 'Aura Manifest Daily'],
+    // The name Google shows above results; short and the same as the app
+    name: 'Aura',
+    alternateName: ['Aura: Manifest Daily', 'Aura App', 'Aura Manifest Daily'],
     description:
       'An AI companion that transforms your dream life into intimate, personalized audio moments and daily affirmations tailored to who you are becoming.',
     publisher: {
