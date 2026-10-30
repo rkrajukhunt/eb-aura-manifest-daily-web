@@ -15,6 +15,7 @@ const COLUMNS = [
       { name: 'A day with Aura', href: '/#day' },
       { name: 'How it works', href: '/#how' },
       { name: 'Every feature', href: '/features' },
+      { name: 'Blog', href: '/blog' },
       { name: 'Plans', href: '/#pricing' },
     ],
   },

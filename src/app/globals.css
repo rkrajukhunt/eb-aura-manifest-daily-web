@@ -896,3 +896,80 @@ html.lenis {
     transition: none;
   }
 }
+
+/* Blog post body: long-form reading in the site's type */
+.post-body {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--body);
+}
+.post-body > * + * {
+  margin-top: 1.4em;
+}
+.post-body h2 {
+  margin-top: 2.4em;
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+  text-wrap: balance;
+  scroll-margin-top: 110px;
+}
+.post-body h3 {
+  margin-top: 2em;
+  font-size: 1.3rem;
+  line-height: 1.3;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.post-body h2 + *,
+.post-body h3 + * {
+  margin-top: 0.8em;
+}
+.post-body ul,
+.post-body ol {
+  padding-left: 1.4em;
+}
+.post-body ul {
+  list-style: none;
+  padding-left: 0;
+}
+.post-body ul li {
+  position: relative;
+  padding-left: 1.4em;
+}
+.post-body ul li::before {
+  content: '';
+  position: absolute;
+  left: 0.2em;
+  top: 0.75em;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--ember);
+}
+.post-body ol {
+  list-style: decimal;
+}
+.post-body ol li::marker {
+  color: var(--ember-text);
+  font-weight: 600;
+}
+.post-body li + li {
+  margin-top: 0.55em;
+}
+.post-body blockquote {
+  border-left: 3px solid var(--ember);
+  background: color-mix(in srgb, var(--card) 70%, transparent);
+  border-radius: 0 18px 18px 0;
+  padding: 1.1em 1.4em;
+  font-family: var(--font-newsreader), Georgia, serif;
+  font-size: 1.22rem;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.post-body blockquote p + p {
+  margin-top: 0.6em;
+}
