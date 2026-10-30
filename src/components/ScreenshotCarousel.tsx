@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight, Smartphone } from 'lucide-react';
+import PhoneFrame, { StatusBar } from './phone/PhoneFrame';
 
 interface Slide {
   image: string;
@@ -11,48 +12,56 @@ interface Slide {
   description: string;
 }
 
+// Real app screens, one per feature, shown inside the site's phone frame. Each file is the app
+// screenshot with status-bar room added on top, so the frame's notch never covers its content.
 const SLIDES: Slide[] = [
   {
-    image: '/assets/screenshots/aura-07-1242x2688.png',
+    image: '/assets/screens/onboarding-goals.webp',
     tag: 'Getting Started',
     title: 'It starts with a conversation',
-    description: 'Eleven gentle questions about what matters most to you right now. After that, nothing Aura writes is generic.',
+    description: 'A few gentle questions about what you want to bring into your life. After that, nothing Aura writes is generic.',
   },
   {
-    image: '/assets/screenshots/aura-01-1242x2688.png',
+    image: '/assets/screens/sky-dial.webp',
+    tag: 'Your Time',
+    title: 'Your moment, at your hour',
+    description: 'Slide the sun to the time you want. Morning, midday, evening or before bed, it arrives then and not whenever.',
+  },
+  {
+    image: '/assets/screens/first-letter.webp',
+    tag: 'Living Letters',
+    title: 'Hold to light your first letter',
+    description: 'A letter from the you who already has it, read word by word in a voice that says your name. Every letter is kept.',
+  },
+  {
+    image: '/assets/screens/today.webp',
     tag: 'Daily Moments',
     title: 'A new moment, written every morning',
-    description: 'Each morning brings a fresh moment shaped around the life you described, in your own words.',
+    description: 'Tell Aura how you are arriving today, and the morning brings a fresh moment shaped around the life you described.',
   },
   {
-    image: '/assets/screenshots/aura-04-1242x2688.png',
+    image: '/assets/screens/player.webp',
     tag: 'Audio Player',
     title: 'Every moment arrives spoken',
-    description: 'Listen, or read it instead. Scrub, slow it down, or read along, and keep the ones that land.',
+    description: 'Listen, or read along as each line is said. Skip back, slow it down, or refine it until it sounds like you.',
   },
   {
-    image: '/assets/screenshots/aura-03-1242x2688.png',
-    tag: 'Living Letters',
-    title: 'A letter from the you who already has it',
-    description: 'Word by word, in a voice that says your name. Every letter is kept, so you can hear it again.',
-  },
-  {
-    image: '/assets/screenshots/aura-05-1242x2688.png',
+    image: '/assets/screens/affirmation.webp',
     tag: 'Affirmations',
-    title: 'Affirmations that explain themselves',
-    description: 'Identity phrasing, 369 and scripting, with the technique behind each line. Hear it read or share it as a card.',
+    title: 'Words for today, in your own voice',
+    description: 'One affirmation a day, written from your promise. Hear it read, or share it as a card.',
   },
   {
-    image: '/assets/screenshots/aura-06-1242x2688.png',
+    image: '/assets/screens/what-aura-knows.webp',
     tag: 'Living Memory',
     title: 'It remembers, and you can edit all of it',
-    description: 'Your evening gratitude returns in what Aura writes. Review or remove anything in "What Aura Knows", anytime.',
+    description: 'Everything Aura remembers, in your words, grouped plainly. Edit or remove anything and it forgets completely.',
   },
   {
-    image: '/assets/screenshots/aura-02-1242x2688.png',
+    image: '/assets/screens/never-mention.webp',
     tag: 'Privacy',
-    title: 'Your words are only for you',
-    description: 'What you share is used only to write to you. Edit or remove anything, and it is forgotten completely.',
+    title: 'Some things stay out',
+    description: 'Words and topics you would rather leave out never appear in anything Aura writes. Change them any time.',
   },
 ];
 
@@ -123,18 +132,26 @@ export default function ScreenshotCarousel() {
           </div>
         </div>
 
-        {/* Right / App Store screenshot (already includes its own device frame) */}
+        {/* Right / the real screen in the phone frame, crossfading between slides */}
         <div className="lg:col-span-6 flex justify-center">
-          <div className="relative w-[260px] sm:w-[300px] aspect-[1242/2688] rounded-[28px] overflow-hidden border border-line shadow-[0_40px_80px_-30px_rgba(27,24,16,0.45)]">
-            <Image
-              key={SLIDES[current].image}
-              src={SLIDES[current].image}
-              alt={`${SLIDES[current].title} - Aura App Interface Preview`}
-              fill
-              sizes="(max-width: 640px) 260px, 300px"
-              className="object-cover"
-            />
-          </div>
+          <PhoneFrame className="w-[260px] sm:w-[300px]">
+            <div className="absolute inset-x-0 top-0 z-20">
+              <StatusBar />
+            </div>
+            {SLIDES.map((slide, idx) => (
+              <Image
+                key={slide.image}
+                src={slide.image}
+                alt={idx === current ? `${slide.title}, Aura app screen` : ''}
+                aria-hidden={idx !== current}
+                fill
+                sizes="(max-width: 640px) 260px, 300px"
+                className={`object-cover transition-[opacity,scale] duration-500 ease-out ${
+                  idx === current ? 'opacity-100 scale-100' : 'opacity-0 scale-[1.02]'
+                }`}
+              />
+            ))}
+          </PhoneFrame>
         </div>
       </div>
     </div>
