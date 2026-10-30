@@ -12,6 +12,7 @@ export const metadata: Metadata = {
     canonical: `${SITE_URL}/delete-account`,
   },
   openGraph: {
+    type: 'website',
     title: 'Delete Account & Data | Aura: Manifest Daily',
     description:
       'Instructions for permanent account and data erasure in Aura: Manifest Daily.',

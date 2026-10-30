@@ -23,11 +23,11 @@ const newsreader = Newsreader({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Aura: Manifest Daily - Personalized Audio Moments & Daily Affirmations',
+    default: 'Aura: Manifest Daily - Personal Daily Affirmations App',
     template: '%s | Aura: Manifest Daily',
   },
   description:
-    'Aura is a personal affirmation app for iPhone and Android. Tell it your goals once, and every morning it writes a two-minute audio affirmation in your own words and reads it to you by name.',
+    'A personal affirmation app for iPhone and Android. Tell Aura your goals once, and every morning it writes a two-minute audio affirmation in your own words.',
   keywords: [
     'Aura',
     'Manifest Daily',
@@ -111,6 +111,8 @@ export const metadata: Metadata = {
     statusBarStyle: 'default',
     title: 'Aura',
   },
+  // Google Search Console: set GOOGLE_SITE_VERIFICATION to the code from the HTML-tag method
+  ...(process.env.GOOGLE_SITE_VERIFICATION && { verification: { google: process.env.GOOGLE_SITE_VERIFICATION } }),
   formatDetection: {
     telephone: false,
     email: false,

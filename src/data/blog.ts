@@ -11,7 +11,9 @@ export interface PostSource {
 export interface Post {
   slug: string;
   title: string;
-  /** Meta description and card text */
+  /** The search result title, short enough that Google shows it whole (with " | Aura", under 60 characters) */
+  seoTitle: string;
+  /** Meta description and card text, under 155 characters so search results show it whole */
   description: string;
   category: 'The science' | 'How to' | 'Methods' | 'Affirmations';
   date: string;
@@ -26,8 +28,9 @@ const POSTS_UNSORTED: Post[] = [
   {
     slug: 'do-affirmations-work',
     title: 'Do affirmations actually work? What the research says',
+    seoTitle: 'Do Affirmations Work? What the Research Says',
     description:
-      'Affirmations can help, but not the way most quote cards suggest. Here is what decades of self-affirmation research found, when positive statements backfire, and how to use them so they work.',
+      'Affirmations can help, but not the way quote cards suggest. What the research found, when positive statements backfire, and how to use them well.',
     category: 'The science',
     date: '2026-10-08',
     cover: '/assets/blog/poster-do-affirmations-work.webp',
@@ -113,8 +116,9 @@ Affirmations are not magic, and they are not nonsense. The version that works is
   {
     slug: 'why-affirmations-feel-fake',
     title: 'Why affirmations feel fake, and how to write ones you believe',
+    seoTitle: 'Why Affirmations Feel Fake (and How to Fix It)',
     description:
-      'If saying "I am confident" makes you cringe, your brain is telling you something useful. Here is why affirmations feel fake, and five ways to rewrite them so they finally land.',
+      'If saying "I am confident" makes you cringe, your brain is telling you something. Why affirmations feel fake, and five ways to write ones you believe.',
     category: 'How to',
     date: '2026-10-12',
     cover: '/assets/blog/poster-why-affirmations-feel-fake.webp',
@@ -226,8 +230,9 @@ Affirmations feel fake when they are too far from where you are, or written in s
   {
     slug: '369-method',
     title: 'The 369 method: how it works, and an honest look at whether it helps',
+    seoTitle: 'The 369 Method: How It Works, Honestly',
     description:
-      'The 369 manifestation method went viral for a reason. Here is exactly how to do it, what the evidence does and does not say, and a version that adds the one thing most people leave out.',
+      'How to do the viral 369 manifestation method step by step, what the evidence does and does not say, and the one step most people leave out.',
     category: 'Methods',
     date: '2026-10-15',
     cover: '/assets/blog/poster-369-method.webp',
@@ -317,8 +322,9 @@ The 369 method is not magic, and it does not need to be. Used well, it is a simp
   {
     slug: 'letter-to-your-future-self',
     title: 'How to write a letter to your future self (with 15 prompts)',
+    seoTitle: 'How to Write a Letter to Your Future Self',
     description:
-      'A letter to or from your future self is one of the most moving journaling exercises there is. Here is why it works, how to write one step by step, 15 prompts, and an example.',
+      'Why writing to your future self works, how to write a letter step by step, 15 prompts to get you started, and a full example letter.',
     category: 'How to',
     date: '2026-10-19',
     cover: '/assets/blog/poster-letter-to-your-future-self.webp',
@@ -410,8 +416,9 @@ You do not need a perfect sentence or a special notebook. Set a timer for ten mi
   {
     slug: 'affirmations-for-confidence',
     title: '40 affirmations for confidence that don\'t sound fake',
+    seoTitle: '40 Confidence Affirmations That Don\'t Sound Fake',
     description:
-      'Confidence affirmations that you can actually say and mean, grouped by where confidence wobbles most: speaking up, how you look, work, certain people, and hard days.',
+      '40 confidence affirmations you can say and mean, grouped by where confidence wobbles: speaking up, how you look, work, certain people and hard days.',
     category: 'Affirmations',
     date: '2026-10-22',
     cover: '/assets/blog/poster-affirmations-for-confidence.webp',
@@ -516,8 +523,9 @@ Pick one line from this list. Say it tomorrow morning. Do one small thing that m
   {
     slug: 'gratitude-one-line-a-night',
     title: 'One line of gratitude a night: what it changes, and how to start',
+    seoTitle: 'One Line of Gratitude a Night: How to Start',
     description:
-      'You do not need a gratitude journal with three pages a night. Here is what the research says about gratitude, why one specific line works, and 20 prompts for the nights you draw a blank.',
+      'You do not need three pages a night. What the research says about gratitude, why one specific line works, and 20 prompts for the nights you draw a blank.',
     category: 'How to',
     date: '2026-10-27',
     cover: '/assets/blog/poster-gratitude-one-line-a-night.webp',
@@ -622,6 +630,11 @@ export function getPost(slug: string) {
 
 export function readingMinutes(post: Post) {
   return Math.max(1, Math.round(post.body.split(/\s+/).filter(Boolean).length / 220));
+}
+
+/** The cover as a JPG, for share cards: some apps (LinkedIn among them) do not show WebP previews */
+export function shareImage(post: Post) {
+  return post.cover.replace(/\.webp$/, '.jpg');
 }
 
 export function formatPostDate(date: string) {

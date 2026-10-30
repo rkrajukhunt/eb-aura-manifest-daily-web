@@ -871,6 +871,10 @@ html.lenis {
     translate: 0 8px;
   }
 }
+/* The words live in data-word, drawn here, so they stay out of the headline's text */
+.dream-text::before {
+  content: attr(data-word);
+}
 .dream-word {
   transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }

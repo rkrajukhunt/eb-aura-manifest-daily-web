@@ -8,7 +8,7 @@ import PageTransition from '@/components/PageTransition';
 import BreadcrumbData from '@/components/BreadcrumbData';
 import PostBody, { headingsOf } from '@/components/blog/PostBody';
 import PostCard from '@/components/blog/PostCard';
-import { POSTS, formatPostDate, getPost, readingMinutes } from '@/data/blog';
+import { POSTS, formatPostDate, getPost, readingMinutes, shareImage } from '@/data/blog';
 import { SITE_URL } from '@/data/site';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -23,13 +23,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPost((await params).slug);
   if (!post) return {};
   const url = `${SITE_URL}/blog/${post.slug}`;
-  const image = { url: `${SITE_URL}${post.cover}`, width: 1600, height: 900, alt: post.coverAlt };
+  const image = { url: `${SITE_URL}${shareImage(post)}`, width: 1600, height: 900, alt: post.coverAlt, type: 'image/jpeg' };
   return {
-    title: post.title,
+    title: { absolute: `${post.seoTitle} | Aura` },
     description: post.description,
     keywords: post.keywords,
     alternates: { canonical: url },
-    openGraph: { type: 'article', title: post.title, description: post.description, url, publishedTime: post.date, images: [image] },
+    openGraph: { type: 'article', title: post.title, description: post.description, url, siteName: 'Aura: Manifest Daily', publishedTime: post.date, images: [image] },
     twitter: { card: 'summary_large_image', title: post.title, description: post.description, images: [image] },
   };
 }
@@ -45,7 +45,7 @@ export default async function PostPage({ params }: Props) {
     '@type': 'BlogPosting',
     headline: post.title,
     description: post.description,
-    image: `${SITE_URL}${post.cover}`,
+    image: `${SITE_URL}${shareImage(post)}`,
     datePublished: post.date,
     dateModified: post.date,
     author: { '@type': 'Organization', name: 'Aura', url: SITE_URL },

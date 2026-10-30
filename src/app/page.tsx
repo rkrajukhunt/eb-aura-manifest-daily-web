@@ -16,6 +16,9 @@ import DreamMarquee from '@/components/DreamMarquee';
 import HowItWorks from '@/components/HowItWorks';
 import TrustBento from '@/components/TrustBento';
 import PageTransition from '@/components/PageTransition';
+import { HomeStructuredData } from '@/components/StructuredData';
+import PostCard from '@/components/blog/PostCard';
+import { POSTS } from '@/data/blog';
 
 // Lines people have kept, a faint wall behind the marquee
 const KEPT_LINES = [
@@ -34,6 +37,7 @@ const KEPT_LINES = [
 export default function Home() {
   return (
     <PageTransition>
+      <HomeStructuredData />
       <main className="relative overflow-x-clip">
         <Hero />
 
@@ -173,6 +177,29 @@ export default function Home() {
         </section>
 
         <TrustBento />
+
+        {/* ============================================================ */}
+        {/* FROM THE BLOG                                                  */}
+        {/* ============================================================ */}
+        <section id="blog" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+          <SectionHeading
+            eyebrow="From the blog"
+            title="Affirmations,"
+            accent="honestly"
+            intro="What the research says, the methods people swear by, and how to make them work for you."
+          />
+          <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {POSTS.slice(0, 3).map((post) => (
+              <PostCard key={post.slug} post={post} />
+            ))}
+          </div>
+          <div className="reveal mt-10 flex justify-center">
+            <Link href="/blog" className="btn-ghost">
+              Read every post
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </section>
 
         {/* ============================================================ */}
         {/* 10. FAQ                                                        */}

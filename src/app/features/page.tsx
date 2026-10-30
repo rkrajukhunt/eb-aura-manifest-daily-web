@@ -16,6 +16,7 @@ export const metadata: Metadata = {
     'Explore every feature in Aura: Manifest Daily - from your onboarding future letter and personalized audio moments to living memory and soft streaks.',
   alternates: { canonical: `${SITE_URL}/features` },
   openGraph: {
+    type: 'website',
     title: 'Every Feature in Aura: Manifest Daily',
     description: 'A daily moment in your own words, affirmations that explain themselves, and a memory you control.',
     url: `${SITE_URL}/features`,

@@ -7,11 +7,12 @@ import { SHARE_IMAGE, SITE_URL } from '@/data/site';
 export const metadata: Metadata = {
   title: 'Terms of Service',
   description:
-    'Review the Terms of Service governing your use of Aura: Manifest Daily, including subscription policies, auto-renewal rules, acceptable use, and intellectual property.',
+    'The Terms of Service for Aura: Manifest Daily, covering subscriptions, the free trial, auto-renewal, acceptable use and intellectual property.',
   alternates: {
     canonical: `${SITE_URL}/terms`,
   },
   openGraph: {
+    type: 'website',
     title: 'Terms of Service | Aura: Manifest Daily',
     description:
       'Official Terms of Service for Aura: Manifest Daily applications and services.',

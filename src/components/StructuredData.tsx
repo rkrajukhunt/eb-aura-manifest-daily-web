@@ -1,6 +1,9 @@
 import React from 'react';
 import { APP_STORE_URL, PLAY_STORE_URL, SITE_URL } from '@/data/site';
 
+// Organization and WebSite describe the whole site, so they go on every page (from the layout).
+// The app and its FAQ are only on the home page, where the FAQ is visible: Google wants FAQ markup
+// only on the page that shows those questions.
 export default function StructuredData() {
   const schemaOrg = {
     '@context': 'https://schema.org',
@@ -38,6 +41,21 @@ export default function StructuredData() {
     inLanguage: 'en-US',
   };
 
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrg) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaWebSite) }}
+      />
+    </>
+  );
+}
+
+export function HomeStructuredData() {
   const schemaApp = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
@@ -76,13 +94,6 @@ export default function StructuredData() {
       price: '0',
       priceCurrency: 'USD',
       category: 'Free download with optional in-app membership',
-    },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      reviewCount: '1280',
-      bestRating: '5',
-      worstRating: '1',
     },
     publisher: {
       '@id': `${SITE_URL}/#organization`,
@@ -142,14 +153,6 @@ export default function StructuredData() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrg) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaWebSite) }}
-      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaApp) }}

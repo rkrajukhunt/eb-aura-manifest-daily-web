@@ -33,24 +33,21 @@ export default function RotatingWord() {
       className="dream-word relative inline-block align-baseline ml-1 text-left font-serif italic font-normal tracking-[-0.02em] whitespace-nowrap text-ember-text"
       style={width ? { width: width + 1 } : undefined}
     >
+      {/* Every word below is drawn by CSS from data-word, so the headline's text, for search engines
+          and screen readers alike, is just the first goal */}
+      <span className="sr-only">{DREAMS[0].word}</span>
+
       {/* Hidden copies, only to measure each word */}
       <span ref={measureRef} className="absolute left-0 top-0 invisible pointer-events-none" aria-hidden="true">
         {DREAMS.map(({ word }) => (
-          <span key={word} className="absolute left-0 top-0 whitespace-nowrap">
-            {word}
-          </span>
+          <span key={word} data-word={word} className="dream-text absolute left-0 top-0 whitespace-nowrap" />
         ))}
       </span>
 
       {/* Keeps the baseline; the visible words sit on top of it */}
-      <span className="invisible" aria-hidden="true">
-        {DREAMS[index].word}
-      </span>
-      <span className="sr-only">{DREAMS[0].word}</span>
+      <span data-word={DREAMS[index].word} className="dream-text invisible" aria-hidden="true" />
       {DREAMS.map(({ word }, i) => (
-        <span key={word} aria-hidden="true" className={`dream-word-layer ${i === index ? 'is-on' : ''}`}>
-          {word}
-        </span>
+        <span key={word} data-word={word} aria-hidden="true" className={`dream-text dream-word-layer ${i === index ? 'is-on' : ''}`} />
       ))}
     </span>
   );

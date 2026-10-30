@@ -7,11 +7,12 @@ import { SHARE_IMAGE, SITE_URL } from '@/data/site';
 export const metadata: Metadata = {
   title: 'Privacy Policy',
   description:
-    'Read our complete Privacy Policy. Learn how Aura: Manifest Daily collects, encrypts, and handles your intentions and reflections with strict row-level security and zero data sale.',
+    'How Aura: Manifest Daily collects, protects and handles your goals, journal entries and reflections. Encrypted, never sold, and yours to delete.',
   alternates: {
     canonical: `${SITE_URL}/privacy`,
   },
   openGraph: {
+    type: 'website',
     title: 'Privacy Policy | Aura: Manifest Daily',
     description:
       'Learn how Aura handles and secures your personal journal, affirmations, and memory reflections with strict privacy guarantees.',

@@ -7,11 +7,12 @@ import { SHARE_IMAGE, SITE_URL } from '@/data/site';
 export const metadata: Metadata = {
   title: 'Support & Help Center',
   description:
-    'Need help with Aura: Manifest Daily? Contact our product engineering team, restore your subscription, or find answers to common questions about audio and rituals.',
+    'Need help with Aura: Manifest Daily? Contact the team, restore your subscription, or find answers to common questions about audio and your daily ritual.',
   alternates: {
     canonical: `${SITE_URL}/support`,
   },
   openGraph: {
+    type: 'website',
     title: 'Support & Help Center | Aura: Manifest Daily',
     description:
       'Customer support, troubleshooting, subscription restore assistance, and direct inquiries for Aura users.',
