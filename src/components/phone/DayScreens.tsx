@@ -252,7 +252,7 @@ export function RefineScreen() {
   );
 }
 
-/* 12:30 · today's affirmation, hold to reveal, with its 369 practice */
+/* 12:30 · today's affirmation, hold to reveal, with its 369 practice and Create with Aura */
 export function AffirmationScreen() {
   const rows: [string, number, number][] = [
     ['Morning · 3', 3, 3],
@@ -263,52 +263,73 @@ export function AffirmationScreen() {
   return (
     <div className="absolute inset-0">
       <StatusBar />
-      <div className="px-4 pt-7 space-y-3">
-        <Serif className="text-[24px] leading-tight">
-          Words for <em>today</em>
-          <span className="text-[#e2682f]">.</span>
-        </Serif>
-        <div className="relative rounded-[20px] bg-[#f4ebd6] border border-[#8a8265]/20 p-4 space-y-3 overflow-hidden">
-          <div className="flex justify-between">
-            <Eyebrow>Today · October 21</Eyebrow>
-            <Heart className="w-3.5 h-3.5 text-[#e38fb0] fill-[#e38fb0]" />
+      <div className="px-4 pt-6 space-y-3">
+        <div>
+          <Eyebrow>Affirmations</Eyebrow>
+          <Serif className="mt-0.5 text-[24px] leading-tight">
+            Words for <em>today</em>
+            <span className="text-[#e2682f]">.</span>
+          </Serif>
+        </div>
+
+        {/* Today's card, in the app's ember gradient */}
+        <div className="relative rounded-[22px] p-4 space-y-3 overflow-hidden text-[#fff6ec] bg-[radial-gradient(120%_90%_at_80%_0%,#f0a067_0%,#d9652c_45%,#a9431a_100%)] shadow-[0_18px_30px_-18px_rgba(169,67,26,0.8)]">
+          <div className="flex justify-between items-center">
+            <p className="text-[8.5px] font-semibold uppercase tracking-[0.16em] text-[#fff6ec]/80">Today · October 21</p>
+            <span className="w-6 h-6 rounded-full bg-white/15 flex items-center justify-center">
+              <Heart className="w-3 h-3 text-[#ffd3de] fill-[#ffd3de]" />
+            </span>
           </div>
-          <Serif className="text-[19px] leading-snug italic">I build steadily, and what I build holds.</Serif>
+          <Serif className="!text-[#fff6ec] text-[20px] leading-snug italic">I build steadily, and what I build holds.</Serif>
           <div className="flex flex-wrap gap-1.5">
-            <span className="rounded-full bg-white px-2 py-0.5 text-[9px]">Identity</span>
-            <span className="rounded-full bg-white px-2 py-0.5 text-[9px]">From your words: &ldquo;money&rdquo;</span>
+            <span className="rounded-full bg-white/15 px-2 py-0.5 text-[9px]">Identity</span>
+            <span className="rounded-full bg-white/15 px-2 py-0.5 text-[9px]">From your words: &ldquo;money&rdquo;</span>
           </div>
-          <div className="grid grid-cols-2 gap-1.5">
-            <span className="rounded-full bg-[#1b1810] text-[#f5f2e8] text-[10px] font-semibold py-1.5 flex items-center justify-center gap-1">
+          <div className="grid grid-cols-2 gap-1.5 pt-1">
+            <span className="rounded-full bg-[#fff6ec] text-[#1b1810] text-[10px] font-semibold py-1.5 flex items-center justify-center gap-1">
               <Volume2 className="w-3 h-3" /> Hear it read
             </span>
-            <span className="rounded-full border border-[#1b1810] text-[10px] font-semibold py-1.5 flex items-center justify-center gap-1">
+            <span className="rounded-full bg-white/15 border border-white/30 text-[10px] font-semibold py-1.5 flex items-center justify-center gap-1">
               <Share2 className="w-3 h-3" /> Share as card
             </span>
           </div>
 
-          {/* The hold-to-reveal veil lifts after a press */}
-          <div className="mk mk-fade-out absolute inset-0 opacity-0 pointer-events-none bg-[#f4ebd6] flex flex-col items-center justify-center gap-2" style={d(1.4)}>
-            <span className="relative w-12 h-12 rounded-full border-2 border-[#ebd9c4] flex items-center justify-center">
-              <svg viewBox="0 0 48 48" className="absolute inset-[-2px] w-[52px] h-[52px] -rotate-90">
-                <circle cx="26" cy="26" r="23" fill="none" stroke="#e2682f" strokeWidth="2.5" strokeDasharray="145" className="mk mk-draw" style={{ ...d(0.2), ['--len' as string]: 145 }} />
+          {/* The hold-to-reveal veil: the ring fills, then the veil lifts off the line */}
+          <div
+            className="mk mk-fade-out absolute inset-0 opacity-0 pointer-events-none flex flex-col items-center justify-center gap-2.5 bg-[radial-gradient(120%_90%_at_50%_30%,#f3b07c_0%,#de6f35_55%,#b04a1d_100%)]"
+            style={d(1.2)}
+          >
+            <span className="relative w-14 h-14 rounded-full bg-white/15 flex items-center justify-center shadow-[0_0_30px_rgba(255,220,180,0.55)]">
+              {/* A faint track and the filling ring, both centred on the 56px button with 4px around it */}
+              <svg viewBox="0 0 64 64" className="absolute -inset-1 w-16 h-16 -rotate-90 overflow-visible" aria-hidden="true">
+                <circle cx="32" cy="32" r="30" fill="none" stroke="#fff6ec" strokeOpacity="0.25" strokeWidth="2.5" />
+                <circle cx="32" cy="32" r="30" fill="none" stroke="#fff6ec" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="188.5" className="mk mk-draw" style={{ ...d(0.1), animationDuration: '1s', ['--len' as string]: 188.5 }} />
               </svg>
-              <span className="w-3 h-3 rounded-full bg-[#e2682f]" />
+              <Sparkles className="w-5 h-5 text-[#fff6ec]" />
             </span>
-            <p className="text-[11px] font-semibold">Hold to reveal</p>
+            <p className="text-[11px] font-semibold text-[#fff6ec]">Hold to reveal</p>
+            <p className="text-[9px] text-[#fff6ec]/75">Today&rsquo;s line is ready</p>
           </div>
         </div>
-        <p className="text-center text-[10px] text-[#655e48]">One a day. That&rsquo;s enough.</p>
 
-        <div className="mk mk-in rounded-[18px] bg-white border border-[#8a8265]/20 p-3 space-y-2" style={d(2)}>
-          <p className="text-[11px] font-semibold">369 practice</p>
+        <p className="text-center text-[10px] text-[#655e48] leading-snug">
+          One a day. That&rsquo;s enough.
+          <br />
+          Your kept words will live here.
+        </p>
+
+        <div className="mk mk-in rounded-[18px] bg-white border border-[#8a8265]/20 p-3 space-y-2" style={d(1.6)}>
+          <div className="flex justify-between items-center">
+            <p className="text-[11px] font-semibold">369 practice</p>
+            <p className="text-[9px] text-[#655e48]">7 of 18 today</p>
+          </div>
           {rows.map(([label, total, filled]) => (
             <div key={label} className="flex items-center gap-2">
               <span className="w-[68px] text-[9px] text-[#655e48]">{label}</span>
               <span className="flex gap-1">
                 {Array.from({ length: total }).map((_, i) => {
                   const on = i < filled;
-                  const delay = on ? 2.4 + dot++ * 0.18 : 0;
+                  const delay = on ? 1.9 + dot++ * 0.15 : 0;
                   return (
                     <span
                       key={i}
@@ -320,6 +341,17 @@ export function AffirmationScreen() {
               </span>
             </div>
           ))}
+        </div>
+
+        <div className="mk mk-in rounded-[18px] bg-white border border-[#8a8265]/20 p-3 flex items-center gap-2.5" style={d(2.1)}>
+          <span className="w-8 h-8 rounded-full bg-[#e2682f] flex items-center justify-center shrink-0">
+            <Sparkles className="w-4 h-4 text-white" />
+          </span>
+          <span className="flex-1 min-w-0">
+            <span className="block text-[11px] font-semibold">Create with Aura</span>
+            <span className="block text-[9px] text-[#655e48]">Three new lines for what today needs</span>
+          </span>
+          <span className="text-[#655e48] text-sm">&rsaquo;</span>
         </div>
       </div>
       <TabBar active="Affirmations" />
